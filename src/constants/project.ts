@@ -42,8 +42,8 @@ export const projectData: IProjectProps[] = [{
   term: '2024.09 ~ 2024.10',
   termDiff: '2개월',
   name: '웹 포트폴리오',
-  url: '',
-  github: '',
+  url: 'https://kimjy-portfolio.vercel.app/',
+  github: 'https://github.com/kimjy97/portfolio-v2',
   contribution: { dev: '100%', design: '100%', planning: '100%' },
   stacks: ['Next.js', 'TypeScript', 'Recoil', 'StyledComponents', 'MongoDB', 'Vercel'],
   issues: [{

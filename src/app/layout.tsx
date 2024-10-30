@@ -25,6 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <meta name="google-site-verification" content="a2fgyHnx6CNoDmHMVOuzQTV4DQqn7a-WQkMF8YNLXvw" />
+      </head>
       <body className={`${poppins.variable} ${pretendard.variable}`}>
         <RecoilRootWrapper>
           <StyledComponentsRegistry>
