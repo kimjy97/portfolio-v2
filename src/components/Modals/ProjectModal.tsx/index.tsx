@@ -12,12 +12,14 @@ import Issue from '@/components/Modals/ProjectModal.tsx/Issue';
 import ReasonText from '@/components/Modals/ProjectModal.tsx/ReasonText';
 import FuncList from '@/components/Modals/ProjectModal.tsx/FuncList';
 import StyledText from '@/components/Modals/ProjectModal.tsx/StyledText';
+import ImageWithSpinner from '@/components/ImageWithSpinner';
 
 const ProjectModal = () => {
   const [isOpen, setIsOpen] = useRecoilState(isOpenProjectState);
   const [info, setInfo] = useState<IProjectProps | undefined>(projectData[0]);
   const [isScroll, setIsScroll] = useState(false);
   const [thumbNum, setThumbNum] = useState<number>(0);
+  const [randomKey, setRandomKey] = useState(1);
   const bodyRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const imgListRef = useRef<HTMLDivElement>(null);
@@ -48,6 +50,7 @@ const ProjectModal = () => {
 
   useEffect(() => {
     if (isOpen) {
+      setRandomKey(Math.random())
       setInfo(isOpen);
       setThumbNum(0);
       document.body.style.overflow = 'hidden';
@@ -80,7 +83,7 @@ const ProjectModal = () => {
             <SelectThumbList ref={imgListRef}>
               {info.thumb.map((i: StaticImageData, idx: number) =>
                 <SelectThumb
-                  key={idx}
+                  key={idx * randomKey}
                   className={idx === thumbNum ? 'selected' : ''}
                   src={i}
                   alt={`${info.name}(Thumbnail)_${idx}`}
@@ -273,7 +276,7 @@ const Top = styled.div`
 
   @media (max-width: 768px) {
     height: 3rem;
-    padding-right: 0.;
+    padding-right: 0;
   }
 `
 const ExitBtn = styled.div`
@@ -745,7 +748,7 @@ const Intro = styled.div`
 const SelectThumbList = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 1.5em;
+  gap: 1.25em;
   width: 75%;
   max-width: 80em;
 
@@ -758,7 +761,7 @@ const SelectThumbList = styled.div`
     gap: 0em;
   }
 `
-const SelectThumb = styled(Image)`
+const SelectThumb = styled(ImageWithSpinner)`
   display: block;
   width: 100%;
   height: auto;
