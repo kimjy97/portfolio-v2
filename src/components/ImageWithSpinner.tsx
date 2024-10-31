@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import Image from 'next/image';
-import styled, { keyframes } from 'styled-components';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import Image, { ImageProps } from 'next/image';
+import styled from 'styled-components';
 
 interface LoaderContainerProps {
   $isLoading: boolean;
+}
+
+interface ImageWithSpinnerProps extends Omit<ImageProps, 'onLoad'> {
+  className?: string;
 }
 
 const ImageWithSpinner = ({
@@ -18,7 +21,7 @@ const ImageWithSpinner = ({
   blurDataURL,
   className,
   ...props
-}: any) => {
+}: ImageWithSpinnerProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
