@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📄 웹 포트폴리오
 
-## Getting Started
+프론트엔드 개발자 김종연의 포트폴리오 웹사이트입니다. 인터랙티브한 요소들과 반응형 디자인을 통해 개발 기술과 프로젝트들을 효과적으로 보여주고자 직접 Next.js로 개발했습니다.
 
-First, run the development server:
+## ✨ 주요 기능
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 🎨 인터랙티브한 UI/UX
+- 📱 모든 디바이스를 위한 반응형 디자인
+- 🔍 프로젝트 상세 정보 제공
+- 📊 기술 스택 시각화
+- 💫 스크롤 기반 애니메이션 효과
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠 기술 스택
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend**: Next.js, TypeScript, Styled Components
+- **상태 관리**: Recoil
+- **데이터베이스**: MongoDB
+- **배포**: Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 💡 핵심 기능 설명
 
-## Learn More
+### 인터랙티브 디자인
 
-To learn more about Next.js, take a look at the following resources:
+- 스크롤 기반의 섹션별 애니메이션 효과
+- 부드러운 페이지 전환 애니메이션
+- 호버 효과를 통한 사용자 상호작용
+- 사용자 경험을 고려한 모션 디자인
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 반응형 레이아웃
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 모든 디바이스에 최적화된 레이아웃
+- 화면 크기에 따른 동적 컴포넌트 조정
+- 유동적인 그리드 시스템
 
-## Deploy on Vercel
+### 성능 최적화
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **이미지 최적화**: Next.js Image 컴포넌트를 활용한 이미지 최적화
+- **스크롤 성능**: Intersection Observer를 활용한 효율적인 스크롤 이벤트 처리
+- **렌더링 최적화**: 불필요한 리렌더링 방지를 위한 상태 관리
