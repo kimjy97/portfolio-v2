@@ -76,6 +76,9 @@ const SubTitle = styled.p`
   color: #ffffff;
   font-size: 1.125em;
   font-weight: 400;
+  line-height: 1.5em;
+  white-space: pre-line;
+  text-align: center;
 
   opacity: 0;
 

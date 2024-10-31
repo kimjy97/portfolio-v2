@@ -22,7 +22,7 @@ const ProjectsSection = (): JSX.Element => {
         <Title
           isVisible={isVisible}
           main='프로젝트'
-          sub='현재까지 개발한 개인 또는 팀 프로젝트입니다.'
+          sub={`현재까지 개발한 프로젝트입니다.\n프로젝트를 클릭하면 자세히 볼 수 있습니다.`}
         />
         <ContentsWrapper className={className}>
           <SortOption />
@@ -52,9 +52,13 @@ const Wrapper = styled.div`
   max-width: 80rem;
   min-height: 100vh;
   margin: 0 auto;
-  padding-bottom: 5.875rem;
+  padding-bottom: 7rem;
   
   font-family: var(--font-pretendard);
+
+  @media (max-width: 768px) {
+    padding-bottom: 5.875rem;
+  }
 `
 const ContentsWrapper = styled.div`
   width: 100%;
