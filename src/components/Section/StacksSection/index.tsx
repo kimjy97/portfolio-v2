@@ -11,6 +11,7 @@ import MongodbSVG from '@public/svgs/stacks/mongodb.svg';
 import StyledComponentsSVG from '@public/svgs/stacks/styledcompoents.svg';
 import ScssSVG from '@public/svgs/stacks/scss.svg';
 import RecoilSVG from '@public/svgs/stacks/recoil.svg';
+import ZustandSVG from '@public/svgs/stacks/zustand.svg';
 import FigmaSVG from '@public/svgs/stacks/figma.svg';
 import PostmanSVG from '@public/svgs/stacks/postman.svg';
 import IllustratorSVG from '@public/svgs/stacks/illustrator.svg';
@@ -18,6 +19,9 @@ import PhotoshopSVG from '@public/svgs/stacks/photoshop.svg';
 import VercelSVG from '@public/svgs/stacks/vercel.svg';
 import AwsSVG from '@public/svgs/stacks/aws.svg';
 import GooglePlaySVG from '@public/svgs/stacks/googleplay.svg';
+import ExpoSVG from '@public/svgs/stacks/expo.svg';
+import SupabaseSVG from '@public/svgs/stacks/supabase.svg';
+import FirebaseSVG from '@public/svgs/stacks/firebase.svg';
 import { useScroll } from '@hooks/useScroll';
 import Stack from '@components/Section/StacksSection/Stack';
 import Title from '@components/Section/Title';
@@ -98,14 +102,18 @@ const StacksSection = (): JSX.Element => {
               <Stack name='Next.js' icon={<NextjsIcon />} count={stackCounts['Next.js'] || 0} />
               <Stack name='React.js' icon={<ReactIcon />} count={stackCounts['React'] || 0} />
               <Stack name='ReactNative' icon={<ReactIcon />} count={stackCounts['ReactNative'] || 0} />
+              <Stack name='Expo' icon={<ExpoIcon />} count={stackCounts['Expo'] || 0} />
               <Stack name='jQuery' icon={<JqueryIcon />} count={stackCounts['jQuery'] || 0} />
               <Stack name='TypeScript' icon={<TypescriptIcon />} count={stackCounts['TypeScript'] || 0} />
               <Stack name='Recoil' icon={<RecoilIcon />} count={stackCounts['Recoil'] || 0} />
+              <Stack name='Zustand' icon={<ZustandIcon />} count={stackCounts['Zustand'] || 0} />
               <Stack name='Styled' name2='Components' icon={<StyledComponentsIcon />} count={stackCounts['StyledComponents'] || 0} />
               <Stack name='SCSS' icon={<ScssIcon />} count={stackCounts['SCSS'] || 0} />
               <Stack name='Node.js' icon={<NodejsIcon />} count={stackCounts['Nodejs'] || 0} />
               <Stack name='MongoDB' icon={<MongodbIcon />} count={stackCounts['MongoDB'] || 0} />
               <Stack name='MySQL' icon={<MysqlIcon />} count={stackCounts['MySQL'] || 0} />
+              <Stack name='Supabase' icon={<SupabaseIcon />} count={stackCounts['Supabase'] || 0} />
+              <Stack name='Firebase' icon={<FirebaseIcon />} count={stackCounts['Firebase'] || 0} />
             </StackRow>
           </StackItem>
           <StackItem>
@@ -265,6 +273,10 @@ const RecoilIcon = styled(RecoilSVG)`
   width: 3.5em;
   height: 3.5em;
 `
+const ZustandIcon = styled(ZustandSVG)`
+  width: 4.25em;
+  height: 4.25em;
+`
 const FigmaIcon = styled(FigmaSVG)`
   width: 3.75em;
   height: 3.75em;
@@ -290,6 +302,18 @@ const AwsIcon = styled(AwsSVG)`
   height: 5em;
 `
 const GooglePlayIcon = styled(GooglePlaySVG)`
+  width: 3.8em;
+  height: 3.8em;
+`
+const ExpoIcon = styled(ExpoSVG)`
+  width: 3.8em;
+  height: 3.8em;
+`
+const SupabaseIcon = styled(SupabaseSVG)`
+  width: 3.8em;
+  height: 3.8em;
+`
+const FirebaseIcon = styled(FirebaseSVG)`
   width: 3.8em;
   height: 3.8em;
 `
