@@ -130,7 +130,7 @@ const ProjectModal = () => {
               <InfoRow>
                 <Label>구성원</Label>
                 <InfoText>
-                  {info?.team}
+                  {info?.team || '개인 프로젝트'}
                 </InfoText>
               </InfoRow>
               <InfoRow>
