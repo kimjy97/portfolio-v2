@@ -1,4 +1,3 @@
-// hooks/useVisitorTracking.ts
 import { useEffect, useCallback } from 'react';
 
 interface VisitorData {

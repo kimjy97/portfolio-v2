@@ -1,9 +1,8 @@
-// app/api/visitors/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@libs/mongodb';
 import { getClientIp } from '@/utils/ip';
 
-const FIFTEEN_MINUTES = 15 * 60 * 1000;
+const INTERVAL = 60 * 1000;
 
 export async function POST(req: NextRequest) {
   try {
@@ -14,7 +13,7 @@ export async function POST(req: NextRequest) {
     const userAgent = req.headers.get('user-agent') || '';
     const data = await req.json();
 
-    const fifteenMinutesAgo = new Date(Date.now() - FIFTEEN_MINUTES);
+    const fifteenMinutesAgo = new Date(Date.now() - INTERVAL);
 
     const recentVisit = await collection.findOne({
       ip,
