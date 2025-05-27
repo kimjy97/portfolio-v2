@@ -18,6 +18,10 @@ import WhatIsPillThumbImg from '@public/images/thumbnails/whatispill.png';
 import WhatIsPillImg1 from '@public/images/projects/wip_1.png';
 import WhatIsPillImg2 from '@public/images/projects/wip_2.png';
 import WhatIsPillImg3 from '@public/images/projects/wip_3.png';
+import BlogAdminThumbImg from '@public/images/thumbnails/blogadmin.png';
+import BlogAdminImg1 from '@public/images/projects/blogadmin_1.png';
+import BlogAdminImg2 from '@public/images/projects/blogadmin_2.png';
+import BlogAdminImg3 from '@public/images/projects/blogadmin_3.png';
 import { StaticImageData } from 'next/image';
 
 export interface IProjectProps {
@@ -25,7 +29,7 @@ export interface IProjectProps {
   term: string;
   termDiff?: string;
   name: string;
-  url: string;
+  url?: string;
   github?: string;
   team?: string;
   contribution: { dev: string, design: string, planning: string };
@@ -59,7 +63,7 @@ export const projectData: IProjectProps[] = [{
   term: '2024.04 ~ 2024.08',
   termDiff: '5개월',
   name: 'AI 챗봇 서비스',
-  url: '',
+  url: 'https://kimjy.vercel.app/chat',
   github: 'https://github.com/kimjy97/devblog-v2',
   contribution: { dev: '100%', design: '100%', planning: '100%' },
   stacks: ['Next.js', 'TypeScript', 'Recoil', 'MongoDB', 'Vercel', 'StyledComponents'],
@@ -106,6 +110,41 @@ export const projectData: IProjectProps[] = [{
   intro: '개발하면서 얻은 정보들을 체계적으로 기록할 수 있는 개인 블로그가 필요하다고 느껴 직접 제작하였습니다. 블로그의 기본적인 형태와 기능을 모두 구현했으며, SEO 최적화를 통해 구글 검색이 가능하도록 했습니다. 또한, 사용자의 선호에 따라 다크모드와 라이트모드를 선택할 수 있도록 기능을 추가하여, 다양한 환경에서도 편리하게 블로그를 이용할 수 있도록 하였습니다.',
   func: ['게시물 조회', '게시물 검색', '게시물 좋아요', '게시물 정렬', '댓글 등록, 수정, 삭제', '게시판 이동', '다크모드 및 라이트모드 지원', '반응형 웹'],
 }, {
+  thumb: [BlogAdminThumbImg, BlogAdminImg1, BlogAdminImg2, BlogAdminImg3],
+  term: "2025.05 ~ 2025.05",
+  termDiff: "1개월",
+  name: "블로그 관리자 (대시보드)",
+  url: "",
+  github: "https://github.com/kimjy97/blog-admin",
+  contribution: { "dev": "100%", "design": "100%", "planning": "100%" },
+  stacks: ["Next.js", "TypeScript", "Zustand", "ReactQuery", "TailwindCSS", "MongoDB", "Vercel"],
+  issues: [
+    {
+      "issue": "대시보드 특성상 유사 데이터를 기반으로 다양한 가공 정보가 필요해 불필요한 API 호출 및 데이터 가공 비효율이 우려되었습니다.",
+      "solving": "**React Query**를 활용하여 데이터 캐싱 및 재요청 관리를 최적화했습니다. 서버에서 가져온 원본 데이터를 캐시하고 클라이언트에서 가공하여 사용함으로써 API 호출 횟수를 줄이고 대시보드 응답 속도를 개선했습니다."
+    },
+    {
+      "issue": "게시물 CRUD 등 민감한 관리자 기능에 대한 비인가 접근을 막기 위해 강력한 로그인 방식이 필요했습니다.",
+      "solving": "**NextAuth.js**의 **CredentialsProvider**를 통해 이메일/비밀번호 기반 로그인 시스템을 구현하고, **Next.js 미들웨어**로 관리자 페이지 접근 시 서버 단에서 세션 유효성을 검증하여 대시보드 보안을 강화했습니다."
+    },
+    {
+      "issue": "통계 데이터 조회 시 복잡한 집계 쿼리가 필요하며, 데이터 증가에 따른 쿼리 성능 저하가 예상되었습니다.",
+      "solving": "**MongoDB Aggregation Pipeline 연산자**를 활용하여 통계 데이터를 효율적으로 집계하고, 자주 조회되는 필드에 인덱스를 생성하여 쿼리 성능을 최적화했습니다."
+    }
+  ],
+  reason: "`Next.js`는 SSR/SSG를 통한 초기 로딩 속도 개선 및 **API 라우터를 활용한 백엔드 개발 및 통합 배포의 이점** 때문에 선택했습니다. 상태 관리는 경량 라이브러리인 `Zustand`를 통해 전역 상태를 효율적으로 다루었습니다. 서버 데이터 관리 및 캐싱은 `React Query`를 사용하여 비동기 데이터 처리 로직을 간소화하고, API 요청을 최적화하여 성능을 향상시켰습니다. UI는 `Tailwind CSS`와 `Shadcn/ui` 조합으로 개발했습니다. Tailwind CSS의 유틸리티 클래스로 빠른 스타일링을 구현하고, Shadcn/ui 컴포넌트로 다크 모드 및 반응형 UI를 쉽게 적용하여 사용자 경험을 확보했습니다. 데이터베이스는 기존 블로그에서 사용 중인 `MongoDB`를 선택하여 데이터 연동 및 유연한 데이터 관리가 가능하도록 했습니다. 방문자 및 게시물 통계 시각화는 `Chart.js`와 `Recharts`를 활용하여 데이터를 직관적으로 파악할 수 있도록 했습니다. 인증 시스템은 `NextAuth.js`를 통해 이메일/비밀번호 기반의 안전한 로그인 기능을 구현하여 대시보드 접근 보안을 강화했습니다.",
+  learned: "**Zustand**와 **React Query**의 조합은 서버-클라이언트 상태 관리를 효율적으로 분리하여 개발 생산성을 크게 향상시켰습니다. 특히 **React Query**의 캐싱 및 동기화 기능은 비동기 데이터 처리의 복잡성을 줄여주었습니다. **Tailwind CSS**와 **Shadcn/ui**를 활용하면서 UI 개발 속도가 혁신적으로 단축되었고, **일관된 디자인**과 **반응형 웹** 구현에 큰 도움이 되었습니다. 이를 통해 디자인 시스템 구축의 효율성을 체감했습니다.\n전반적으로 이번 프로젝트는 최신 웹 기술 스택을 실질적으로 적용하며 복합적인 문제를 해결하는 좋은 경험이 되었습니다.",
+  intro: "Next.js 15를 활용하여 개인 개발 블로그의 대시보드 웹 서비스를 개발했습니다. 블로그 콘텐츠 및 사용자 활동을 효율적으로 관리하고 모니터링할 수 있도록 설계되었으며, 최신 웹 기술 스택을 적용하여 성능과 사용자 경험을 최적화했습니다.",
+  func: [
+    "게시물 및 댓글 관리",
+    "방문자 및 게시물 통계 조회",
+    "방문자 로그 확인",
+    "관리자 로그인",
+    "다크모드 지원",
+    "반응형 웹"
+  ]
+},
+{
   thumb: [WhatIsPillThumbImg, WhatIsPillImg1, WhatIsPillImg2, WhatIsPillImg3],
   term: '2023.03 ~ 진행중',
   name: '이게뭐약 - 알약 촬영 검색 애플리케이션',
@@ -141,7 +180,7 @@ export const projectData: IProjectProps[] = [{
     "solving": "**IntersectionObserver**를 활용한 **무한 스크롤** 기능을 구현하여 **페이지네이션** 없이 **점진적인 문서 로딩** 구현. 이를 통해 **초기 로딩 시간 단축**과 **부드러운 스크롤 경험** 제공."
   }],
   reason: "`Next.js`는 서버 사이드 렌더링(SSR)과 정적 사이트 생성(SSG)으로 SEO와 성능을 최적화할 수 있어 선택했고, **API Routes**로 백엔드 없이도 API 처리가 가능했음. `TypeScript`는 타입 오류 방지와 코드 유지보수를 위해 도입했으며, `Recoil`은 불필요한 리렌더링을 줄여 성능 최적화에 적합해 사용함. **배포 환경**으로는 Next.js와 호환성이 뛰어나고 빠른 배포가 가능한 `Vercel`을 선택함. `MongoDB`는 유연한 스키마 설계와 빠른 데이터 처리 속도로 선택했으며, 간단한 CRUD 작업에 적합해 사용함.",
-  learned: 'MongoDB 매니저 프로젝트를 통해 데이터베이스 관리와 성능 최적화에 대한 깊은 이해를 얻었습니다. 특히, **MongoDB 네이티브 드라이버**를 사용한 다중 데이터베이스 관리와 효율적인 데이터 처리 방법을 학습했습니다. 또한, **IntersectionObserver**를 활용한 무한 스크롤 구현을 통해 대규모 데이터셋을 사용자에게 부드럽게 제공하는 기술을 익혔습니다. 이 프로젝트를 통해 데이터베이스와 프론트엔드 간의 상호작용을 효율적으로 설계하고, 사용자 경험을 고려한 인터페이스 최적화 방법을 경험했습니다.',
+  learned: ' 이 프로젝트를 통해 데이터베이스 관리와 성능 최적화에 대한 깊은 이해를 얻었습니다. 특히, **MongoDB 네이티브 드라이버**를 사용한 다중 데이터베이스 관리와 효율적인 데이터 처리 방법을 학습했습니다. 또한, **IntersectionObserver**를 활용한 무한 스크롤 구현을 통해 대규모 데이터셋을 사용자에게 부드럽게 제공하는 기술을 익혔습니다. 이 프로젝트를 통해 데이터베이스와 프론트엔드 간의 상호작용을 효율적으로 설계하고, 사용자 경험을 고려한 인터페이스 최적화 방법을 경험했습니다.',
   intro: 'MongoDB 데이터베이스를 쉽게 관리하고 모니터링할 수 있는 웹 기반 도구입니다. 데이터베이스 구조를 시각화하고, 데이터를 다루는 기본 작업들을 쉽고 빠르게 다룰 수 있도록 구현하여 개발자와 데이터베이스 관리자가 작업을 효율적으로 할 수 있도록 돕습니다. 제가 진행한 대부분의 프로젝트에서 MongoDB를 사용했기 때문에, MongoDB를 직접 관리할 수 있는 도구의 필요성을 느껴 이 프로젝트를 시작하게 되었습니다. 이를 통해 MongoDB의 관리 효율성을 높이고, 데이터 작업을 보다 직관적으로 수행할 수 있는 환경을 만들고자 했습니다.',
   func: [
     '데이터베이스 연결 및 관리',

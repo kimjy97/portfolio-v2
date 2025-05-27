@@ -104,10 +104,10 @@ const ProjectModal = () => {
                 <StatusLight />
                 <p>서비스 중</p>
               </StatusService>
-              <LinkBtn href={info?.url} target='_blank'>
+              {info?.url && <LinkBtn href={info?.url} target='_blank'>
                 <span>사이트 바로가기</span>
                 <LinkIcon />
-              </LinkBtn>
+              </LinkBtn>}
               {info?.github ?
                 <LinkBtn href={info?.github} target='_blank'>
                   <span>GitHub 바로가기</span>

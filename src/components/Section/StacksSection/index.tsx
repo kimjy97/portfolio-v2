@@ -22,10 +22,13 @@ import GooglePlaySVG from '@public/svgs/stacks/googleplay.svg';
 import ExpoSVG from '@public/svgs/stacks/expo.svg';
 import SupabaseSVG from '@public/svgs/stacks/supabase.svg';
 import FirebaseSVG from '@public/svgs/stacks/firebase.svg';
+import TailwindCSSSVG from '@public/svgs/stacks/tailwindcss.svg';
+import ReactQuerySrc from '@public/images/stacks/reactquery.png';
 import { useScroll } from '@hooks/useScroll';
 import Stack from '@components/Section/StacksSection/Stack';
 import Title from '@components/Section/Title';
 import { IProjectProps, projectData } from '@/constants/project';
+import Image from 'next/image';
 
 const StacksSection = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false);
@@ -97,8 +100,8 @@ const StacksSection = (): JSX.Element => {
         />
         <StackList>
           <StackItem>
-            <StackType visible={visibleRows[0]}># FRONT-END & BACK-END</StackType>
-            <StackRow ref={setRowRef(0)} visible={visibleRows[0]}>
+            <StackType $visible={visibleRows[0]}># FRONT-END & BACK-END</StackType>
+            <StackRow ref={setRowRef(0)} $visible={visibleRows[0]}>
               <Stack name='Next.js' icon={<NextjsIcon />} count={stackCounts['Next.js'] || 0} />
               <Stack name='React.js' icon={<ReactIcon />} count={stackCounts['React'] || 0} />
               <Stack name='ReactNative' icon={<ReactIcon />} count={stackCounts['ReactNative'] || 0} />
@@ -107,7 +110,9 @@ const StacksSection = (): JSX.Element => {
               <Stack name='TypeScript' icon={<TypescriptIcon />} count={stackCounts['TypeScript'] || 0} />
               <Stack name='Recoil' icon={<RecoilIcon />} count={stackCounts['Recoil'] || 0} />
               <Stack name='Zustand' icon={<ZustandIcon />} count={stackCounts['Zustand'] || 0} />
+              <Stack name='ReactQuery' icon={<ReactQueryIcon src={ReactQuerySrc} alt='ReactQuery' />} count={stackCounts['ReactQuery'] || 0} />
               <Stack name='Styled' name2='Components' icon={<StyledComponentsIcon />} count={stackCounts['StyledComponents'] || 0} />
+              <Stack name='TailwindCSS' icon={<TailwindCSSIcon />} count={stackCounts['TailwindCSS'] || 0} />
               <Stack name='SCSS' icon={<ScssIcon />} count={stackCounts['SCSS'] || 0} />
               <Stack name='Node.js' icon={<NodejsIcon />} count={stackCounts['Nodejs'] || 0} />
               <Stack name='MongoDB' icon={<MongodbIcon />} count={stackCounts['MongoDB'] || 0} />
@@ -117,16 +122,16 @@ const StacksSection = (): JSX.Element => {
             </StackRow>
           </StackItem>
           <StackItem>
-            <StackType visible={visibleRows[1]}># DEPLOYMENT</StackType>
-            <StackRow ref={setRowRef(1)} visible={visibleRows[1]}>
+            <StackType $visible={visibleRows[1]}># DEPLOYMENT</StackType>
+            <StackRow ref={setRowRef(1)} $visible={visibleRows[1]}>
               <Stack name='Vercel' icon={<VercelIcon />} count={stackCounts['Vercel'] || 0} />
               <Stack name='AWS' icon={<AwsIcon />} count={stackCounts['AWS'] || 0} />
               <Stack name='GooglePlay' name2='Console' icon={<GooglePlayIcon />} count={stackCounts['GooglePlayConsole'] || 0} />
             </StackRow>
           </StackItem>
           <StackItem>
-            <StackType visible={visibleRows[2]}># TOOLS</StackType>
-            <StackRow ref={setRowRef(2)} visible={visibleRows[2]}>
+            <StackType $visible={visibleRows[2]}># TOOLS</StackType>
+            <StackRow ref={setRowRef(2)} $visible={visibleRows[2]}>
               <Stack name='Postman' icon={<PostmanIcon />} count={stackCounts['Postman'] || 0} />
               <Stack name='Figma' icon={<FigmaIcon />} count={stackCounts['Figma'] || 0} />
               <Stack name='illustrator' icon={<IllustratorIcon />} count={stackCounts['Illustrator'] || 0} />
@@ -203,7 +208,7 @@ const StackItem = styled.div`
     margin-top: 1em;
   }
 `
-const StackType = styled.p<{ visible: boolean }>`
+const StackType = styled.p<{ $visible: boolean }>`
   width: 100%;
   margin-bottom: 1.125em;
 
@@ -211,11 +216,11 @@ const StackType = styled.p<{ visible: boolean }>`
   font-size: 1.35em;
   font-weight: 500;
 
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  transform: translateY(${({ visible }) => (visible ? '0px' : '10px')});
+  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+  transform: translateY(${({ $visible }) => ($visible ? '0px' : '10px')});
   transition: 200ms ease-out;
 `
-const StackRow = styled.div<{ visible: boolean }>`
+const StackRow = styled.div<{ $visible: boolean }>`
   display: flex;
   flex-wrap: wrap;
   gap: 2em;
@@ -223,8 +228,8 @@ const StackRow = styled.div<{ visible: boolean }>`
   width: 100%;
   margin-bottom: 1.5em;
 
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  transform: translateY(${({ visible }) => (visible ? '0px' : '10px')});
+  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+  transform: translateY(${({ $visible }) => ($visible ? '0px' : '10px')});
   transition: opacity 1200ms 250ms cubic-bezier(0.23, 1, 0.320, 1), transform 1200ms 250ms cubic-bezier(0.23, 1, 0.320, 1);
 
   @media (max-width: 470px) {
@@ -316,4 +321,12 @@ const SupabaseIcon = styled(SupabaseSVG)`
 const FirebaseIcon = styled(FirebaseSVG)`
   width: 3.8em;
   height: 3.8em;
+`
+const TailwindCSSIcon = styled(TailwindCSSSVG)`
+  width: 3.8em;
+  height: 3.8em;
+`
+const ReactQueryIcon = styled(Image)`
+  width: 4.25em;
+  height: 4.25em;
 `

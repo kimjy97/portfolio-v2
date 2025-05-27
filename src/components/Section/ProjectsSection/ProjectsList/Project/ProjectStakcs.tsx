@@ -2,15 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { projectFilterState } from '@/atoms/project';
-import { GooglePlayConsoleIcon, MongodbIcon, NextjsIcon, ReactNativeIcon, RecoilIcon, StyledComponentsIcon, TypescriptIcon, VercelIcon } from '@/components/Section/ProjectsSection/ProjectsList/Project/StackIcons';
+import { GooglePlayConsoleIcon, MongodbIcon, NextjsIcon, ReactNativeIcon, RecoilIcon, StyledComponentsIcon, TypescriptIcon, VercelIcon, TailwindCSSIcon, ZustandIcon, ReactQueryIcon } from '@/components/Section/ProjectsSection/ProjectsList/Project/StackIcons';
 import smoothScrollTo from '@/utils/smoothScrollTo';
 import { useRouter } from 'next/navigation';
-import { IStyledComponentBase } from 'styled-components/dist/types';
-
-type StyledIconComponent = IStyledComponentBase<"web">;
-
 interface StackIconsType {
-  [key: string]: StyledIconComponent;
+  [key: string]: React.ElementType;
 }
 
 const stackIcons: StackIconsType = {
@@ -22,6 +18,9 @@ const stackIcons: StackIconsType = {
   Vercel: VercelIcon,
   ReactNative: ReactNativeIcon,
   GooglePlayConsole: GooglePlayConsoleIcon,
+  TailwindCSS: TailwindCSSIcon,
+  Zustand: ZustandIcon,
+  ReactQuery: ReactQueryIcon,
 };
 
 interface IProps {

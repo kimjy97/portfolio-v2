@@ -8,6 +8,10 @@ import VercelSVG from '@public/svgs/stacks/vercel.svg';
 import RecoilSVG from '@public/svgs/stacks/recoil.svg';
 import ReactNativeSVG from '@public/svgs/stacks/react.svg';
 import GooglePlayConsoleSVG from '@public/svgs/stacks/googleplay.svg';
+import TailwindCSSSVG from '@public/svgs/stacks/tailwindcss.svg';
+import ReactQuerySrc from '@public/images/stacks/reactquery.png';
+import ZustandSVG from '@public/svgs/stacks/zustand.svg';
+import Image from "next/image";
 
 export const NextjsIcon = styled(NextjsSVG)`
   width: 1.875em;
@@ -46,4 +50,20 @@ export const ReactNativeIcon = styled(ReactNativeSVG)`
 export const GooglePlayConsoleIcon = styled(GooglePlayConsoleSVG)`
   width: 1.25em;
   height: 1.25em;
+`
+export const TailwindCSSIcon = styled(TailwindCSSSVG)`
+  width: 1.5em;
+  height: 1.5em;
+`
+export const ReactQueryIcon = () => {
+  return (
+    <div style={{ width: '1.5em', height: '1.5em' }}>
+      <Image src={ReactQuerySrc} alt='ReactQuery' fill />
+    </div>
+  )
+}
+export const ZustandIcon = styled(ZustandSVG)`
+  width: 1.75em;
+  height: 1.75em;
+  margin-bottom: -0.3em;
 `

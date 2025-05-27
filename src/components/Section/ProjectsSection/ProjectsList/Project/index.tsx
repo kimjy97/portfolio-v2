@@ -51,10 +51,10 @@ const Project = ({ data }: IProps): JSX.Element => {
         </Info>
       </Row>
       <BtnWrapper>
-        <LinkBtn href={url} target='_blank'>
+        {url && <LinkBtn href={url} target='_blank'>
           <span>서비스 이동</span>
           <LinkIcon />
-        </LinkBtn>
+        </LinkBtn>}
         {github &&
           <LinkBtn href={github} target='_blank'>
             <span>GitHub</span>
