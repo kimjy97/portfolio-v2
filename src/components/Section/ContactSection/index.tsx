@@ -36,7 +36,7 @@ const ContactSection = (): JSX.Element => {
         <FooterSection>
           <FooterLine />
           <CopyRights>
-            Copyright © 2024. JongYeon All rights reserved.
+            Copyright © 2025. JongYeon All rights reserved.
           </CopyRights>
         </FooterSection>
       </Wrapper>
