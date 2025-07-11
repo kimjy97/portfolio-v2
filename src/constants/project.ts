@@ -2,6 +2,10 @@ import BlogThumbImg from '@public/images/projects/blog_2.png';
 import BlogImg1 from '@public/images/projects/blog_1.png';
 import BlogImg2 from '@public/images/projects/blog_3.png';
 import BlogImg3 from '@public/images/projects/blog_4.png';
+import RestoryThumbImg from '@public/images/thumbnails/restory.png';
+import RestoryImg1 from '@public/images/projects/restory_1.png';
+import RestoryImg2 from '@public/images/projects/restory_2.png';
+import RestoryImg3 from '@public/images/projects/restory_3.png';
 import PortfolioThumbImg from '@public/images/thumbnails/portfolio.png';
 import PortfolioImg1 from '@public/images/projects/portfolio_1.png';
 import PortfolioImg2 from '@public/images/projects/portfolio_2.png';
@@ -163,6 +167,46 @@ export const projectData: IProjectProps[] = [{
   learned: ' **React**와 **React Native**의 차이를 깊이 이해하며 모바일 환경에서의 성능 최적화와 네이티브 모듈, 특히 카메라 모듈을 활용한 이미지 처리 방법을 배웠습니다. 앱 출시 경험을 통해 **Google Play** 등록 절차와 팀 프로젝트에서의 협업 중요성도 깨달았습니다. 다양한 디바이스에 대응하는 반응형 UI와 성능 최적화 기술을 익혀 실무 역량을 한층 강화했으며, **Git 커밋 컨벤션**을 도입하여 코드 일관성과 협업 효율성을 높일 수 있었습니다.',
   intro: '사용자가 알약을 카메라로 촬영하여 검색하면 해당 약품의 정보를 제공하는 모바일 애플리케이션입니다. AI 기반의 이미지 인식 기술을 활용하여 촬영한 알약을 식별하고, 식품의약품안전처에서 제공하는 공공데이터를 바탕으로 상세한 약품 정보를 제공합니다. React Native를 사용해 크로스 플랫폼 앱으로 개발되었으며, 현재 Android 버전은 Google Play에 출시되어 있습니다. 올해 안에 iOS 버전도 App Store에 등록할 예정입니다. 알약 데이터는 식품의약품안전처의 최신 데이터를 기반으로 지속적으로 업데이트됩니다.',
   func: ['알약 촬영 및 검색 기능', '앨범에서 사진 선택하여 검색 기능', '알약 정보 조회', '최근 검색한 약품 리스트 제공', '알약 보관함 기능'],
+}, {
+  "thumb": [RestoryThumbImg, RestoryImg1, RestoryImg2, RestoryImg3],
+  "term": "2025.06 ~ 2025.07",
+  "termDiff": "1개월",
+  "name": "ReStory - AI 사진 복원 서비스",
+  "url": "https://restory-free.vercel.app",
+  "github": "https://github.com/kimjy97/ReStory",
+  "contribution": { "dev": "100%", "design": "100%", "planning": "100%" },
+  "stacks": [
+    "Next.js",
+    "TypeScript",
+    "React",
+    "TailwindCSS",
+    "Vercel",
+  ],
+  "issues": [
+    {
+      "issue": "고해상도 이미지 처리 시 AI 모델의 처리 시간이 길어지고 서버 자원을 많이 소모함.",
+      "solving": "**Google Gemini API**를 활용하여 AI 추론을 외부 서비스로 위임하고, 업로드 파일 크기 제한(10MB) 및 타입 검증(JPG/PNG)으로 서버 부하와 오류를 최소화. 복원 진행 상태와 에러를 실시간으로 안내하여 사용자 경험을 개선."
+    },
+    {
+      "issue": "사용자가 업로드한 사진 데이터의 보안과 개인정보 보호가 중요한 이슈였습니다.",
+      "solving": "이미지는 서버에 임시로만 사용하며 별도 저장하지 않고, **파일 타입/크기 검증**을 통해 보안을 강화. 개인정보 처리방침을 통해 외부 서비스(Gemini API, Vercel) 사용을 명확히 고지."
+    },
+    {
+      "issue": "다양한 이미지 품질과 복원 스타일에 대해 일관된 결과를 제공해야 했습니다.",
+      "solving": "복원 스타일(보수적/모던/하이브리드)별로 맞춤 프롬프트를 적용하여 사용자가 원하는 결과를 선택할 수 있도록 함."
+    }
+  ],
+  "reason": "`Next.js`는 **API 라우터를 통한 백엔드 통합**과 **SSR 기반 SEO 최적화**를 위해 선택했습니다. AI 복원은 `Google Gemini API`를 통해 **이미지 생성 모델**을 활용하고, 서버 비용을 절감했습니다. UI는 `React`와 `TailwindCSS`, `Radix UI`로 **반응형 드래그 앤 드롭** 인터페이스와 다양한 상태 안내, 모달, 토스트 등 세련된 UX를 구현했습니다. `TypeScript`로 **타입 안정성**을 확보했습니다.",
+  "learned": "**외부 AI API 연동** 경험을 통해 ML 서비스와의 효율적 통신, 비동기 처리, 에러 핸들링의 중요성을 체감했습니다. **이미지 업로드/복원/상태 안내** 등 UX 세부 구현을 고민하고, **반응형 웹/접근성**/PWA 등 실전 프론트엔드 기술을 폭넓게 익혔습니다.",
+  "intro": "Next.js와 Google Gemini AI를 결합하여 손상된 사진을 무료로 복원해주는 웹 서비스를 개발했습니다. 사용자가 사진을 업로드하면 AI가 자동으로 복원 스타일별로 이미지를 복원해주며, 복원 전후 비교와 다양한 상태 안내를 제공합니다.",
+  "func": [
+    "Gemini api 기반 사진 복원 (보수적/모던/하이브리드 스타일)",
+    "드래그 앤 드롭 파일 업로드 및 타입/크기 검증",
+    "복원 전후 비교 뷰어 및 이미지 확대/다운로드",
+    "다양한 이미지 포맷(JPG/PNG) 지원",
+    "반응형 웹 디자인 및 PWA 지원",
+    "다크모드 지원",
+  ]
 }, {
   thumb: [MongoDBThumbImg, MongoDBImg1, MongoDBImg2, MongoDBImg3],
   term: '2024.08 ~ 2024.09',

@@ -20,6 +20,7 @@ const ProjectModal = () => {
   const [isScroll, setIsScroll] = useState(false);
   const [thumbNum, setThumbNum] = useState<number>(0);
   const [randomKey, setRandomKey] = useState(1);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const bodyRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const imgListRef = useRef<HTMLDivElement>(null);
@@ -66,136 +67,184 @@ const ProjectModal = () => {
 
   const handleClose = () => setIsOpen(undefined);
 
+  const handleImageClick = () => {
+    setIsImageModalOpen(true);
+  };
+
+  const handleImageModalClose = () => {
+    setIsImageModalOpen(false);
+  };
+
+  // ESC 키로 이미지 모달 닫기
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isImageModalOpen) {
+        setIsImageModalOpen(false);
+      }
+    };
+
+    if (isImageModalOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isImageModalOpen]);
+
   return (
-    <Container className={isOpen ? 'visible' : ''}>
-      <Top>
-        <ExitBtn onClick={handleClose}>
-          <CrossIcon />
-        </ExitBtn>
-      </Top>
-      <Body ref={bodyRef}>
-        <BackColor>
-          {info && <Image src={info.thumb[thumbNum]} alt={`${info.name}(Thumbnail)_${thumbNum}`} />}
-        </BackColor>
-        {info && (
-          <MockUp className={MockUpClassName}>
-            <Image ref={imgRef} src={info.thumb[thumbNum]} alt={`${info.name}(Thumbnail)_${thumbNum}`} />
-            <SelectThumbList ref={imgListRef}>
-              {info.thumb.map((i: StaticImageData, idx: number) =>
-                <SelectThumb
-                  key={idx * randomKey}
-                  className={idx === thumbNum ? 'selected' : ''}
-                  src={i}
-                  alt={`${info.name}(Thumbnail)_${idx}`}
-                  onClick={() => setThumbNum(idx)}
-                />
-              )}
-            </SelectThumbList>
-          </MockUp>
-        )}
-        <Contents ref={contentsRef} className={isScroll ? 'visible' : 'unVisible'}>
-          <ContentsWrapper className={isScroll ? 'visible' : 'unVisible'}>
-            <Name>
-              <DocumentIcon />
-              <p>{info?.name}</p>
-            </Name>
-            <Status>
-              <StatusService>
-                <StatusLight />
-                <p>서비스 중</p>
-              </StatusService>
-              {info?.url && <LinkBtn href={info?.url} target='_blank'>
-                <span>사이트 바로가기</span>
-                <LinkIcon />
-              </LinkBtn>}
-              {info?.github ?
-                <LinkBtn href={info?.github} target='_blank'>
-                  <span>GitHub 바로가기</span>
+    <>
+      <Container className={isOpen ? 'visible' : ''}>
+        <Top>
+          <ExitBtn onClick={handleClose}>
+            <CrossIcon />
+          </ExitBtn>
+        </Top>
+        <Body ref={bodyRef}>
+          <BackColor>
+            {info && <Image src={info.thumb[thumbNum]} alt={`${info.name}(Thumbnail)_${thumbNum}`} />}
+          </BackColor>
+          {info && (
+            <MockUp className={MockUpClassName}>
+              <Image
+                ref={imgRef}
+                src={info.thumb[thumbNum]}
+                alt={`${info.name}(Thumbnail)_${thumbNum}`}
+                onClick={handleImageClick}
+                style={{ cursor: 'pointer' }}
+              />
+              <SelectThumbList ref={imgListRef}>
+                {info.thumb.map((i: StaticImageData, idx: number) =>
+                  <SelectThumb
+                    key={idx * randomKey}
+                    className={idx === thumbNum ? 'selected' : ''}
+                    src={i}
+                    alt={`${info.name}(Thumbnail)_${idx}`}
+                    onClick={() => setThumbNum(idx)}
+                  />
+                )}
+              </SelectThumbList>
+            </MockUp>
+          )}
+          <Contents ref={contentsRef} className={isScroll ? 'visible' : 'unVisible'}>
+            <ContentsWrapper className={isScroll ? 'visible' : 'unVisible'}>
+              <Name>
+                <DocumentIcon />
+                <p>{info?.name}</p>
+              </Name>
+              <Status>
+                <StatusService>
+                  <StatusLight />
+                  <p>서비스 중</p>
+                </StatusService>
+                {info?.url && <LinkBtn href={info?.url} target='_blank'>
+                  <span>사이트 바로가기</span>
                   <LinkIcon />
-                </LinkBtn>
-                : null
-              }
-            </Status>
-            <Info>
-              <Intro>
-                <p>INTRO.</p>
-                {info?.intro}
-              </Intro>
-              <InfoRow>
-                <Label>개발 기간</Label>
-                <InfoText>
-                  {`${info?.term} ${info?.termDiff ? `(${info?.termDiff})` : ''}`}
-                </InfoText>
-              </InfoRow>
-              <InfoRow>
-                <Label>구성원</Label>
-                <InfoText>
-                  {info?.team || '개인 프로젝트'}
-                </InfoText>
-              </InfoRow>
-              <InfoRow>
-                <Label>기여도</Label>
-                <ContributionList>
-                  {info?.contribution.dev ? <Contribution>
-                    <span>개발</span>
-                    {info?.contribution.dev}
-                  </Contribution>
-                    : null
-                  }
-                  {info?.contribution.design ? <Contribution>
-                    <span>디자인</span>
-                    {info?.contribution.design}
-                  </Contribution>
-                    : null
-                  }
-                  {info?.contribution.planning ? <Contribution>
-                    <span>기획</span>
-                    {info?.contribution.planning}
-                  </Contribution>
-                    : null
-                  }
-                </ContributionList>
-              </InfoRow>
-              <InfoRow>
-                <Label>사용된 기술 스택</Label>
-                <StackList>
-                  {info?.stacks.map((i: string, idx: number) =>
-                    <Stack key={idx}>{i}</Stack>
-                  )}
-                </StackList>
-              </InfoRow>
-              {(info?.func && info?.func.length > 0) &&
+                </LinkBtn>}
+                {info?.github ?
+                  <LinkBtn href={info?.github} target='_blank'>
+                    <span>GitHub 바로가기</span>
+                    <LinkIcon />
+                  </LinkBtn>
+                  : null
+                }
+              </Status>
+              <Info>
+                <Intro>
+                  <p>INTRO.</p>
+                  {info?.intro}
+                </Intro>
                 <InfoRow>
-                  <Label>주요 기능</Label>
-                  <FuncList info={info} />
+                  <Label>⏱️ 개발 기간</Label>
+                  <InfoText>
+                    {`${info?.term} ${info?.termDiff ? `(${info?.termDiff})` : ''}`}
+                  </InfoText>
                 </InfoRow>
-              }
-            </Info>
-            <DetailInfo>
-              <InfoRow>
-                <BlackLabel>기술 선정 이유</BlackLabel>
-                <ReasonText info={info} />
-              </InfoRow>
-              <InfoRow>
-                <BlackLabel>개발 이슈</BlackLabel>
-                <Issue info={info} />
-              </InfoRow>
-              <InfoRow>
-                <BlackLabel>개발 후 느낀점</BlackLabel>
-                <DetailInfoText>
-                  <StyledText>{info?.learned}</StyledText>
-                </DetailInfoText>
-              </InfoRow>
-            </DetailInfo>
-          </ContentsWrapper>
-        </Contents>
-      </Body>
-      <ScrollGradient className={!isScroll ? 'unVisible' : ''} />
-      <ScrollNote className={!isScroll ? 'unVisible' : ''}>
-        <ArrowDownIcon />
-        <p>스크롤을 내리면 프로젝트 정보를 볼 수 있습니다.</p>
-      </ScrollNote>
-    </Container>
+                <InfoRow>
+                  <Label>👥 구성원</Label>
+                  <InfoText>
+                    {info?.team || '개인 프로젝트'}
+                  </InfoText>
+                </InfoRow>
+                <InfoRow>
+                  <Label>기여도</Label>
+                  <ContributionList>
+                    {info?.contribution.dev ? <Contribution>
+                      <span>개발</span>
+                      {info?.contribution.dev}
+                    </Contribution>
+                      : null
+                    }
+                    {info?.contribution.design ? <Contribution>
+                      <span>디자인</span>
+                      {info?.contribution.design}
+                    </Contribution>
+                      : null
+                    }
+                    {info?.contribution.planning ? <Contribution>
+                      <span>기획</span>
+                      {info?.contribution.planning}
+                    </Contribution>
+                      : null
+                    }
+                  </ContributionList>
+                </InfoRow>
+                <InfoRow>
+                  <Label>🛠️ 사용된 기술 스택</Label>
+                  <StackList>
+                    {info?.stacks.map((i: string, idx: number) =>
+                      <Stack key={idx}>{i}</Stack>
+                    )}
+                  </StackList>
+                </InfoRow>
+                {(info?.func && info?.func.length > 0) &&
+                  <InfoRow>
+                    <Label>⚡ 주요 기능</Label>
+                    <FuncList info={info} />
+                  </InfoRow>
+                }
+              </Info>
+              <DetailInfo>
+                <InfoRow>
+                  <BlackLabel>🤔 기술 선정 이유</BlackLabel>
+                  <ReasonText info={info} />
+                </InfoRow>
+                <InfoRow>
+                  <BlackLabel>🐛 개발 이슈</BlackLabel>
+                  <Issue info={info} />
+                </InfoRow>
+                <InfoRow>
+                  <BlackLabel>💭 개발 후 느낀점</BlackLabel>
+                  <DetailInfoText>
+                    <StyledText>{info?.learned}</StyledText>
+                  </DetailInfoText>
+                </InfoRow>
+              </DetailInfo>
+            </ContentsWrapper>
+          </Contents>
+        </Body>
+        <ScrollGradient className={!isScroll ? 'unVisible' : ''} />
+        <ScrollNote className={!isScroll ? 'unVisible' : ''}>
+          <ArrowDownIcon />
+          <p>스크롤을 내리면 프로젝트 정보를 볼 수 있습니다.</p>
+        </ScrollNote>
+      </Container>
+
+      {/* 전체 화면 이미지 모달 */}
+      {isImageModalOpen && info && (
+        <ImageModalOverlay onClick={handleImageModalClose}>
+          <ImageModalContent onClick={(e) => e.stopPropagation()}>
+            <ImageModalCloseBtn onClick={handleImageModalClose}>
+              <CrossIcon />
+            </ImageModalCloseBtn>
+            <ImageModalImage
+              src={info.thumb[thumbNum]}
+              alt={`${info.name}(Thumbnail)_${thumbNum}`}
+            />
+          </ImageModalContent>
+        </ImageModalOverlay>
+      )}
+    </>
   );
 };
 
@@ -800,3 +849,98 @@ const SelectThumb = styled(ImageWithSpinner)`
     }
   }
 `
+
+const ImageModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
+
+const ImageModalContent = styled.div`
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  animation: scaleIn 0.2s ease-out;
+
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+  }
+`;
+
+const ImageModalCloseBtn = styled.button`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+  border: none;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10001;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+`;
+
+const ImageModalImage = styled(Image)`
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  
+  @media (max-width: 768px) {
+    border-radius: 0;
+  }
+`;
