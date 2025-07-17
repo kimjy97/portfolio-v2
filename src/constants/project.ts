@@ -100,13 +100,16 @@ export const projectData: IProjectProps[] = [{
   url: 'https://kimjy.vercel.app/',
   github: 'https://github.com/kimjy97/devblog-v2',
   contribution: { dev: '100%', design: '100%', planning: '100%' },
-  stacks: ['Next.js', 'TypeScript', 'Recoil', 'StyledComponents', 'MongoDB', 'Vercel'],
+  stacks: ['Next.js', 'TypeScript', 'Recoil', 'ReactQuery', 'StyledComponents', 'MongoDB', 'Vercel'],
   issues: [{
     issue: '**Vercel**의 특징 중 하나인 **Cold Start**로 인해 초기 데이터가 로드되는 시간이 길어져 화면에 게시물 관련 요소들이 노출 되는 것이 늦어지는 문제 발생.',
     solving: '게시판의 게시물들과 게시물의 내용들을 **Skeletone UI**를 적용해 데이터가 로드 되는 것을 직관적으로 알 수 있도록 함.'
   }, {
     issue: '특정 IP나 사용자가 **블랙리스트**에 등록되었을 때, 이를 실시간으로 감지하여 접근을 제한할 필요가 있었음.',
     solving: 'Next.js의 **미들웨어** 기능을 사용해 블랙리스트 API를 호출하고, 사용자가 블랙리스트에 포함되어 있는지 실시간으로 확인하는 로직을 구현함. 이를 통해 특정 사용자가 블랙리스트에 있을 경우, API 응답에 필요한 **헤더**를 추가하고 접근을 차단하는 방식으로 처리했으며, 미들웨어에서 NextResponse를 활용하여 블랙리스트 여부를 빠르게 응답할 수 있도록 최적화함.'
+  }, {
+    issue: '게시물 목록이나 상세 페이지에서 데이터를 매번 요청해 로딩 속도가 느려지는 경우가 있었음.',
+    solving: '**Tanstack Query**를 도입하여 게시물 목록과 상세 데이터를 서버에서 불러올 때 데이터를 캐싱하도록 구현함. 이를 통해 동일한 데이터 요청 시 네트워크 지연 없이 빠르게 데이터를 제공할 수 있었고, 페이지 전환이나 재방문 시에도 즉각적으로 데이터를 표시할 수 있어 사용자 경험이 크게 향상됨.'
   }
   ],
   reason: "`Next.js`는 서버 사이드 렌더링(SSR)과 정적 사이트 생성(SSG)으로 SEO와 성능을 최적화할 수 있어 선택했고, **API Routes**로 백엔드 없이도 API 처리가 가능했음. `TypeScript`는 타입 오류 방지와 코드 유지보수를 위해 도입했으며, `Recoil`은 불필요한 리렌더링을 줄여 성능 최적화에 적합해 사용함. **배포 환경**으로는 Next.js와 호환성이 뛰어나고 빠른 배포가 가능한 `Vercel`을 선택함. `MongoDB`는 유연한 스키마 설계와 빠른 데이터 처리 속도로 선택했으며, 간단한 CRUD 작업에 적합해 사용함.",
