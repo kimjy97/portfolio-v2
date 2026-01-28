@@ -9,8 +9,11 @@ import RecoilSVG from '@public/svgs/stacks/recoil.svg';
 import ReactNativeSVG from '@public/svgs/stacks/react.svg';
 import GooglePlayConsoleSVG from '@public/svgs/stacks/googleplay.svg';
 import TailwindCSSSVG from '@public/svgs/stacks/tailwindcss.svg';
-import ReactQuerySrc from '@public/images/stacks/reactquery.png';
+import TanstackQuerySrc from '@public/images/stacks/tanstackquery.png';
 import ZustandSVG from '@public/svgs/stacks/zustand.svg';
+import RailwaySVG from '@public/svgs/stacks/railway.svg';
+import SocketIOSVG from '@public/svgs/stacks/socketio.svg';
+import PostgreSQLSVG from '@public/images/stacks/postgresql.png';
 import Image from "next/image";
 
 export const NextjsIcon = styled(NextjsSVG)`
@@ -55,13 +58,29 @@ export const TailwindCSSIcon = styled(TailwindCSSSVG)`
   width: 1.5em;
   height: 1.5em;
 `
-export const ReactQueryIcon = () => {
+export const TanstackQueryIcon = () => {
   return (
     <div style={{ width: '1.5em', height: '1.5em' }}>
-      <Image src={ReactQuerySrc} alt='ReactQuery' fill />
+      <Image src={TanstackQuerySrc} alt='TanstackQuery' fill />
     </div>
   )
 }
+export const PostgreSQLIcon = () => {
+  return (
+    <div style={{ width: '1.5em', height: '1.5em' }}>
+      <Image src={PostgreSQLSVG} alt='PostgreSQL' fill />
+    </div>
+  )
+}
+export const RailwayIcon = styled(RailwaySVG)`
+  width: 1.3em;
+  height: 1.3em;
+`
+export const SocketIOIcon = styled(SocketIOSVG)`
+  width: 1.5em;
+  height: 1.5em;
+`
+
 export const ZustandIcon = styled(ZustandSVG)`
   width: 1.75em;
   height: 1.75em;

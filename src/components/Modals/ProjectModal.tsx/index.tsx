@@ -94,6 +94,7 @@ const ProjectModal = () => {
 
   return (
     <>
+      <Background className={isOpen ? 'visible' : ''} onClick={handleClose} />
       <Container className={isOpen ? 'visible' : ''}>
         <Top>
           <ExitBtn onClick={handleClose}>
@@ -167,7 +168,7 @@ const ProjectModal = () => {
                   </InfoText>
                 </InfoRow>
                 <InfoRow>
-                  <Label>기여도</Label>
+                  <Label>📌 기여도</Label>
                   <ContributionList>
                     {info?.contribution.dev ? <Contribution>
                       <span>개발</span>
@@ -206,7 +207,7 @@ const ProjectModal = () => {
               </Info>
               <DetailInfo>
                 <InfoRow>
-                  <BlackLabel>🤔 기술 선정 이유</BlackLabel>
+                  <BlackLabel>🤔 기술 선정</BlackLabel>
                   <ReasonText info={info} />
                 </InfoRow>
                 <InfoRow>
@@ -268,6 +269,7 @@ const Container = styled.div`
   width: calc(100% - 12rem);
   max-width: 100rem;
   height: calc(100% - 1rem);
+  z-index: 10000;
 
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
@@ -464,7 +466,7 @@ const Contents = styled.div`
   padding-bottom: 10em;
   top: 450px;
 
-  background: #dedfe4;
+  background: #f1f1f5;
   opacity: 0;
 
   transition: 150ms ease-out;
@@ -551,6 +553,7 @@ const DocumentIcon = styled(DocumentSVG)`
 
   fill: #ffffff;
   opacity: 1;
+  filter: drop-shadow(0px 4px 4px #0001);
 
   transition: 100ms;
 `
@@ -662,7 +665,8 @@ const Contribution = styled.p`
   padding: 0.125em 0.625em;
   
   border-radius: 0.5em;
-  background-color: #f8b3b3;
+  background-color: #f8dddd;
+  border: 1px solid #eec7c7;
   
   font-size: 0.875em;
   font-weight: 400;
@@ -783,6 +787,7 @@ const Intro = styled.div`
 
   border-radius: 0.375em;
   background-color: #f5f5d8;
+  border: 1px solid #dfdfbb;
 
   white-space: pre-wrap;
   font-size: 1em;
@@ -790,7 +795,7 @@ const Intro = styled.div`
   line-height: 1.5em;
 
   &>p {
-    color: #939669;
+    color: #797d3c;
     font-size: 0.875em;
   }
 `
@@ -942,5 +947,20 @@ const ImageModalImage = styled(Image)`
   
   @media (max-width: 768px) {
     border-radius: 0;
+  }
+`;
+
+const Background = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  pointer-events: none;
+  
+  &.visible {
+    display: flex;
+    pointer-events: initial;
   }
 `;

@@ -35,11 +35,12 @@ const Container = styled.div`
 `;
 
 const DetailStack = styled.span`
-  padding: 0.125em 0.5em;
+  padding: 0.2em 0.3em;
   margin: 0 0.15em;
   border-radius: 6px;
-  background: #7173a6;
-  color: #fff;
+  border: 1px solid #d4d4df;
+  background: #e6e6ea;
+  color: #810a0a;
   font-size: 0.875rem;
   font-weight: 500;
 `;

@@ -12,7 +12,7 @@ const Issue = ({ info }: IProps): JSX.Element => {
       {info?.issues && info?.issues.map((i: { issue: string, solving: string }, idx: number) =>
         <Wrapper key={idx}>
           <DetailInfoText>
-            <DetailBoldRed>문제</DetailBoldRed>
+            <DetailBoldRed>이슈</DetailBoldRed>
             <StyledText>{i.issue}</StyledText>
           </DetailInfoText>
           <DetailInfoText>

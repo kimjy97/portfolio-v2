@@ -139,6 +139,13 @@ const Name = styled.div`
     
     cursor: pointer;
     transition: 300ms;
+
+    line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 
   &>span:hover {

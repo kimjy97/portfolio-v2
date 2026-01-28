@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { projectFilterState } from '@/atoms/project';
-import { GooglePlayConsoleIcon, MongodbIcon, NextjsIcon, ReactNativeIcon, RecoilIcon, StyledComponentsIcon, TypescriptIcon, VercelIcon, TailwindCSSIcon, ZustandIcon, ReactQueryIcon } from '@/components/Section/ProjectsSection/ProjectsList/Project/StackIcons';
+import { GooglePlayConsoleIcon, MongodbIcon, NextjsIcon, ReactNativeIcon, RecoilIcon, StyledComponentsIcon, TypescriptIcon, VercelIcon, TailwindCSSIcon, ZustandIcon, TanstackQueryIcon, SocketIOIcon, PostgreSQLIcon, RailwayIcon } from '@/components/Section/ProjectsSection/ProjectsList/Project/StackIcons';
 import smoothScrollTo from '@/utils/smoothScrollTo';
 import { useRouter } from 'next/navigation';
 interface StackIconsType {
@@ -11,6 +11,10 @@ interface StackIconsType {
 
 const stackIcons: StackIconsType = {
   'Next.js': NextjsIcon,
+  'Socket.IO': SocketIOIcon,
+  'TanstackQuery': TanstackQueryIcon,
+  'PostgreSQL': PostgreSQLIcon,
+  'Railway': RailwayIcon,
   TypeScript: TypescriptIcon,
   Recoil: RecoilIcon,
   StyledComponents: StyledComponentsIcon,
@@ -20,7 +24,6 @@ const stackIcons: StackIconsType = {
   GooglePlayConsole: GooglePlayConsoleIcon,
   TailwindCSS: TailwindCSSIcon,
   Zustand: ZustandIcon,
-  ReactQuery: ReactQueryIcon,
 };
 
 interface IProps {
@@ -96,11 +99,11 @@ const TooltipWrapper = styled.div`
 
   cursor: pointer;
   
-  svg {
+  svg, img {
     transition: 100ms;
   }
   
-  &:hover svg{
+  &:hover svg, &:hover img {
     transform: scale(1.15);
   }
 `

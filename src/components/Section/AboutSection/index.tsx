@@ -19,19 +19,18 @@ const AboutSection = (): JSX.Element => {
       <TopGradient />
       <Wrapper style={{ opacity }}>
         <BackImg />
-        <Typo className={isVisibleClassName}>
+        <Typo className={isVisibleClassName} aria-label="I'm getting ready for next level">
           I&apos;M GETTING READY FOR<br />
           <span>NEXT LEVEL.</span>
         </Typo>
         <AboutTextWrapper className={isVisibleClassName}>
-          <p>안녕하세요! 프론트엔드 개발자 <b>김종연</b>입니다.</p>
-          <p>이 단어는 저의 성향을 가장 잘 표현한다고 생각합니다.</p>
-          <p className='word'>&quot; 몰두하다 : [동사] 어떤 일에 온 정신을 다 기울여 열중하다. &quot;</p>
-          <p>어떤 일이든 온 마음을 다해 몰두하며, 목표를 달성하기 위해 최선을 다합니다.</p>
-          <p>단 하나의 결함도 용납하지 않는 완벽함을 추구하고, 사용자의 입장에서 수십 번씩 직접 테스트하며 최상의 결과를 만들어내고자 노력합니다.</p>
-          <br></br>
-          <p>끊임없이 변화하는 프론트엔드 트렌드와 기술을 빠르게 습득하고, 실제 프로젝트에 적용하는 데에 자신이 있습니다. 새로운 도전을 두려워하지 않고, 더 나은 사용자 경험을 위해 항상 고민합니다.</p>
-          <p>앞으로도 배움과 성장에 대한 열정을 바탕으로, 더욱 완성도 높은 서비스를 만들어가겠습니다.</p>
+          <p>안녕하세요! 웹 개발자 <b>김종연</b>입니다.</p>
+          <p><span className='word'>"왜?"</span>라는 질문을 통해 <b>본질적인 문제</b>를 파악하고,</p>
+          <p>기술적 의사결정을 통해 <b>효율적인 솔루션</b>을 제시하는 개발자입니다.</p>
+          <br />
+          <p>프론트엔드 중심으로 시작했지만, 더 다양한 서비스를 직접 만들어보고 싶다는 열망으로 <b>백엔드와 데이터베이스 영역</b>까지 확장했습니다. 그 과정에서 <b>10개 이상의 풀스택 서비스</b>를 처음부터 끝까지 완성하며 실질적인 개발 역량을 키웠습니다.</p>
+          <br />
+          <p>AI와의 긴밀한 협업을 통해 <b>생산성과 품질</b>을 동시에 높이는 연습을 지속해왔습니다. AI로 절약한 시간을 서비스의 <b>구조적 설계와 성능 최적화</b>에 재투자하고, 동시에 AI를 <b>코드 리뷰어 및 페어 프로그래밍 파트너</b>로 활용하며 개발자로서의 한계를 끊임없이 확장하고 있습니다.</p>
           <TagList>
             <Tag>#열정적인</Tag>
             <Tag>#끈기있는</Tag>
@@ -191,10 +190,11 @@ const AboutTextWrapper = styled.div`
 
   &>p {
     font-size: 1em;
-    font-weight: 500;
+    font-weight: 400;
     font-family: var(--font-poppins) var(--font-pretendard);
     line-height: 1.7em;
     color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 
     &:first-child {
       font-size: 1.4em;
@@ -211,11 +211,15 @@ const AboutTextWrapper = styled.div`
       }
     }
     
-    &.word {
-      margin: 0.3em 0.375em;
+    .word {
+      margin: 0.3em 0;
 
-      color: rgb(255, 149, 149);;
-      font-size: 1em;
+      color: rgb(255, 149, 149);
+      font-size: 1.5em;
+    }
+
+    b {
+      font-weight: 700;
     }
   }
 
@@ -266,11 +270,13 @@ const Tag = styled.div`
   font-size: 0.875em;
   font-weight: 500;
   white-space: nowrap;
+  cursor: default;
   
   transition: 150ms;
 
   &:hover {
     transform: scale(1.1);
+    background-color: #8585a22d;
   }
 `
 const TopGradient = styled.div`

@@ -23,7 +23,11 @@ import ExpoSVG from '@public/svgs/stacks/expo.svg';
 import SupabaseSVG from '@public/svgs/stacks/supabase.svg';
 import FirebaseSVG from '@public/svgs/stacks/firebase.svg';
 import TailwindCSSSVG from '@public/svgs/stacks/tailwindcss.svg';
-import ReactQuerySrc from '@public/images/stacks/reactquery.png';
+import RailwaySVG from '@public/svgs/stacks/railway.svg';
+import SocketIOSVG from '@public/svgs/stacks/socketio.svg';
+import TanstackQuerySrc from '@public/images/stacks/tanstackquery.png';
+import PostgreSQLSrc from '@public/images/stacks/postgresql.png';
+import NginxSrc from '@public/images/stacks/nginx.png';
 import { useScroll } from '@hooks/useScroll';
 import Stack from '@components/Section/StacksSection/Stack';
 import Title from '@components/Section/Title';
@@ -100,7 +104,7 @@ const StacksSection = (): JSX.Element => {
         />
         <StackList>
           <StackItem>
-            <StackType $visible={visibleRows[0]}># FRONT-END & BACK-END</StackType>
+            <StackType $visible={visibleRows[0]}># FRONT-END</StackType>
             <StackRow ref={setRowRef(0)} $visible={visibleRows[0]}>
               <Stack name='Next.js' icon={<NextjsIcon />} count={stackCounts['Next.js'] || 0} />
               <Stack name='React.js' icon={<ReactIcon />} count={stackCounts['React'] || 0} />
@@ -110,28 +114,35 @@ const StacksSection = (): JSX.Element => {
               <Stack name='TypeScript' icon={<TypescriptIcon />} count={stackCounts['TypeScript'] || 0} />
               <Stack name='Recoil' icon={<RecoilIcon />} count={stackCounts['Recoil'] || 0} />
               <Stack name='Zustand' icon={<ZustandIcon />} count={stackCounts['Zustand'] || 0} />
-              <Stack name='ReactQuery' icon={<ReactQueryIcon src={ReactQuerySrc} alt='ReactQuery' />} count={stackCounts['ReactQuery'] || 0} />
+              <Stack name='TanstackQuery' icon={<TanstackQueryIcon src={TanstackQuerySrc} alt='TanstackQuery' />} count={stackCounts['TanstackQuery'] || 0} />
               <Stack name='Styled' name2='Components' icon={<StyledComponentsIcon />} count={stackCounts['StyledComponents'] || 0} />
               <Stack name='TailwindCSS' icon={<TailwindCSSIcon />} count={stackCounts['TailwindCSS'] || 0} />
               <Stack name='SCSS' icon={<ScssIcon />} count={stackCounts['SCSS'] || 0} />
-              <Stack name='Node.js' icon={<NodejsIcon />} count={stackCounts['Nodejs'] || 0} />
-              <Stack name='MongoDB' icon={<MongodbIcon />} count={stackCounts['MongoDB'] || 0} />
-              <Stack name='MySQL' icon={<MysqlIcon />} count={stackCounts['MySQL'] || 0} />
-              <Stack name='Supabase' icon={<SupabaseIcon />} count={stackCounts['Supabase'] || 0} />
-              <Stack name='Firebase' icon={<FirebaseIcon />} count={stackCounts['Firebase'] || 0} />
+              <Stack name='Socket.IO' icon={<SocketIOIcon />} count={stackCounts['Socket.IO'] || 0} />
             </StackRow>
           </StackItem>
           <StackItem>
-            <StackType $visible={visibleRows[1]}># DEPLOYMENT</StackType>
+            <StackType $visible={visibleRows[1]}># BACK-END & DATABASE</StackType>
             <StackRow ref={setRowRef(1)} $visible={visibleRows[1]}>
+              <Stack name='Node.js' icon={<NodejsIcon />} count={stackCounts['Nodejs'] || 0} />
+              <Stack name='MongoDB' icon={<MongodbIcon />} count={stackCounts['MongoDB'] || 0} />
+              <Stack name='MySQL' icon={<MysqlIcon />} count={stackCounts['MySQL'] || 0} />
+              <Stack name='PostgreSQL' icon={<PostgreSQLIcon src={PostgreSQLSrc} alt='PostgreSQL' />} count={stackCounts['PostgreSQL'] || 0} />
+              <Stack name='Nginx' icon={<NginxIcon src={NginxSrc} alt='Nginx' />} count={stackCounts['Nginx'] || 0} />
+            </StackRow>
+          </StackItem>
+          <StackItem>
+            <StackType $visible={visibleRows[2]}># DEPLOYMENT</StackType>
+            <StackRow ref={setRowRef(2)} $visible={visibleRows[2]}>
               <Stack name='Vercel' icon={<VercelIcon />} count={stackCounts['Vercel'] || 0} />
+              <Stack name='Railway' icon={<RailwayIcon />} count={stackCounts['Railway'] || 0} />
               <Stack name='AWS' icon={<AwsIcon />} count={stackCounts['AWS'] || 0} />
               <Stack name='GooglePlay' name2='Console' icon={<GooglePlayIcon />} count={stackCounts['GooglePlayConsole'] || 0} />
             </StackRow>
           </StackItem>
           <StackItem>
-            <StackType $visible={visibleRows[2]}># TOOLS</StackType>
-            <StackRow ref={setRowRef(2)} $visible={visibleRows[2]}>
+            <StackType $visible={visibleRows[3]}># TOOLS</StackType>
+            <StackRow ref={setRowRef(3)} $visible={visibleRows[3]}>
               <Stack name='Postman' icon={<PostmanIcon />} count={stackCounts['Postman'] || 0} />
               <Stack name='Figma' icon={<FigmaIcon />} count={stackCounts['Figma'] || 0} />
               <Stack name='illustrator' icon={<IllustratorIcon />} count={stackCounts['Illustrator'] || 0} />
@@ -302,6 +313,10 @@ const VercelIcon = styled(VercelSVG)`
   width: 5em;
   height: 5em;
 `
+const RailwayIcon = styled(RailwaySVG)`
+  width: 4.25em;
+  height: 4.25em;
+`
 const AwsIcon = styled(AwsSVG)`
   width: 5em;
   height: 5em;
@@ -322,11 +337,23 @@ const FirebaseIcon = styled(FirebaseSVG)`
   width: 3.8em;
   height: 3.8em;
 `
+const SocketIOIcon = styled(SocketIOSVG)`
+  width: 4em;
+  height: 4em;
+`
 const TailwindCSSIcon = styled(TailwindCSSSVG)`
   width: 3.8em;
   height: 3.8em;
 `
-const ReactQueryIcon = styled(Image)`
+const TanstackQueryIcon = styled(Image)`
+  width: 4.25em;
+  height: 4.25em;
+`
+const PostgreSQLIcon = styled(Image)`
+  width: 4.25em;
+  height: 4.25em;
+`
+const NginxIcon = styled(Image)`
   width: 4.25em;
   height: 4.25em;
 `

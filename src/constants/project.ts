@@ -26,6 +26,10 @@ import BlogAdminThumbImg from '@public/images/thumbnails/blogadmin.png';
 import BlogAdminImg1 from '@public/images/projects/blogadmin_1.png';
 import BlogAdminImg2 from '@public/images/projects/blogadmin_2.png';
 import BlogAdminImg3 from '@public/images/projects/blogadmin_3.png';
+import CromoThumbImg from '@public/images/thumbnails/cromo.png';
+import CromoImg1 from '@public/images/projects/cromo_1.png';
+import CromoImg2 from '@public/images/projects/cromo_2.png';
+import CromoImg3 from '@public/images/projects/cromo_3.png';
 import { StaticImageData } from 'next/image';
 
 export interface IProjectProps {
@@ -47,21 +51,62 @@ export interface IProjectProps {
 
 export const projectData: IProjectProps[] = [{
   thumb: [PortfolioThumbImg, PortfolioImg1, PortfolioImg2, PortfolioImg3],
-  term: '2024.09 ~ 2024.10',
-  termDiff: '2개월',
+  term: '2024.09 ~ 진행중',
   name: '웹 포트폴리오',
   url: 'https://kimjy-portfolio.vercel.app/',
   github: 'https://github.com/kimjy97/portfolio-v2',
   contribution: { dev: '100%', design: '100%', planning: '100%' },
   stacks: ['Next.js', 'TypeScript', 'Recoil', 'StyledComponents', 'MongoDB', 'Vercel'],
   issues: [{
-    issue: '섹션이 화면에 보여지면 애니메이션 효과를 주기 위해 **IntersectionObserver**를 사용했으나, 긴 섹션에서는 제대로 동작하지 않는 문제가 있었음.',
-    solving: '기존에 **IntersectionObserver**를 사용해 화면에 노출되는 섹션을 감지하려 했지만, 섹션이 길어질 경우 감지 범위가 불안정하게 작동하는 문제가 발생함. 이를 해결하기 위해 **getBoundingClientRect**와 스크롤 이벤트를 사용해 화면 노출 여부를 직접 계산하고, 특정 지점에서 섹션이 노출되는지 체크하는 방식으로 변경함.'
+    issue: '섹션이 화면에 보여지면 애니메이션 효과를 주기 위해 **IntersectionObserver**를 사용했습니다만, 긴 섹션에서는 제대로 동작하지 않는 문제가 있었습니다.',
+    solving: '기존에 **IntersectionObserver**를 사용해 화면에 노출되는 섹션을 감지하려 했지만, 섹션이 길어질 경우 감지 범위가 불안정하게 작동하는 문제가 발생했습니다. 이를 해결하기 위해 **getBoundingClientRect**와 스크롤 이벤트를 사용해 화면 노출 여부를 직접 계산하고, 특정 지점에서 섹션이 노출되는지 체크하는 방식으로 변경했습니다.'
   },
   ],
-  reason: "`Next.js`는 서버 사이드 렌더링(SSR)과 정적 사이트 생성(SSG)으로 SEO와 성능을 최적화할 수 있어 선택했고, **API Routes**로 백엔드 없이도 API 처리가 가능했음. `TypeScript`는 타입 오류 방지와 코드 유지보수를 위해 도입했으며, `Recoil`은 불필요한 리렌더링을 줄여 성능 최적화에 적합해 사용함. **배포 환경**으로는 Next.js와 호환성이 뛰어나고 빠른 배포가 가능한 `Vercel`을 선택함. `MongoDB`는 유연한 스키마 설계와 빠른 데이터 처리 속도로 선택했으며, 간단한 CRUD 작업에 적합해 사용함.",
+  reason: "`Next.js`는 서버 사이드 렌더링(SSR)과 정적 사이트 생성(SSG)으로 SEO와 성능을 최적화할 수 있어 선택했고, **API Routes**로 백엔드 없이도 API 처리가 가능했습니다. `TypeScript`는 타입 오류 방지와 코드 유지보수를 위해 도입했으며, `Recoil`은 불필요한 리렌더링을 줄여 성능 최적화에 적합해 사용했습니다. **배포 환경**으로는 Next.js와 호환성이 뛰어나고 빠른 배포가 가능한 `Vercel`을 선택했습니다. `MongoDB`는 유연한 스키마 설계와 빠른 데이터 처리 속도로 선택했으며, 간단한 CRUD 작업에 적합해 사용했습니다.",
   learned: ' 웹사이트 퍼포먼스 최적화와 사용자 경험을 고려한 인터랙티브 요소 구현에 대해 학습했으며, 다양한 디바이스에 맞는 반응형 디자인의 중요성을 경험했습니다.',
   intro: '저의 개발 기술 스택과 진행한 프로젝트들을 보여주기 위해 제작한 웹 포트폴리오입니다.\n사용자 경험을 고려해 인터랙티브한 요소를 추가했고, 추가적인 라이브러리 없이 다양한 효과들을 직접 구현했습니다. 또한, 반응형 디자인을 적용하여 어디서든 쉽게 포트폴리오를 볼 수 있도록 개발했습니다.',
+}, {
+  thumb: [CromoThumbImg, CromoImg1, CromoImg2, CromoImg3],
+  term: '2025.11 ~ 2026.01',
+  termDiff: '3개월',
+  name: 'Cromo - AI와 함께하는 스마트한 메모 관리',
+  url: 'https://cromo.site',
+  github: 'https://github.com/team-croni/Cromo',
+  contribution: { dev: '100%', design: '100%', planning: '100%' },
+  stacks: ['Next.js', 'TypeScript', 'TailwindCSS', 'Zustand', 'TanstackQuery', 'Socket.IO', 'PostgreSQL', 'Vercel', 'Railway'],
+  issues: [
+    {
+      issue: '서버리스 환경에서 실시간 WebSocket 연결 유지의 한계',
+      solving: '**Next.js App Router**와 **Socket.io** 서버를 분리 배포하여 해결했습니다. **Vercel**에서는 API 및 웹 인터페이스를, **Railway**에는 독립 **Node.js** 소켓 서버를 구축하여 연결 안정성을 확보하고, **Write-Behind 패턴**으로 DB 동기화 최적화를 구현했습니다.'
+    },
+    {
+      issue: '수만 건의 메모에서 키워드와 의미를 모두 고려한 검색 성능 확보',
+      solving: '**pg_trgm**을 활용한 키워드 검색과 **pgvector**를 활용한 의미 기반 검색을 결합했습니다. 벡터 거리에 따른 동적 가중치 기반 **RRF(Reciprocal Rank Fusion)** 알고리즘을 자체 구현하고, **HNSW 인덱스**를 적용하여 밀리초 단위의 검색 성능을 달성했습니다.'
+    },
+    {
+      issue: '임베딩 처리 비용 최적화 및 변경 감지 시스템 구현',
+      solving: '**MD5 해시**를 통한 **Content Hashing**으로 실제 변경된 메모만 감지하고, **Inngest 스케줄링**(4분 주기)을 통해 50개 단위로 스캔하되 최대 2개씩 배치 처리하여 API 비용을 절감했습니다. 임베딩 완료 후 **AI 기반 자동 태깅**을 연계하여 검색 정확도를 향상시켰습니다.'
+    },
+    {
+      issue: '**AI API** 장애 시 서비스 중단 없이 기능 연속성 보장',
+      solving: 'OpenRouter API 실패 또는 타임아웃 발생 시 자동으로 로컬 OpenAI 호환 모델로 전환되는 **폴백 시스템**을 구축했습니다. 클라우드 API의 안정성과 로컬 모델의 독립성을 결합하여 서비스 가용성을 극대화하고, 네트워크 장애나 API 장애 상황에서도 핵심 AI 기능이 중단되지 않도록 **이중화**했습니다.'
+    }
+  ],
+  reason: "`Next.js 15 App Router`는 서버 컴포넌트와 클라이언트 컴포넌트를 효율적으로 분리할 수 있어 선택했고, `TypeScript`로 타입 안정성을 확보했습니다. `TailwindCSS`는 빠른 UI 개발과 일관된 디자인 시스템 구축을 위해 도입했으며, `Zustand`와 `TanstackQuery`를 조합하여 클라이언트 상태와 서버 상태를 명확히 분리 관리했습니다. `Socket.IO`는 실시간 공유 기능의 핵심으로, 서버리스 환경의 제약을 극복하기 위해 `Railway`에 독립 서버로 구축했습니다. `PostgreSQL`은 Neon의 서버리스 DB로 자동 스케일링과 pgvector 확장을 지원하여 벡터 검색 구현에 최적이었고, `Inngest`는 임베딩 처리 같은 백그라운드 작업을 선언적으로 스케줄링할 수 있어 채택했습니다.",
+  learned: ' **RRF 알고리즘**을 직접 구현하며 하이브리드 검색의 원리를 깊이 이해하게 되었고, **서버리스 환경과 상태 유지 서버를 분리 배포**하는 아키텍처 설계 경험을 쌓았습니다. MD5 해싱과 배치 처리를 통한 **비용 최적화 전략**을 실무에 적용하며, 대규모 데이터에서도 밀리초 단위 응답을 보장하는 인덱싱 전략의 중요성을 체감했습니다. 또한 Inngest를 활용한 비동기 작업 스케줄링과 OpenRouter API 통합을 통해 안정적인 AI 파이프라인 구축 방법을 익혔습니다.',
+  intro: '단순한 메모 기록을 넘어, 개인의 생각이나 여러 사람의 아이디어를 실시간으로 동기화하고 AI를 통해 더 가치 있게 만드는 플랫폼입니다. 실시간 동기화의 안정성을 위해 서버 구조를 분리하고, 임베딩 모델로 메모를 임베딩하는 스케줄링 로직과 검색 알고리즘을 직접 구현하여 문맥까지 찾아내는 검색 엔진을 구현했습니다.',
+  func: [
+    '실시간 공유 메모 작성 및 동기화',
+    '하이브리드 검색 (키워드 + 의미 기반 벡터 검색)',
+    'AI 기반 자동 제목 생성',
+    'AI 기반 태그 추천 및 자동 카테고리화',
+    '메모 요약 및 분석',
+    '오타 자동 수정',
+    '역할 기반 권한 관리 (Owner/Editor/Viewer)',
+    '실시간 권한 변경 및 공유',
+    '임베딩 기반 문맥 검색',
+    '자동 임베딩 스케줄링 및 배치 처리'
+  ]
 }, {
   thumb: [AichatThumbImg, AichatImg1, AichatImg2, AichatImg3],
   term: '2024.04 ~ 2024.08',
@@ -73,15 +118,15 @@ export const projectData: IProjectProps[] = [{
   stacks: ['Next.js', 'TypeScript', 'Recoil', 'MongoDB', 'Vercel', 'StyledComponents'],
   issues: [{
     issue: '챗봇 응답 시간이 길어지는 문제 발생',
-    solving: 'Gemini API의 **Streaming** 기능을 활용하여 응답이 준비되는 대로 실시간으로 표시되도록 처리함. 이를 통해 사용자 경험을 개선하고, 긴 텍스트 응답의 대기 시간을 줄일 수 있었음.'
+    solving: 'Gemini API의 **Streaming** 기능을 활용하여 응답이 준비되는 대로 실시간으로 표시되도록 처리했습니다. 이를 통해 사용자 경험을 개선하고, 긴 텍스트 응답의 대기 시간을 줄일 수 있었습니다.'
   }, {
     issue: '긴 대화가 이어질수록 렌더링 성능이 저하되는 문제 발생',
-    solving: '대화 UI의 **box-shadow**와 같은 복잡한 스타일 속성을 제거하고, 디자인을 단순화하여 성능을 최적화함. 불필요한 CSS 효과를 줄임으로써 렌더링 속도를 개선하고, 대화 내용의 가독성도 함께 향상시켰음.'
+    solving: '대화 UI의 **box-shadow**와 같은 복잡한 스타일 속성을 제거하고, 디자인을 단순화하여 성능을 최적화했습니다. 불필요한 CSS 효과를 줄임으로써 렌더링 속도를 개선하고, 대화 내용의 가독성도 함께 향상시켰습니다.'
   }, {
     issue: '로그인 없이 대화 내용을 저장할 방법 필요',
-    solving: '**localStorage**를 사용해 브라우저에 대화 내용을 저장함으로써, 페이지 새로고침이나 브라우저 종료 후에도 대화 기록을 복원할 수 있도록 구현함. 이를 통해 로그인 없이도 사용자 대화 기록을 유지할 수 있었음.'
+    solving: '**localStorage**를 사용해 브라우저에 대화 내용을 저장함으로써, 페이지 새로고침이나 브라우저 종료 후에도 대화 기록을 복원할 수 있도록 구현했습니다. 이를 통해 로그인 없이도 사용자 대화 기록을 유지할 수 있었습니다.'
   }],
-  reason: "`Next.js`는 서버 사이드 렌더링(SSR)과 정적 사이트 생성(SSG)으로 SEO와 성능을 최적화할 수 있어 선택했고, **API Routes**로 백엔드 없이도 API 처리가 가능했음. `TypeScript`는 타입 오류 방지와 코드 유지보수를 위해 도입했으며, `Recoil`은 불필요한 리렌더링을 줄여 성능 최적화에 적합해 사용함. **배포 환경**으로는 Next.js와 호환성이 뛰어나고 빠른 배포가 가능한 `Vercel`을 선택함. `MongoDB`는 유연한 스키마 설계와 빠른 데이터 처리 속도로 선택했으며, 간단한 CRUD 작업에 적합해 사용함.",
+  reason: "`Next.js`는 서버 사이드 렌더링(SSR)과 정적 사이트 생성(SSG)으로 SEO와 성능을 최적화할 수 있어 선택했고, **API Routes**로 백엔드 없이도 API 처리가 가능했습니다. `TypeScript`는 타입 오류 방지와 코드 유지보수를 위해 도입했으며, `Recoil`은 불필요한 리렌더링을 줄여 성능 최적화에 적합해 사용했습니다. **배포 환경**으로는 Next.js와 호환성이 뛰어나고 빠른 배포가 가능한 `Vercel`을 선택했습니다. `MongoDB`는 유연한 스키마 설계와 빠른 데이터 처리 속도로 선택했으며, 간단한 CRUD 작업에 적합해 사용했습니다.",
   learned: ' AI 챗봇 서비스를 개발하며 **Gemini API**를 활용한 자연어 처리와 대화 흐름 관리에 대한 이해를 높일 수 있었습니다. 특히, **Next.js**와 **TypeScript**를 사용해 서버 사이드 렌더링과 클라이언트 측 상태 관리를 효과적으로 구현하는 방법을 익혔습니다. 또한, **Recoil**을 통해 복잡한 대화 상태를 관리하며 성능을 최적화하는 기술을 배웠고, **localStorage**를 활용한 대화 기록 저장 방식으로 사용자 편의성을 높이는 경험을 쌓았습니다. 이 프로젝트를 통해 웹 기반 실시간 서비스의 성능 최적화 및 사용자 경험 개선에 대한 다양한 실무적 역량을 키웠습니다.',
   intro: 'Gemini API의 스트리밍 기능을 활용한 웹 기반 챗봇 서비스로, 사용자와 AI 간의 실시간 대화를 지원합니다. Google Cloud의 TTS(Text-to-Speech) 기능을 통합해 음성으로도 응답을 제공하며, 이미지와 음성 파일 분석 기능을 통해 다양한 입력을 처리할 수 있습니다. 대화 내용은 브라우저 캐시를 통해 저장되며, 여러 채팅 기록을 저장해 사용자가 이전 대화를 쉽게 이어나갈 수 있습니다.',
   func: [
@@ -100,21 +145,21 @@ export const projectData: IProjectProps[] = [{
   url: 'https://kimjy.vercel.app/',
   github: 'https://github.com/kimjy97/devblog-v2',
   contribution: { dev: '100%', design: '100%', planning: '100%' },
-  stacks: ['Next.js', 'TypeScript', 'Recoil', 'ReactQuery', 'StyledComponents', 'MongoDB', 'Vercel'],
+  stacks: ['Next.js', 'TypeScript', 'Recoil', 'TanstackQuery', 'StyledComponents', 'MongoDB', 'Vercel'],
   issues: [{
-    issue: '**Vercel**의 특징 중 하나인 **Cold Start**로 인해 초기 데이터가 로드되는 시간이 길어져 화면에 게시물 관련 요소들이 노출 되는 것이 늦어지는 문제 발생.',
-    solving: '게시판의 게시물들과 게시물의 내용들을 **Skeletone UI**를 적용해 데이터가 로드 되는 것을 직관적으로 알 수 있도록 함.'
+    issue: '**Vercel**의 특징 중 하나인 **Cold Start**로 인해 초기 데이터가 로드되는 시간이 길어져 화면에 게시물 관련 요소들이 노출 되는 것이 늦어지는 문제가 발생했습니다.',
+    solving: '게시판의 게시물들과 게시물의 내용들을 **Skeletone UI**를 적용해 데이터가 로드 되는 것을 직관적으로 알 수 있도록 했습니다.'
   }, {
-    issue: '특정 IP나 사용자가 **블랙리스트**에 등록되었을 때, 이를 실시간으로 감지하여 접근을 제한할 필요가 있었음.',
-    solving: 'Next.js의 **미들웨어** 기능을 사용해 블랙리스트 API를 호출하고, 사용자가 블랙리스트에 포함되어 있는지 실시간으로 확인하는 로직을 구현함. 이를 통해 특정 사용자가 블랙리스트에 있을 경우, API 응답에 필요한 **헤더**를 추가하고 접근을 차단하는 방식으로 처리했으며, 미들웨어에서 NextResponse를 활용하여 블랙리스트 여부를 빠르게 응답할 수 있도록 최적화함.'
+    issue: '특정 IP나 사용자가 **블랙리스트**에 등록되었을 때, 이를 실시간으로 감지하여 접근을 제한할 필요가 있었습니다.',
+    solving: 'Next.js의 **미들웨어** 기능을 사용해 블랙리스트 API를 호출하고, 사용자가 블랙리스트에 포함되어 있는지 실시간으로 확인하는 로직을 구현했습니다. 이를 통해 특정 사용자가 블랙리스트에 있을 경우, API 응답에 필요한 **헤더**를 추가하고 접근을 차단하는 방식으로 처리했으며, 미들웨어에서 NextResponse를 활용하여 블랙리스트 여부를 빠르게 응답할 수 있도록 최적화했습니다.'
   }, {
-    issue: '게시물 목록이나 상세 페이지에서 데이터를 매번 요청해 로딩 속도가 느려지는 경우가 있었음.',
-    solving: '**Tanstack Query**를 도입하여 게시물 목록과 상세 데이터를 서버에서 불러올 때 데이터를 캐싱하도록 구현함. 이를 통해 동일한 데이터 요청 시 네트워크 지연 없이 빠르게 데이터를 제공할 수 있었고, 페이지 전환이나 재방문 시에도 즉각적으로 데이터를 표시할 수 있어 사용자 경험이 크게 향상됨.'
+    issue: '게시물 목록이나 상세 페이지에서 데이터를 매번 요청해 로딩 속도가 느려지는 경우가 있었습니다.',
+    solving: '**Tanstack Query**를 도입하여 게시물 목록과 상세 데이터를 서버에서 불러올 때 데이터를 캐싱하도록 구현했습니다. 이를 통해 동일한 데이터 요청 시 네트워크 지연 없이 빠르게 데이터를 제공할 수 있었고, 페이지 전환이나 재방문 시에도 즉각적으로 데이터를 표시할 수 있어 사용자 경험이 크게 향상되었습니다.'
   }
   ],
-  reason: "`Next.js`는 서버 사이드 렌더링(SSR)과 정적 사이트 생성(SSG)으로 SEO와 성능을 최적화할 수 있어 선택했고, **API Routes**로 백엔드 없이도 API 처리가 가능했음. `TypeScript`는 타입 오류 방지와 코드 유지보수를 위해 도입했으며, `Recoil`은 불필요한 리렌더링을 줄여 성능 최적화에 적합해 사용함. **배포 환경**으로는 Next.js와 호환성이 뛰어나고 빠른 배포가 가능한 `Vercel`을 선택함. `MongoDB`는 유연한 스키마 설계와 빠른 데이터 처리 속도로 선택했으며, 간단한 CRUD 작업에 적합해 사용함.",
+  reason: "`Next.js`는 서버 사이드 렌더링(SSR)과 정적 사이트 생성(SSG)으로 SEO와 성능을 최적화할 수 있어 선택했고, **API Routes**로 백엔드 없이도 API 처리가 가능했습니다. `TypeScript`는 타입 오류 방지와 코드 유지보수를 위해 도입했으며, `Recoil`은 불필요한 리렌더링을 줄여 성능 최적화에 적합해 사용했습니다. **배포 환경**으로는 Next.js와 호환성이 뛰어나고 빠른 배포가 가능한 `Vercel`을 선택했습니다. `MongoDB`는 유연한 스키마 설계와 빠른 데이터 처리 속도로 선택했으며, 간단한 CRUD 작업에 적합해 사용했습니다.",
   learned: ' 블로그 프로젝트를 통해 풀스택 개발 경험을 쌓으며, 프론트엔드와 백엔드 통합의 중요성을 배웠습니다. 특히, **SEO 최적화 기법**과 성능 향상을 위한 다양한 **Next.js** 기능을 실제로 적용해보며 깊이 있는 학습을 할 수 있었습니다. 또한, **TypeScript**를 사용하면서 타입 시스템의 이점을 직접 경험하고, 더 안정적인 코드 작성 방법을 익혔습니다.\n 추가로, 다크모드와 라이트모드를 구현하여 사용자 환경에 맞춘 UI 경험을 제공하는 방법을 배웠으며, **chart.js**를 사용해 시각화 도구를 구현하고 데이터 분석 결과를 직관적으로 표현하는 방법을 익혔습니다. 블로그 포스트 작성 형식을 위해 **react-markdown**을 사용해 마크다운 방식을 커스텀하여, 유연하게 포스트를 작성하고 관리할 수 있는 경험을 쌓았습니다.',
-  intro: '개발하면서 얻은 정보들을 체계적으로 기록할 수 있는 개인 블로그가 필요하다고 느껴 직접 제작하였습니다. 블로그의 기본적인 형태와 기능을 모두 구현했으며, SEO 최적화를 통해 구글 검색이 가능하도록 했습니다. 또한, 사용자의 선호에 따라 다크모드와 라이트모드를 선택할 수 있도록 기능을 추가하여, 다양한 환경에서도 편리하게 블로그를 이용할 수 있도록 하였습니다.',
+  intro: '개발하면서 얻은 정보들을 체계적으로 기록할 수 있는 개인 블로그가 필요하다고 느껴 직접 제작했습니다. 블로그의 기본적인 형태와 기능을 모두 구현했으며, SEO 최적화를 통해 구글 검색이 가능하도록 했습니다. 또한, 사용자의 선호에 따라 다크모드와 라이트모드를 선택할 수 있도록 기능을 추가하여, 다양한 환경에서도 편리하게 블로그를 이용할 수 있도록 했습니다.',
   func: ['게시물 조회', '게시물 검색', '게시물 좋아요', '게시물 정렬', '댓글 등록, 수정, 삭제', '게시판 이동', '다크모드 및 라이트모드 지원', '반응형 웹'],
 }, {
   thumb: [BlogAdminThumbImg, BlogAdminImg1, BlogAdminImg2, BlogAdminImg3],
@@ -124,7 +169,7 @@ export const projectData: IProjectProps[] = [{
   url: "",
   github: "https://github.com/kimjy97/blog-admin",
   contribution: { "dev": "100%", "design": "100%", "planning": "100%" },
-  stacks: ["Next.js", "TypeScript", "Zustand", "ReactQuery", "TailwindCSS", "MongoDB", "Vercel"],
+  stacks: ["Next.js", "TypeScript", "Zustand", "TanstackQuery", "TailwindCSS", "MongoDB", "Vercel"],
   issues: [
     {
       "issue": "대시보드 특성상 유사 데이터를 기반으로 다양한 가공 정보가 필요해 불필요한 API 호출 및 데이터 가공 비효율이 우려되었습니다.",
@@ -160,49 +205,49 @@ export const projectData: IProjectProps[] = [{
   contribution: { dev: '100%', design: '100%', planning: '33%' },
   stacks: ['ReactNative', 'TypeScript', 'Recoil', 'MongoDB', 'GooglePlayConsole'],
   issues: [{
-    issue: '기존 코드에 명확한 디자인 패턴이 적용되지 않아 코드 구조가 일관되지 않고 관리가 어려웠음. 디렉토리와 코드 구조의 체계적인 개편이 필요했음.',
-    solving: '**아토믹 디자인 패턴**을 도입해 컴포넌트를 작은 단위로 나누고, 재사용성과 유지보수성을 높임. 이를 통해 코드 구조가 명확해지고, 확장성과 디자인 일관성도 개선됨.'
+    issue: '기존 코드에 명확한 디자인 패턴이 적용되지 않아 코드 구조가 일관되지 않고 관리가 어려웠습니다. 디렉토리와 코드 구조의 체계적인 개편이 필요했습니다.',
+    solving: '**아토믹 디자인 패턴**을 도입해 컴포넌트를 작은 단위로 나누고, 재사용성과 유지보수성을 높였습니다. 이를 통해 코드 구조가 명확해지고, 확장성과 디자인 일관성도 개선되었습니다.'
   }, {
-    issue: '백엔드에서 알약 앞뒤 이미지를 가로로 배치한 하나의 이미지를 요청 본문에 포함해 보내야 하는 요구사항 발생.',
-    solving: '**react-native-view-shot**을 사용해 알약 앞뒤 이미지를 가로로 배열한 후 **ViewShot**으로 캡처, URI로 추출해 문제 해결. 이미지 합성 작업을 별도의 라이브러리 없이 간단하게 구현하기 위해 이 방식을 사용했음.'
+    issue: '백엔드에서 알약 앞뒤 이미지를 가로로 배치한 하나의 이미지를 요청 본문에 포함해 보내야 하는 요구사항이 발생했습니다.',
+    solving: '**react-native-view-shot**을 사용해 알약 앞뒤 이미지를 가로로 배열한 후 **ViewShot**으로 캡처, URI로 추출해 문제를 해결했습니다. 이미지 합성 작업을 별도의 라이브러리 없이 간단하게 구현하기 위해 이 방식을 사용했습니다.'
   }],
-  reason: '`React Native`는 하나의 코드베이스로 iOS와 Android 모두에서 앱을 개발할 수 있어 개발 속도가 빠르고 유지보수가 용이해서 선택함. **Flutter**도 고려했으나, 기존 **React** 지식을 활용할 수 있고 커뮤니티 지원이 풍부한 React Native가 적합하다고 판단함. `TypeScript`는 복잡한 데이터 구조를 안전하게 처리하고, 런타임 오류를 줄이기 위해 사용함. `Recoil`은 React와 자연스럽게 통합되고, 모바일 환경에서 성능 최적화가 쉬워 **Redux**보다 간편하게 상태 관리를 할 수 있어 선택함.',
+  reason: '`React Native`는 하나의 코드베이스로 iOS와 Android 모두에서 앱을 개발할 수 있어 개발 속도가 빠르고 유지보수가 용이해서 선택했습니다. **Flutter**도 고려했으나, 기존 **React** 지식을 활용할 수 있고 커뮤니티 지원이 풍부한 React Native가 적합하다고 판단했습니다. `TypeScript`는 복잡한 데이터 구조를 안전하게 처리하고, 런타임 오류를 줄이기 위해 사용했습니다. `Recoil`은 React와 자연스럽게 통합되고, 모바일 환경에서 성능 최적화가 쉬워 **Redux**보다 간편하게 상태 관리를 할 수 있어 선택했습니다.',
   learned: ' **React**와 **React Native**의 차이를 깊이 이해하며 모바일 환경에서의 성능 최적화와 네이티브 모듈, 특히 카메라 모듈을 활용한 이미지 처리 방법을 배웠습니다. 앱 출시 경험을 통해 **Google Play** 등록 절차와 팀 프로젝트에서의 협업 중요성도 깨달았습니다. 다양한 디바이스에 대응하는 반응형 UI와 성능 최적화 기술을 익혀 실무 역량을 한층 강화했으며, **Git 커밋 컨벤션**을 도입하여 코드 일관성과 협업 효율성을 높일 수 있었습니다.',
   intro: '사용자가 알약을 카메라로 촬영하여 검색하면 해당 약품의 정보를 제공하는 모바일 애플리케이션입니다. AI 기반의 이미지 인식 기술을 활용하여 촬영한 알약을 식별하고, 식품의약품안전처에서 제공하는 공공데이터를 바탕으로 상세한 약품 정보를 제공합니다. React Native를 사용해 크로스 플랫폼 앱으로 개발되었으며, 현재 Android 버전은 Google Play에 출시되어 있습니다. 올해 안에 iOS 버전도 App Store에 등록할 예정입니다. 알약 데이터는 식품의약품안전처의 최신 데이터를 기반으로 지속적으로 업데이트됩니다.',
   func: ['알약 촬영 및 검색 기능', '앨범에서 사진 선택하여 검색 기능', '알약 정보 조회', '최근 검색한 약품 리스트 제공', '알약 보관함 기능'],
 }, {
-  "thumb": [RestoryThumbImg, RestoryImg1, RestoryImg2, RestoryImg3],
-  "term": "2025.06 ~ 2025.07",
-  "termDiff": "1개월",
-  "name": "ReStory - AI 사진 복원 서비스",
-  "url": "https://restory-free.vercel.app",
-  "github": "https://github.com/kimjy97/ReStory",
-  "contribution": { "dev": "100%", "design": "100%", "planning": "100%" },
-  "stacks": [
+  thumb: [RestoryThumbImg, RestoryImg1, RestoryImg2, RestoryImg3],
+  term: "2025.06 ~ 2025.07",
+  termDiff: "1개월",
+  name: "ReStory - AI 사진 복원 서비스",
+  url: "https://restory-free.vercel.app",
+  github: "https://github.com/kimjy97/ReStory",
+  contribution: { "dev": "100%", "design": "100%", "planning": "100%" },
+  stacks: [
     "Next.js",
     "TypeScript",
     "React",
     "TailwindCSS",
     "Vercel",
   ],
-  "issues": [
+  issues: [
     {
-      "issue": "고해상도 이미지 처리 시 AI 모델의 처리 시간이 길어지고 서버 자원을 많이 소모함.",
-      "solving": "**Google Gemini API**를 활용하여 AI 추론을 외부 서비스로 위임하고, 업로드 파일 크기 제한(10MB) 및 타입 검증(JPG/PNG)으로 서버 부하와 오류를 최소화. 복원 진행 상태와 에러를 실시간으로 안내하여 사용자 경험을 개선."
+      "issue": "고해상도 이미지 처리 시 AI 모델의 처리 시간이 길어지고 서버 자원을 많이 소모합니다.",
+      "solving": "**Google Gemini API**를 활용하여 AI 추론을 외부 서비스로 위임하고, 업로드 파일 크기 제한(10MB) 및 타입 검증(JPG/PNG)으로 서버 부하와 오류를 최소화했습니다. 복원 진행 상태와 에러를 실시간으로 안내하여 사용자 경험을 개선했습니다."
     },
     {
       "issue": "사용자가 업로드한 사진 데이터의 보안과 개인정보 보호가 중요한 이슈였습니다.",
-      "solving": "이미지는 서버에 임시로만 사용하며 별도 저장하지 않고, **파일 타입/크기 검증**을 통해 보안을 강화. 개인정보 처리방침을 통해 외부 서비스(Gemini API, Vercel) 사용을 명확히 고지."
+      "solving": "이미지는 서버에 임시로만 사용하며 별도 저장하지 않고, **파일 타입/크기 검증**을 통해 보안을 강화했습니다. 개인정보 처리방침을 통해 외부 서비스(Gemini API, Vercel) 사용을 명확히 고지했습니다."
     },
     {
       "issue": "다양한 이미지 품질과 복원 스타일에 대해 일관된 결과를 제공해야 했습니다.",
-      "solving": "복원 스타일(보수적/모던/하이브리드)별로 맞춤 프롬프트를 적용하여 사용자가 원하는 결과를 선택할 수 있도록 함."
+      "solving": "복원 스타일(보수적/모던/하이브리드)별로 맞춤 프롬프트를 적용하여 사용자가 원하는 결과를 선택할 수 있도록 했습니다."
     }
   ],
-  "reason": "`Next.js`는 **API 라우터를 통한 백엔드 통합**과 **SSR 기반 SEO 최적화**를 위해 선택했습니다. AI 복원은 `Google Gemini API`를 통해 **이미지 생성 모델**을 활용하고, 서버 비용을 절감했습니다. UI는 `React`와 `TailwindCSS`, `Radix UI`로 **반응형 드래그 앤 드롭** 인터페이스와 다양한 상태 안내, 모달, 토스트 등 세련된 UX를 구현했습니다. `TypeScript`로 **타입 안정성**을 확보했습니다.",
-  "learned": "**외부 AI API 연동** 경험을 통해 ML 서비스와의 효율적 통신, 비동기 처리, 에러 핸들링의 중요성을 체감했습니다. **이미지 업로드/복원/상태 안내** 등 UX 세부 구현을 고민하고, **반응형 웹/접근성**/PWA 등 실전 프론트엔드 기술을 폭넓게 익혔습니다.",
-  "intro": "Next.js와 Google Gemini AI를 결합하여 손상된 사진을 무료로 복원해주는 웹 서비스를 개발했습니다. 사용자가 사진을 업로드하면 AI가 자동으로 복원 스타일별로 이미지를 복원해주며, 복원 전후 비교와 다양한 상태 안내를 제공합니다.",
-  "func": [
+  reason: "`Next.js`는 **API 라우터를 통한 백엔드 통합**과 **SSR 기반 SEO 최적화**를 위해 선택했습니다. AI 복원은 `Google Gemini API`를 통해 **이미지 생성 모델**을 활용하고, 서버 비용을 절감했습니다. UI는 `React`와 `TailwindCSS`, `Radix UI`로 **반응형 드래그 앤 드롭** 인터페이스와 다양한 상태 안내, 모달, 토스트 등 세련된 UX를 구현했습니다. `TypeScript`로 **타입 안정성**을 확보했습니다.",
+  learned: "**외부 AI API 연동** 경험을 통해 ML 서비스와의 효율적 통신, 비동기 처리, 에러 핸들링의 중요성을 체감했습니다. **이미지 업로드/복원/상태 안내** 등 UX 세부 구현을 고민하고, **반응형 웹/접근성**/PWA 등 실전 프론트엔드 기술을 폭넓게 익혔습니다.",
+  intro: "Next.js와 Google Gemini AI를 결합하여 손상된 사진을 무료로 복원해주는 웹 서비스를 개발했습니다. 사용자가 사진을 업로드하면 AI가 자동으로 복원 스타일별로 이미지를 복원해주며, 복원 전후 비교와 다양한 상태 안내를 제공합니다.",
+  func: [
     "Gemini api 기반 사진 복원 (보수적/모던/하이브리드 스타일)",
     "드래그 앤 드롭 파일 업로드 및 타입/크기 검증",
     "복원 전후 비교 뷰어 및 이미지 확대/다운로드",
@@ -221,12 +266,12 @@ export const projectData: IProjectProps[] = [{
   stacks: ['Next.js', 'TypeScript', 'Recoil', 'MongoDB', 'Vercel', 'StyledComponents'],
   issues: [{
     "issue": "**Mongoose** 사용으로 인한 MongoDB 관리 서비스의 유연성 제한 및 다중 데이터베이스 동적 관리의 복잡성 증가.",
-    "solving": "**MongoDB 네이티브 드라이버**로 전환하고 DB연결 함수를 개선하여 직접적인 데이터베이스 제어 및 다중 데이터베이스 연결 관리 구현. 이를 통해 서비스의 유연성 향상 및 관리 효율성 증대."
+    "solving": "**MongoDB 네이티브 드라이버**로 전환하고 DB연결 함수를 개선하여 직접적인 데이터베이스 제어 및 다중 데이터베이스 연결 관리 구현했습니다. 이를 통해 서비스의 유연성 향상 및 관리 효율성 증대를 이루었습니다."
   }, {
-    "issue": "MongoDB 관리 서비스에서 **대량의 문서**를 효율적으로 로드하고 표시해야 하는 **사용자 경험 문제** 발생.",
-    "solving": "**IntersectionObserver**를 활용한 **무한 스크롤** 기능을 구현하여 **페이지네이션** 없이 **점진적인 문서 로딩** 구현. 이를 통해 **초기 로딩 시간 단축**과 **부드러운 스크롤 경험** 제공."
+    "issue": "MongoDB 관리 서비스에서 **대량의 문서**를 효율적으로 로드하고 표시해야 하는 **사용자 경험 문제**가 발생했습니다.",
+    "solving": "**IntersectionObserver**를 활용한 **무한 스크롤** 기능을 구현하여 **페이지네이션** 없이 **점진적인 문서 로딩**을 구현했습니다. 이를 통해 **초기 로딩 시간 단축**과 **부드러운 스크롤 경험**을 제공했습니다."
   }],
-  reason: "`Next.js`는 서버 사이드 렌더링(SSR)과 정적 사이트 생성(SSG)으로 SEO와 성능을 최적화할 수 있어 선택했고, **API Routes**로 백엔드 없이도 API 처리가 가능했음. `TypeScript`는 타입 오류 방지와 코드 유지보수를 위해 도입했으며, `Recoil`은 불필요한 리렌더링을 줄여 성능 최적화에 적합해 사용함. **배포 환경**으로는 Next.js와 호환성이 뛰어나고 빠른 배포가 가능한 `Vercel`을 선택함. `MongoDB`는 유연한 스키마 설계와 빠른 데이터 처리 속도로 선택했으며, 간단한 CRUD 작업에 적합해 사용함.",
+  reason: "`Next.js`는 서버 사이드 렌더링(SSR)과 정적 사이트 생성(SSG)으로 SEO와 성능을 최적화할 수 있어 선택했고, **API Routes**로 백엔드 없이도 API 처리가 가능했습니다. `TypeScript`는 타입 오류 방지와 코드 유지보수를 위해 도입했으며, `Recoil`은 불필요한 리렌더링을 줄여 성능 최적화에 적합해 사용했습니다. **배포 환경**으로는 Next.js와 호환성이 뛰어나고 빠른 배포가 가능한 `Vercel`을 선택했습니다. `MongoDB`는 유연한 스키마 설계와 빠른 데이터 처리 속도로 선택했으며, 간단한 CRUD 작업에 적합해 사용했습니다.",
   learned: ' 이 프로젝트를 통해 데이터베이스 관리와 성능 최적화에 대한 깊은 이해를 얻었습니다. 특히, **MongoDB 네이티브 드라이버**를 사용한 다중 데이터베이스 관리와 효율적인 데이터 처리 방법을 학습했습니다. 또한, **IntersectionObserver**를 활용한 무한 스크롤 구현을 통해 대규모 데이터셋을 사용자에게 부드럽게 제공하는 기술을 익혔습니다. 이 프로젝트를 통해 데이터베이스와 프론트엔드 간의 상호작용을 효율적으로 설계하고, 사용자 경험을 고려한 인터페이스 최적화 방법을 경험했습니다.',
   intro: 'MongoDB 데이터베이스를 쉽게 관리하고 모니터링할 수 있는 웹 기반 도구입니다. 데이터베이스 구조를 시각화하고, 데이터를 다루는 기본 작업들을 쉽고 빠르게 다룰 수 있도록 구현하여 개발자와 데이터베이스 관리자가 작업을 효율적으로 할 수 있도록 돕습니다. 제가 진행한 대부분의 프로젝트에서 MongoDB를 사용했기 때문에, MongoDB를 직접 관리할 수 있는 도구의 필요성을 느껴 이 프로젝트를 시작하게 되었습니다. 이를 통해 MongoDB의 관리 효율성을 높이고, 데이터 작업을 보다 직관적으로 수행할 수 있는 환경을 만들고자 했습니다.',
   func: [

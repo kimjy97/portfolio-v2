@@ -16,7 +16,7 @@ const IntroSection = (): JSX.Element => {
       <Background />
       <Wrapper style={{ opacity }}>
         <Typo>
-          <MainTypo>FRONT-END DEV.</MainTypo>
+          <MainTypo>WEB DEVELOPER.</MainTypo>
           <SubTypo>PORTFOLIO</SubTypo>
         </Typo>
         <ArrowDown>
@@ -117,6 +117,7 @@ const MainTypo = styled.h1`
   font-size: 8.9em;
   font-weight: 900;
   opacity: 1;
+  user-select: none;
 
   @media (max-width: 470px) {
     line-height: 1.3em;
@@ -127,6 +128,7 @@ const SubTypo = styled.h3`
   font-size: 1.8em;
   font-weight: 700;
   letter-spacing: 0.75em;
+  user-select: none;
 
   @media (max-width: 768px) {
     font-size: 2.6em;
