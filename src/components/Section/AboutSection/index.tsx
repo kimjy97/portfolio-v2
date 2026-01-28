@@ -25,7 +25,7 @@ const AboutSection = (): JSX.Element => {
         </Typo>
         <AboutTextWrapper className={isVisibleClassName}>
           <p>안녕하세요! 웹 개발자 <b>김종연</b>입니다.</p>
-          <p><span className='word'>"왜?"</span>라는 질문을 통해 <b>본질적인 문제</b>를 파악하고,</p>
+          <p><span className='word'>&ldquo;왜?&rdquo;</span>라는 질문을 통해 <b>본질적인 문제</b>를 파악하고,</p>
           <p>기술적 의사결정을 통해 <b>효율적인 솔루션</b>을 제시하는 개발자입니다.</p>
           <br />
           <p>프론트엔드 중심으로 시작했지만, 더 다양한 서비스를 직접 만들어보고 싶다는 열망으로 <b>백엔드와 데이터베이스 영역</b>까지 확장했습니다. 그 과정에서 <b>10개 이상의 풀스택 서비스</b>를 처음부터 끝까지 완성하며 실질적인 개발 역량을 키웠습니다.</p>

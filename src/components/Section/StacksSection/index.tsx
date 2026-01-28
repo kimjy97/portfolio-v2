@@ -20,8 +20,6 @@ import VercelSVG from '@public/svgs/stacks/vercel.svg';
 import AwsSVG from '@public/svgs/stacks/aws.svg';
 import GooglePlaySVG from '@public/svgs/stacks/googleplay.svg';
 import ExpoSVG from '@public/svgs/stacks/expo.svg';
-import SupabaseSVG from '@public/svgs/stacks/supabase.svg';
-import FirebaseSVG from '@public/svgs/stacks/firebase.svg';
 import TailwindCSSSVG from '@public/svgs/stacks/tailwindcss.svg';
 import RailwaySVG from '@public/svgs/stacks/railway.svg';
 import SocketIOSVG from '@public/svgs/stacks/socketio.svg';
@@ -326,14 +324,6 @@ const GooglePlayIcon = styled(GooglePlaySVG)`
   height: 3.8em;
 `
 const ExpoIcon = styled(ExpoSVG)`
-  width: 3.8em;
-  height: 3.8em;
-`
-const SupabaseIcon = styled(SupabaseSVG)`
-  width: 3.8em;
-  height: 3.8em;
-`
-const FirebaseIcon = styled(FirebaseSVG)`
   width: 3.8em;
   height: 3.8em;
 `
