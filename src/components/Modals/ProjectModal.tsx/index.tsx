@@ -5,7 +5,6 @@ import styled, { keyframes } from 'styled-components';
 import LinkSVG from '@public/svgs/link.svg';
 import { isOpenProjectState } from '@/atoms/project';
 import CrossSVG from '@public/svgs/cross.svg';
-import DocumentSVG from '@public/svgs/document.svg';
 import ArrowDownSVG from '@public/svgs/arrowDown.svg';
 import { IProjectProps, projectData } from '@/constants/project';
 import Issue from '@/components/Modals/ProjectModal.tsx/Issue';
@@ -562,16 +561,6 @@ const Name = styled.div`
   @media (max-width: 768px) {
     font-size: 0.875em;
   }
-`
-const DocumentIcon = styled(DocumentSVG)`
-  width: 2em;
-  margin-top: 0.2em;
-
-  fill: #ffffff;
-  opacity: 1;
-  filter: drop-shadow(0px 4px 4px #0001);
-
-  transition: 100ms;
 `
 const ScrollGradient = styled.div`
   position: absolute;

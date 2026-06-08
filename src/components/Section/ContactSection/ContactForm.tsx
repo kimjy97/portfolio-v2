@@ -185,27 +185,6 @@ const Container = styled.form`
   }
 `;
 
-const Note = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  color: #858699;
-  font-size: 0.9rem;
-  text-align: center;
-  
-  @media (max-width: 470px) {
-    font-size: 0.8rem;
-    margin-bottom: 2rem;
-  }
-`;
-
-const EmailHighlight = styled.span`
-  color: #8A87FF;
-  font-weight: 600;
-`;
-
 const FormField = styled.div`
   position: relative;
   margin-bottom: 1rem;
