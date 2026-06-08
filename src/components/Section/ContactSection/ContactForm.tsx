@@ -1,7 +1,6 @@
 import { useCallback, useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import emailjs from 'emailjs-com';
-import IconMail from '@public/svgs/mail.svg'
 import IconSend from '@public/svgs/send.svg'
 import IconSuccess from '@public/svgs/success.svg'
 import IconError from '@public/svgs/error.svg'
@@ -99,10 +98,6 @@ const ContactForm = (): JSX.Element => {
       onSubmit={throttledHandleSubmit}
       className={isSubmitting ? 'submitting' : ''}
     >
-      <Note>
-        <IconMail />
-        메시지는 <EmailHighlight>poot972@gmail.com</EmailHighlight>으로 전송됩니다.
-      </Note>
       <FormField className={inputValues.from_name ? 'has-value' : ''}>
         <FormInput
           type="text"
@@ -138,7 +133,7 @@ const ContactForm = (): JSX.Element => {
         <FormLabel htmlFor="message">메시지 내용</FormLabel>
       </FormField>
 
-      <SubmitButton type="submit" disabled={isSubmitting}>
+      <SubmitButton type="submit" disabled={isSubmitting || !inputValues.from_name || !inputValues.reply_to || !inputValues.message}>
         {isSubmitting ? (
           <>
             <LoadingSpinner />
@@ -299,19 +294,17 @@ const SubmitButton = styled.button<{ disabled: boolean }>`
   justify-content: center;
   gap: 0.5rem;
   padding: 0.9em 1.2em;
-  background: ${props => props.disabled ? '#2e2d37' : 'linear-gradient(135deg, #4b39ef 0%, #352d71 100%)'};
   color: ${props => props.disabled ? '#6f6d83' : '#fff'};
-  border: none;
+  background-color: ${props => props.disabled ? 'rgba(31, 31, 40, 1)' : 'transparent'};
+  border: 1px solid ${props => props.disabled ? 'transparent' : '#6565b6'};
   border-radius: 0.5rem;
   font-size: 1em;
-  font-weight: 600;
-  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+  font-weight: 500;
+  cursor: ${props => props.disabled ? 'default' : 'pointer'};
   transition: all 0.2s ease;
-  box-shadow: 0 2px 10px rgba(75, 57, 239, 0.2);
   
   &:hover:not(:disabled) {
-    box-shadow: 0 4px 15px rgba(75, 57, 239, 0.3);
-    background: linear-gradient(135deg, #5a48ff 0%, #433791 100%);
+    border-color: #887ae6ff;
   }
 `;
 

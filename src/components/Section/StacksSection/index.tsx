@@ -26,7 +26,10 @@ import SocketIOSVG from '@public/svgs/stacks/socketio.svg';
 import TanstackQuerySrc from '@public/images/stacks/tanstackquery.png';
 import PostgreSQLSrc from '@public/images/stacks/postgresql.png';
 import NginxSrc from '@public/images/stacks/nginx.png';
-import { useScroll } from '@hooks/useScroll';
+import NestjsSVG from '@public/svgs/stacks/nestjs.svg';
+import DockerSVG from '@public/svgs/stacks/docker.svg';
+import CloudflareSVG from '@public/svgs/stacks/cloudflare.svg';
+import RedisSVG from '@public/svgs/stacks/redis.svg';
 import Stack from '@components/Section/StacksSection/Stack';
 import Title from '@components/Section/Title';
 import { IProjectProps, projectData } from '@/constants/project';
@@ -35,7 +38,6 @@ import Image from 'next/image';
 const StacksSection = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false);
   const [visibleRows, setVisibleRows] = useState<boolean[]>([]);
-  const { handleScroll, opacity } = useScroll();
   const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const setRowRef = useCallback((index: number) => (el: HTMLDivElement | null) => {
@@ -91,10 +93,9 @@ const StacksSection = (): JSX.Element => {
     <SectionContainer
       name='stacks'
       handleVisible={setIsVisible}
-      onScroll={handleScroll}
     >
       <Background />
-      <Wrapper style={{ opacity }}>
+      <Wrapper>
         <Title
           isVisible={isVisible}
           main='주요 기술 스택'
@@ -122,16 +123,20 @@ const StacksSection = (): JSX.Element => {
           <StackItem>
             <StackType $visible={visibleRows[1]}># BACK-END & DATABASE</StackType>
             <StackRow ref={setRowRef(1)} $visible={visibleRows[1]}>
+              <Stack name='Nest.js' icon={<NestjsIcon />} count={stackCounts['Nestjs'] || 0} />
               <Stack name='Node.js' icon={<NodejsIcon />} count={stackCounts['Nodejs'] || 0} />
               <Stack name='MongoDB' icon={<MongodbIcon />} count={stackCounts['MongoDB'] || 0} />
               <Stack name='MySQL' icon={<MysqlIcon />} count={stackCounts['MySQL'] || 0} />
               <Stack name='PostgreSQL' icon={<PostgreSQLIcon src={PostgreSQLSrc} alt='PostgreSQL' />} count={stackCounts['PostgreSQL'] || 0} />
               <Stack name='Nginx' icon={<NginxIcon src={NginxSrc} alt='Nginx' />} count={stackCounts['Nginx'] || 0} />
+              <Stack name='Redis' icon={<RedisIcon />} count={stackCounts['Redis'] || 0} />
             </StackRow>
           </StackItem>
           <StackItem>
             <StackType $visible={visibleRows[2]}># DEPLOYMENT</StackType>
             <StackRow ref={setRowRef(2)} $visible={visibleRows[2]}>
+              <Stack name='Docker' icon={<DockerIcon />} count={stackCounts['Docker'] || 0} />
+              <Stack name='Cloudflare' icon={<CloudflareIcon />} count={stackCounts['Cloudflare'] || 0} />
               <Stack name='Vercel' icon={<VercelIcon />} count={stackCounts['Vercel'] || 0} />
               <Stack name='Railway' icon={<RailwayIcon />} count={stackCounts['Railway'] || 0} />
               <Stack name='AWS' icon={<AwsIcon />} count={stackCounts['AWS'] || 0} />
@@ -262,6 +267,10 @@ const JqueryIcon = styled(JquerySVG)`
   width: 4em;
   height: 4em;
 `
+const NestjsIcon = styled(NestjsSVG)`
+  width: 4.25em;
+  height: 4.25em;
+`
 const NodejsIcon = styled(NodejsSVG)`
   width: 5.5em;
   height: 5.5em;
@@ -294,6 +303,18 @@ const ZustandIcon = styled(ZustandSVG)`
 const FigmaIcon = styled(FigmaSVG)`
   width: 3.75em;
   height: 3.75em;
+`
+const DockerIcon = styled(DockerSVG)`
+  width: 5em;
+  height: 5em;
+`
+const CloudflareIcon = styled(CloudflareSVG)`
+  width: 5em;
+  height: 5em;
+`
+const RedisIcon = styled(RedisSVG)`
+  width: 4.25em;
+  height: 4.25em;
 `
 const PostmanIcon = styled(PostmanSVG)`
   width: 4.25em;

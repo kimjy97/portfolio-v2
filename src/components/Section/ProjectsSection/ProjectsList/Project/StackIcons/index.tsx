@@ -14,6 +14,10 @@ import ZustandSVG from '@public/svgs/stacks/zustand.svg';
 import RailwaySVG from '@public/svgs/stacks/railway.svg';
 import SocketIOSVG from '@public/svgs/stacks/socketio.svg';
 import PostgreSQLSVG from '@public/images/stacks/postgresql.png';
+import DockerSVG from '@public/svgs/stacks/docker.svg';
+import CloudflareSVG from '@public/svgs/stacks/cloudflare.svg';
+import NestjsSVG from '@public/svgs/stacks/nestjs.svg';
+import RedisSVG from '@public/svgs/stacks/redis.svg';
 import Image from "next/image";
 
 export const NextjsIcon = styled(NextjsSVG)`
@@ -72,6 +76,23 @@ export const PostgreSQLIcon = () => {
     </div>
   )
 }
+
+export const DockerIcon = styled(DockerSVG)`
+  width: 1.5em;
+  height: 1.5em;
+`
+export const CloudflareIcon = styled(CloudflareSVG)`
+  width: 1.5em;
+  height: 1.5em;
+`
+export const NestjsIcon = styled(NestjsSVG)`
+  width: 1.5em;
+  height: 1.5em;
+`
+export const RedisIcon = styled(RedisSVG)`
+  width: 1.5em;
+  height: 1.5em;
+`
 export const RailwayIcon = styled(RailwaySVG)`
   width: 1.3em;
   height: 1.3em;

@@ -20,9 +20,9 @@ const Stack = ({ name, name2, icon, count }: IProps): JSX.Element => {
   const router = useRouter();
 
   const handleClickStack = useCallback(async (stack: string) => {
-    setSeletedStacks([stack]);
     const targetSection = document.getElementById('projects');
     if (targetSection && count > 0) {
+      setSeletedStacks([stack]);
       const targetPosition = targetSection.offsetTop;
       await smoothScrollTo(targetPosition, 450);
       router.replace(`/?section=projects`, { scroll: false });

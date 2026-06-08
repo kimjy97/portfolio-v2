@@ -102,9 +102,7 @@ const ProjectModal = () => {
           </ExitBtn>
         </Top>
         <Body ref={bodyRef}>
-          <BackColor>
-            {info && <Image src={info.thumb[thumbNum]} alt={`${info.name}(Thumbnail)_${thumbNum}`} />}
-          </BackColor>
+          <BackColor />
           {info && (
             <MockUp className={MockUpClassName}>
               <Image
@@ -130,8 +128,14 @@ const ProjectModal = () => {
           <Contents ref={contentsRef} className={isScroll ? 'visible' : 'unVisible'}>
             <ContentsWrapper className={isScroll ? 'visible' : 'unVisible'}>
               <Name>
-                <DocumentIcon />
-                <p>{info?.name}</p>
+                <span>
+                  {info?.logo &&
+                    <LogoWrapper>
+                      <Logo src={info.logo} alt={info.name} fill />
+                    </LogoWrapper>
+                  }
+                  {info?.name}
+                </span>
               </Name>
               <Status>
                 <StatusService>
@@ -271,12 +275,16 @@ const Container = styled.div`
   height: calc(100% - 1rem);
   z-index: 10000;
 
+  background-color: #0005;
+  backdrop-filter: blur(200px);
+  -webkit-backdrop-filter: blur(200px);
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   border: 1px solid #34343c;
   border-bottom: none;
   box-shadow: 0 0 36px #0000;
   overflow: hidden;
+  word-break: keep-all;
 
   will-change: transform;
   transition: transform 200ms ease-out, opacity 300ms;
@@ -298,8 +306,8 @@ const Container = styled.div`
     width: 100%;
     height: 100%;
 
-    border-top-left-radius: 1.5rem;
-    border-top-right-radius: 1.5rem;
+    border-top-left-radius: 0rem;
+    border-top-right-radius: 0rem;
   }
   @media (max-width: 768px) {
     border-radius: initial;
@@ -411,13 +419,14 @@ const MockUp = styled.div`
     gap: 0rem;
     transform: scale(1) !important;
     opacity: 1 !important;
+    padding: 0.2em;
 
-    background-color: #dedfe4;
+    background-color: #f1f1f5;
 
     &>img {
       width: 100% !important;
       margin-top: 0px;
-      border-radius: 0;
+      border-radius: 0.5em;
       border: none;
       border-bottom: 1px solid #000000;
       box-shadow: none;
@@ -483,24 +492,33 @@ const Contents = styled.div`
   }
 
   &.visible {
-    top: 0;
+    top: 200px;
     opacity: 1;
 
     transition: 200ms 100ms cubic-bezier(0.23, 1, 0.320, 1)
   }
 
   @media (max-width: 1024px) {
-    top: 0;
     opacity: 1 !important;
-    padding-top: 6em;
-    padding-bottom: 6em;
+    top: 40px;
+    padding-top: 4em;
+    padding-bottom: 4em;
+
+    &.visible {
+      top: 40px;
+    }
   }
   @media (max-width: 768px) {
+    top: 0px;
     padding-top: 1.875em;
     font-size: 0.875rem;
 
     &::after {
       display: none;
+    }
+
+    &.visible {
+      top: 0px;
     }
   }
 `
@@ -522,7 +540,7 @@ const ContentsWrapper = styled.div`
   }
 
   @media (max-width: 1024px) {
-    width: calc(100% - 1.5rem);
+    width: calc(100% - 2rem);
     opacity: 1 !important;
   }
   @media (max-width: 470px) {
@@ -532,15 +550,13 @@ const ContentsWrapper = styled.div`
 const Name = styled.div`
   width: 100%;
   display: flex;
-  align-items: flex-start;
-  gap: 1.125em;
+  align-items: center;
   padding: 0 0.5em;
 
-  &>p {
+  &>span {
     color: #000000;
     font-size: 2.25em;
     font-weight: 700;
-    letter-spacing: -0.08em;
   }
 
   @media (max-width: 768px) {
@@ -577,29 +593,27 @@ const ScrollNote = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.625em;
+  gap: 0.75em;
   position: absolute;
-  bottom: 2.5em;
+  bottom: 0em;
   left: 50%;
-  transform: translateX(-50%) translateY(0.5em);
-  padding: 0.625em 1.125em;
+  transform: translateX(-50%) translateY(100%);
+  padding: 0.625em 2em 0.625em 1.875em;
 
-  background-color: #492e9e;
-  border: 1px solid #fff2;
-  backdrop-filter: blur(40px);
-  border-radius: 1em;
-  opacity: 0;
+  background: linear-gradient(to bottom, #ffffff 0%, #e5e5eeff 100%);
+  border: 1px solid #c0bfc6;
+  border-bottom: none;
+  border-radius: 1em 1em 0 0;
 
-  color: #fff;
+  color: #000000ff;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   white-space: nowrap;
 
   transition: 150ms;
   z-index: 1000;
 
   &.unVisible {
-    opacity: 1;
     transform: translateX(-50%) translateY(0px);
   }
 
@@ -609,10 +623,23 @@ const ScrollNote = styled.div`
 `
 const ArrowDownIcon = styled(ArrowDownSVG)`
   width: 0.75em;
-  stroke: #fff;
+  stroke: #000000ff;
   opacity: 1;
 
   transition: 100ms;
+  animation: move 1s ease-in-out infinite;
+
+  @keyframes move {
+    0% {
+      transform: translateY(-0.125em);
+    }
+    50% {
+      transform: translateY(0.2em);
+    }
+    100% {
+      transform: translateY(-0.125em);
+    }
+  }
 `
 const Info = styled.div`
   display: flex;
@@ -812,7 +839,8 @@ const SelectThumbList = styled.div`
   }
   @media (max-width: 768px) {
     width: calc(100% - 0em) !important;
-    gap: 0em;
+    padding-top: 0.2em;
+    gap: 0.2em;
   }
 `
 const SelectThumb = styled(ImageWithSpinner)`
@@ -836,7 +864,11 @@ const SelectThumb = styled(ImageWithSpinner)`
   will-change: transform;
 
   &.selected {
-    border: 1.5px solid #ca3f3f;
+    position: relative;
+    z-index: 100;
+    outline: 1.5px solid #8764ff;
+    outline-offset: 0.1em;
+    border-color: transparent;
   }
 
   &:hover {
@@ -844,7 +876,7 @@ const SelectThumb = styled(ImageWithSpinner)`
   }
 
   @media (max-width: 768px) {
-    border-radius: initial;
+    border-radius: 0.5em;
     box-shadow: none;
     box-sizing: border-box;
     border: none;
@@ -964,3 +996,20 @@ const Background = styled.div`
     pointer-events: initial;
   }
 `;
+
+const LogoWrapper = styled.div`
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 1em;
+  height: 1em;
+  margin-bottom: -0.14em;
+  margin-right: 0.35em;
+  border-radius: 20%;
+  overflow: hidden;
+`
+const Logo = styled(Image)`
+  object-fit: contain;
+`

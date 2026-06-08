@@ -47,9 +47,11 @@ export interface IProjectProps {
   learned: string;
   intro: string,
   func?: string[],
+  logo?: string,
 }
 
 export const projectData: IProjectProps[] = [{
+  logo: "https://github.com/kimjy97/portfolio-v2/blob/main/public/meta/fav.png?raw=true",
   thumb: [PortfolioThumbImg, PortfolioImg1, PortfolioImg2, PortfolioImg3],
   term: '2024.09 ~ 진행중',
   name: '웹 포트폴리오',
@@ -66,6 +68,7 @@ export const projectData: IProjectProps[] = [{
   learned: ' 웹사이트 퍼포먼스 최적화와 사용자 경험을 고려한 인터랙티브 요소 구현에 대해 학습했으며, 다양한 디바이스에 맞는 반응형 디자인의 중요성을 경험했습니다.',
   intro: '저의 개발 기술 스택과 진행한 프로젝트들을 보여주기 위해 제작한 웹 포트폴리오입니다.\n사용자 경험을 고려해 인터랙티브한 요소를 추가했고, 추가적인 라이브러리 없이 다양한 효과들을 직접 구현했습니다. 또한, 반응형 디자인을 적용하여 어디서든 쉽게 포트폴리오를 볼 수 있도록 개발했습니다.',
 }, {
+  logo: "https://github.com/team-croni/Cromo/blob/main/public/favicon_512.png?raw=true",
   thumb: [CromoThumbImg, CromoImg1, CromoImg2, CromoImg3],
   term: '2025.11 ~ 2026.01',
   termDiff: '3개월',
@@ -97,7 +100,7 @@ export const projectData: IProjectProps[] = [{
     }
   ],
   reason: "`Next.js 15 App Router`는 서버 컴포넌트와 클라이언트 컴포넌트를 효율적으로 분리할 수 있어 선택했고, `TypeScript`로 타입 안정성을 확보했습니다. `TailwindCSS`는 빠른 UI 개발과 일관된 디자인 시스템 구축을 위해 도입했으며, `Zustand`와 `TanstackQuery`를 조합하여 클라이언트 상태와 서버 상태를 명확히 분리 관리했습니다. `Socket.IO`는 실시간 공유 기능의 핵심으로, 서버리스 환경의 제약을 극복하기 위해 `Railway`에 독립 서버로 구축했습니다. `PostgreSQL`은 Neon의 서버리스 DB로 자동 스케일링과 pgvector 확장을 지원하여 벡터 검색 구현에 최적이었고, `Inngest`는 임베딩 처리 같은 백그라운드 작업을 선언적으로 스케줄링할 수 있어 채택했습니다.",
-  learned: ' **RRF 알고리즘**을 직접 구현하며 하이브리드 검색의 원리를 깊이 이해하게 되었고, **서버리스 환경과 상태 유지 서버를 분리 배포**하는 아키텍처 설계 경험을 쌓았습니다. MD5 해싱과 배치 처리를 통한 **비용 최적화 전략**을 실무에 적용하며, 대규모 데이터에서도 밀리초 단위 응답을 보장하는 인덱싱 전략의 중요성을 체감했습니다. 또한 Inngest를 활용한 비동기 작업 스케줄링과 OpenRouter API 통합을 통해 안정적인 AI 파이프라인 구축 방법을 익혔습니다.\n 또한, **GitHub Actions를 활용한 CI/CD 파이프라인 설계**를 통해 단순 배포를 넘어 **검증된 배포**의 중요성을 깨달았습니다. 서로 다른 OS 환경(GitHub-Debian, Vercel-RHEL) 사이의 의존성 문제를 해결하며 **Prisma 엔진 아키텍처**에 대해 이해하게 되었고, 캐싱 전략과 환경 변수 동기화를 통해 빌드 속도와 운영 보안을 동시에 챙기는 실무적인 배포 최적화 경험을 쌓았습니다.',
+  learned: ' **RRF 알고리즘**을 직접 구현하며 하이브리드 검색의 원리를 깊이 이해하게 되었고, **서버리스 환경과 상태 유지 서버를 분리 배포**하는 아키텍처 설계 경험을 쌓았습니다. MD5 해싱과 배치 처리를 통한 **비용 최적화 전략**을 적용하며, 대규모 데이터에서도 밀리초 단위 응답을 보장하는 인덱싱 전략의 중요성을 체감했습니다. 또한 Inngest를 활용한 비동기 작업 스케줄링과 OpenRouter API 통합을 통해 안정적인 AI 파이프라인 구축 방법을 익혔습니다.\n 또한, **GitHub Actions를 활용한 CI/CD 파이프라인 설계**를 통해 단순 배포를 넘어 **검증된 배포**의 중요성을 깨달았습니다. 서로 다른 OS 환경(GitHub-Debian, Vercel-RHEL) 사이의 의존성 문제를 해결하며 **Prisma 엔진 아키텍처**에 대해 이해하게 되었고, 캐싱 전략과 환경 변수 동기화를 통해 빌드 속도와 운영 보안을 동시에 챙기는 실무적인 배포 최적화 경험을 쌓았습니다.',
   intro: '단순한 메모 기록을 넘어, 개인의 생각이나 여러 사람의 아이디어를 실시간으로 동기화하고 AI를 통해 더 가치 있게 만드는 플랫폼입니다. 실시간 동기화의 안정성을 위해 서버 구조를 분리하고, 임베딩 모델로 메모를 임베딩하는 스케줄링 로직과 검색 알고리즘을 직접 구현하여 문맥까지 찾아내는 검색 엔진을 구현했습니다.',
   func: [
     '실시간 공유 메모 작성 및 동기화',
@@ -112,6 +115,63 @@ export const projectData: IProjectProps[] = [{
     '자동 임베딩 스케줄링 및 배치 처리'
   ]
 }, {
+  logo: "https://github.com/kimjy97/ReStory/blob/main/public/favicon_512.png?raw=true",
+  thumb: [RestoryThumbImg, RestoryImg1, RestoryImg2, RestoryImg3],
+  term: "2025.06 ~ 2025.07",
+  termDiff: "1개월",
+  name: "ReStory - AI 사진 복원 서비스",
+  url: "https://restory-free.vercel.app",
+  github: "https://github.com/kimjy97/ReStory",
+  contribution: { dev: "100%", design: "100%", planning: "100%" },
+  stacks: [
+    "Next.js",
+    "TypeScript",
+    "React",
+    "TailwindCSS",
+    "Vercel",
+    "MongoDB",
+    "Cloudflare",
+  ],
+  issues: [
+    {
+      issue:
+        "고해상도 이미지 처리 시 AI 모델의 처리 시간이 길어지고 서버 자원을 많이 소모합니다.",
+      solving:
+        "**Replicate API**를 활용하여 AI 추론을 외부 서비스로 위임하고, **Cloudflare Workers AI**를 fallback 엔진으로 활용하여 안정성을 확보했습니다. 서버사이드 **sharp** 기반 이미지 리사이즈(2560px 제한)와 업로드 파일 크기 제한(10MB)으로 서버 부하를 최소화했습니다. 복원 진행 상태와 에러를 실시간으로 안내하여 사용자 경험을 개선했습니다.",
+    },
+    {
+      issue:
+        "사용자가 업로드한 사진 데이터의 보안과 개인정보 보호가 중요한 이슈였습니다.",
+      solving:
+        "이미지는 서버에 임시로만 사용하며 별도 저장하지 않고, **파일 타입/크기 검증**을 통해 보안을 강화했습니다. **MongoDB 기반 IP 기반 Rate Limiting**(시간당 3회, 일일 10회)으로 무분별한 사용을 방지하고 서버 자원을 보호했습니다. 개인정보 처리방침을 통해 외부 서비스(Replicate, Cloudflare, Vercel) 사용을 명확히 고지했습니다.",
+    },
+    {
+      issue:
+        "다양한 이미지 품질과 복원 결과에 대해 일관된 품질을 제공해야 했습니다.",
+      solving:
+        "Replicate의 **flux-kontext-apps/restore-image** 모델을 통해 고품질 복원을 구현하고, 실패 시 **Cloudflare Workers AI**(SD v1.5 Img2Img)로 자동 fallback하여 안정적인 결과를 보장했습니다. **sharp** 기반 서버사이드 이미지 리사이즈로 다양한 해상도의 입력 이미지를 일관되게 처리했습니다.",
+    },
+  ],
+  reason:
+    '`Next.js`는 **API 라우터를 통한 백엔드 통합**과 **SSR 기반 SEO 최적화**를 위해 선택했습니다. AI 복원은 `Replicate API`의 **FLUX Kontext 모델**을 활용하고, 실패 시 `Cloudflare Workers AI`로 **자동 fallback**하여 안정성과 비용 효율을 확보했습니다. **MongoDB**와 **Mongoose**를 연동하여 IP 기반 **Rate Limiting**을 구현하고, **Sharp**로 서버사이드 이미지 리사이즈를 처리했습니다. UI는 `React`와 `TailwindCSS`, `Radix UI`로 **반응형 드래그 앤 드롭** 인터페이스와 다양한 상태 안내, 모달, 토스트 등 세련된 UX를 구현했습니다. `TypeScript`로 **타입 안정성**을 확보했습니다.',
+  learned:
+    "**Replicate/Cloudflare AI API 연동** 경험을 통해 ML 서비스와의 효율적 통신, 비동기 처리, 에러 핸들링의 중요성을 체감했습니다. **MongoDB 연동 Rate Limiting** 구현으로 백엔드 보안과 서버 자원 관리의 실전 경험을 쌓았습니다. **Sharp 이미지 처리**를 통한 서버사이드 리사이즈, **이미지 업로드/복원/상태 안내** 등 UX 세부 구현을 고민하고, **반응형 웹/접근성**/PWA 등 실전 프론트엔드 기술을 폭넓게 익혔습니다.",
+  intro:
+    "Next.js와 Replicate AI, Cloudflare Workers AI를 결합하여 손상된 사진을 무료로 복원해주는 웹 서비스를 개발했습니다. 사용자가 사진을 업로드하면 AI가 자동으로 복원하여 복원 전후 비교와 다양한 상태 안내를 제공합니다. MongoDB 기반 Rate Limiting으로 서버 자원을 보호하고, 다중 AI 엔진 fallback으로 안정적인 서비스를 구현했습니다.",
+  func: [
+    "Replicate API 기반 사진 복원 (FLUX Kontext 모델) 및 Cloudflare Workers AI fallback",
+    "드래그 앤 드롭 파일 업로드 및 타입/크기 검증",
+    "복원 전후 비교 뷰어 및 이미지 확대/다운로드",
+    "다양한 이미지 포맷(JPG/PNG) 지원",
+    "MongoDB 기반 IP 기반 Rate Limiting (시간당 3회, 일일 10회)",
+    "서버사이드 sharp 이미지 리사이즈 (2560px 제한)",
+    "개발 환경 AI 시뮬레이션 모킹",
+    "반응형 웹 디자인 및 PWA 지원",
+    "다크모드 지원",
+    "GalleryGrid 복원 사례 갤러리",
+  ],
+}, {
+  logo: "https://github.com/kimjy97/devblog-v2/blob/main/public/meta/fav/fav.png?raw=true",
   thumb: [AichatThumbImg, AichatImg1, AichatImg2, AichatImg3],
   term: '2024.04 ~ 2024.08',
   termDiff: '5개월',
@@ -142,6 +202,7 @@ export const projectData: IProjectProps[] = [{
     '반응형 웹'
   ],
 }, {
+  logo: "https://github.com/kimjy97/devblog-v2/blob/main/public/meta/fav/fav.png?raw=true",
   thumb: [BlogThumbImg, BlogImg1, BlogImg2, BlogImg3],
   term: '2024.05 ~ 2024.09',
   termDiff: '5개월',
@@ -166,10 +227,11 @@ export const projectData: IProjectProps[] = [{
   intro: '개발하면서 얻은 정보들을 체계적으로 기록할 수 있는 개인 블로그가 필요하다고 느껴 직접 제작했습니다. 블로그의 기본적인 형태와 기능을 모두 구현했으며, SEO 최적화를 통해 구글 검색이 가능하도록 했습니다. 또한, 사용자의 선호에 따라 다크모드와 라이트모드를 선택할 수 있도록 기능을 추가하여, 다양한 환경에서도 편리하게 블로그를 이용할 수 있도록 했습니다.',
   func: ['게시물 조회', '게시물 검색', '게시물 좋아요', '게시물 정렬', '댓글 등록, 수정, 삭제', '게시판 이동', '다크모드 및 라이트모드 지원', '반응형 웹'],
 }, {
+  logo: "https://github.com/kimjy97/blog-admin/blob/main/public/favicon.png?raw=true",
   thumb: [BlogAdminThumbImg, BlogAdminImg1, BlogAdminImg2, BlogAdminImg3],
   term: "2025.05 ~ 2025.05",
   termDiff: "1개월",
-  name: "블로그 관리자 (대시보드)",
+  name: "블로그 관리자 - 대시보드",
   url: "",
   github: "https://github.com/kimjy97/blog-admin",
   contribution: { "dev": "100%", "design": "100%", "planning": "100%" },
@@ -201,6 +263,7 @@ export const projectData: IProjectProps[] = [{
   ]
 },
 {
+  logo: "https://avatars.githubusercontent.com/u/82198250?s=200&v=4",
   thumb: [WhatIsPillThumbImg, WhatIsPillImg1, WhatIsPillImg2, WhatIsPillImg3],
   term: '2023.03 ~ 진행중',
   name: '이게뭐약 - 알약 촬영 검색 애플리케이션',
@@ -220,46 +283,7 @@ export const projectData: IProjectProps[] = [{
   intro: '사용자가 알약을 카메라로 촬영하여 검색하면 해당 약품의 정보를 제공하는 모바일 애플리케이션입니다. AI 기반의 이미지 인식 기술을 활용하여 촬영한 알약을 식별하고, 식품의약품안전처에서 제공하는 공공데이터를 바탕으로 상세한 약품 정보를 제공합니다. React Native를 사용해 크로스 플랫폼 앱으로 개발되었으며, 현재 Android 버전은 Google Play에 출시되어 있습니다. 올해 안에 iOS 버전도 App Store에 등록할 예정입니다. 알약 데이터는 식품의약품안전처의 최신 데이터를 기반으로 지속적으로 업데이트됩니다.',
   func: ['알약 촬영 및 검색 기능', '앨범에서 사진 선택하여 검색 기능', '알약 정보 조회', '최근 검색한 약품 리스트 제공', '알약 보관함 기능'],
 }, {
-  thumb: [RestoryThumbImg, RestoryImg1, RestoryImg2, RestoryImg3],
-  term: "2025.06 ~ 2025.07",
-  termDiff: "1개월",
-  name: "ReStory - AI 사진 복원 서비스",
-  url: "https://restory-free.vercel.app",
-  github: "https://github.com/kimjy97/ReStory",
-  contribution: { "dev": "100%", "design": "100%", "planning": "100%" },
-  stacks: [
-    "Next.js",
-    "TypeScript",
-    "React",
-    "TailwindCSS",
-    "Vercel",
-  ],
-  issues: [
-    {
-      "issue": "고해상도 이미지 처리 시 AI 모델의 처리 시간이 길어지고 서버 자원을 많이 소모합니다.",
-      "solving": "**Google Gemini API**를 활용하여 AI 추론을 외부 서비스로 위임하고, 업로드 파일 크기 제한(10MB) 및 타입 검증(JPG/PNG)으로 서버 부하와 오류를 최소화했습니다. 복원 진행 상태와 에러를 실시간으로 안내하여 사용자 경험을 개선했습니다."
-    },
-    {
-      "issue": "사용자가 업로드한 사진 데이터의 보안과 개인정보 보호가 중요한 이슈였습니다.",
-      "solving": "이미지는 서버에 임시로만 사용하며 별도 저장하지 않고, **파일 타입/크기 검증**을 통해 보안을 강화했습니다. 개인정보 처리방침을 통해 외부 서비스(Gemini API, Vercel) 사용을 명확히 고지했습니다."
-    },
-    {
-      "issue": "다양한 이미지 품질과 복원 스타일에 대해 일관된 결과를 제공해야 했습니다.",
-      "solving": "복원 스타일(보수적/모던/하이브리드)별로 맞춤 프롬프트를 적용하여 사용자가 원하는 결과를 선택할 수 있도록 했습니다."
-    }
-  ],
-  reason: "`Next.js`는 **API 라우터를 통한 백엔드 통합**과 **SSR 기반 SEO 최적화**를 위해 선택했습니다. AI 복원은 `Google Gemini API`를 통해 **이미지 생성 모델**을 활용하고, 서버 비용을 절감했습니다. UI는 `React`와 `TailwindCSS`, `Radix UI`로 **반응형 드래그 앤 드롭** 인터페이스와 다양한 상태 안내, 모달, 토스트 등 세련된 UX를 구현했습니다. `TypeScript`로 **타입 안정성**을 확보했습니다.",
-  learned: "**외부 AI API 연동** 경험을 통해 ML 서비스와의 효율적 통신, 비동기 처리, 에러 핸들링의 중요성을 체감했습니다. **이미지 업로드/복원/상태 안내** 등 UX 세부 구현을 고민하고, **반응형 웹/접근성**/PWA 등 실전 프론트엔드 기술을 폭넓게 익혔습니다.",
-  intro: "Next.js와 Google Gemini AI를 결합하여 손상된 사진을 무료로 복원해주는 웹 서비스를 개발했습니다. 사용자가 사진을 업로드하면 AI가 자동으로 복원 스타일별로 이미지를 복원해주며, 복원 전후 비교와 다양한 상태 안내를 제공합니다.",
-  func: [
-    "Gemini api 기반 사진 복원 (보수적/모던/하이브리드 스타일)",
-    "드래그 앤 드롭 파일 업로드 및 타입/크기 검증",
-    "복원 전후 비교 뷰어 및 이미지 확대/다운로드",
-    "다양한 이미지 포맷(JPG/PNG) 지원",
-    "반응형 웹 디자인 및 PWA 지원",
-    "다크모드 지원",
-  ]
-}, {
+  logo: "https://raw.githubusercontent.com/kimjy97/mongoDB-manager/refs/heads/main/src/app/favicon.ico",
   thumb: [MongoDBThumbImg, MongoDBImg1, MongoDBImg2, MongoDBImg3],
   term: '2024.08 ~ 2024.09',
   termDiff: '2개월',

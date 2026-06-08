@@ -1,24 +1,21 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import SectionContainer from '@components/Section/SectionContainer';
-import { useScroll } from '@hooks/useScroll';
 import ProjectsList from '@components/Section/ProjectsSection/ProjectsList';
 import Title from '@components/Section/Title';
 import SortOption from '@components/Section/ProjectsSection/SortOption';
 
 const ProjectsSection = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false);
-  const { handleScroll, opacity } = useScroll();
   const className = isVisible ? 'visible' : '';
 
   return (
     <SectionContainer
       name='projects'
       handleVisible={setIsVisible}
-      onScroll={handleScroll}
     >
       <Background />
-      <Wrapper style={{ opacity }}>
+      <Wrapper>
         <Title
           isVisible={isVisible}
           main='프로젝트'

@@ -2,19 +2,15 @@ import React from 'react';
 import SectionContainer from '@components/Section/SectionContainer';
 import ArrowDownSVG from '@public/svgs/arrowDown.svg';
 import styled, { keyframes } from 'styled-components';
-import { useScroll } from '@hooks/useScroll';
 
 const IntroSection = (): JSX.Element => {
-  const { handleScroll, opacity } = useScroll();
-
   return (
     <SectionContainer
       name='intro'
-      onScroll={handleScroll}
       full
     >
       <Background />
-      <Wrapper style={{ opacity }}>
+      <Wrapper>
         <Typo>
           <MainTypo>WEB DEVELOPER.</MainTypo>
           <SubTypo>PORTFOLIO</SubTypo>

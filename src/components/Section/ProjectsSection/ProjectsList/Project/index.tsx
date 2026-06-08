@@ -15,7 +15,7 @@ interface IProps {
 
 const Project = ({ data }: IProps): JSX.Element => {
   const [, setIsOpen] = useRecoilState(isOpenProjectState);
-  const { thumb, term, name, url, github, team, stacks } = data;
+  const { thumb, term, name, url, github, team, stacks, logo } = data;
   const selectedStacks = useRecoilValue<string[]>(projectFilterState);
 
   const handleClickDetail = () => {
@@ -35,8 +35,19 @@ const Project = ({ data }: IProps): JSX.Element => {
       </ThumbnailWrapper>
       <Row $marginBottom='0.65em'>
         <NameWrapper>
-          <Name>
-            <span onClick={handleClickDetail}>{name}</span>
+          <Name onClick={handleClickDetail}>
+            {logo &&
+              <LogoWrapper>
+                <Logo
+                  src={logo}
+                  alt={name}
+                  fill
+                />
+              </LogoWrapper>
+            }
+            <span>
+              {name}
+            </span>
             <DetailBtn onClick={handleClickDetail}>
               <p>자세히 보기</p>
               <ArrowIcon />
@@ -83,7 +94,7 @@ const Container = styled.div`
     }
   }
 
-  @media (max-width: 470px) {
+  @media (max-width: 500px) {
     font-size: 0.875rem;
   }
 `
@@ -116,7 +127,7 @@ const ThumbnailWrapper = styled.div`
     border: 1.5px solid #ffffff4d;
   }
 
-  @media (max-width: 470px) {
+  @media (max-width: 500px) {
     border-radius: 0.625em;
   }
 `
@@ -129,7 +140,6 @@ const NameWrapper = styled.div`
 const Name = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   
   &>span {
@@ -217,6 +227,7 @@ const DetailBtn = styled.div`
   align-items: center;
   gap: 0.4em;
   padding-left: 0.75em;
+  margin-left: auto;
 
   color: #838198;
   font-size: 0.875em;
@@ -233,4 +244,19 @@ const DetailBtn = styled.div`
       fill: #b0b5dd;
     }
   }
+`
+const LogoWrapper = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 1.75em;
+  height: 1.75em;
+  margin-right: 0.6em;
+  border-radius: 20%;
+  overflow: hidden;
+`
+const Logo = styled(Image)`
+  object-fit: contain;
 `

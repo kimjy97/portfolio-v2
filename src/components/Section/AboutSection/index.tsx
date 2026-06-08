@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 import SectionContainer from '@components/Section/SectionContainer';
 import styled, { keyframes } from 'styled-components';
-import { useScroll } from '@hooks/useScroll';
 
 const AboutSection = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false);
-  const { handleScroll, opacity } = useScroll();
   const isVisibleClassName = isVisible ? 'visible' : '';
 
   return (
     <SectionContainer
       name='about'
       handleVisible={setIsVisible}
-      onScroll={handleScroll}
       full
     >
       <Background />
       <TopGradient />
-      <Wrapper style={{ opacity }}>
+      <Wrapper>
         <BackImg />
         <Typo className={isVisibleClassName} aria-label="I'm getting ready for next level">
           I&apos;M GETTING READY FOR<br />
@@ -25,12 +22,15 @@ const AboutSection = (): JSX.Element => {
         </Typo>
         <AboutTextWrapper className={isVisibleClassName}>
           <p>안녕하세요! 웹 개발자 <b>김종연</b>입니다.</p>
-          <p><span className='word'>&ldquo;왜?&rdquo;</span>라는 질문을 통해 <b>본질적인 문제</b>를 파악하고,</p>
-          <p>기술적 의사결정을 통해 <b>효율적인 솔루션</b>을 제시하는 개발자입니다.</p>
+          <p>저는 <b>끝없이 성장</b>하며 <span className='word'>&ldquo;지치지 않는 열정&rdquo;</span>을 가진 개발자입니다.</p>
+          <p>맡은 일에 최선을 다하는 책임감 있는 태도로 <b>완벽한 결과물</b>을 만들기 위해 노력합니다.</p>
           <br />
-          <p>프론트엔드 중심으로 시작했지만, 더 다양한 서비스를 직접 만들어보고 싶다는 열망으로 <b>백엔드와 데이터베이스 영역</b>까지 확장했습니다. 그 과정에서 <b>10개 이상의 풀스택 서비스</b>를 처음부터 끝까지 완성하며 실질적인 개발 역량을 키웠습니다.</p>
+          <p><b>10개 이상의 프로젝트를</b> 단순 토이 프로젝트가 아닌 실제 <b>서비스 수준</b>으로 기획하고, <b>풀스택</b>으로 개발하며 실질적인 개발 역량을 키웠습니다.</p>
           <br />
-          <p>AI와의 긴밀한 협업을 통해 <b>생산성과 품질</b>을 동시에 높이는 연습을 지속해왔습니다. AI로 절약한 시간을 서비스의 <b>구조적 설계와 성능 최적화</b>에 재투자하고, 동시에 AI를 <b>코드 리뷰어 및 페어 프로그래밍 파트너</b>로 활용하며 개발자로서의 한계를 끊임없이 확장하고 있습니다.</p>
+          <p>최근에는 <b>AI와의 협업</b>을 통해 <b>개발 속도와 코드 품질을 동시에 높이는 것</b>을 지속적으로 연습 하고 있으며 개발자로서의 한계를 끊임없이 확장해 나가고 있습니다.</p>
+          <br />
+          <p><b>초등학생때 부터</b> 해온 개발이 지금은 <b>가장 큰 즐거움</b>이 되었고, 개발에 <b>지치지 않는 열정</b>을 가지게 되었습니다.</p>
+          <p>앞으로도 <span className='word'>&ldquo;끝없이 발전하는 개발자&rdquo;</span>가 되는것이 <b>목표</b>입니다.</p>
           <TagList>
             <Tag>#열정적인</Tag>
             <Tag>#끈기있는</Tag>
@@ -39,7 +39,7 @@ const AboutSection = (): JSX.Element => {
           </TagList>
         </AboutTextWrapper>
       </Wrapper>
-    </SectionContainer>
+    </SectionContainer >
   )
 };
 
@@ -193,15 +193,17 @@ const AboutTextWrapper = styled.div`
     font-weight: 400;
     font-family: var(--font-poppins) var(--font-pretendard);
     line-height: 1.7em;
+    letter-spacing: 0.015em;
     color: #fff;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    word-break: keep-all;
 
     &:first-child {
       font-size: 1.4em;
-      font-weight: 600;
+      font-weight: 400;
       
       padding-bottom: 1.25em;
-      margin-bottom: 1.75em;
+      margin-bottom: 1.25em;
       border-bottom: 2px dashed #b1b1bd22;
       
       &>b {
@@ -216,6 +218,8 @@ const AboutTextWrapper = styled.div`
 
       color: rgb(255, 149, 149);
       font-size: 1.5em;
+      font-weight: 500;
+      line-height: 1.5em;
     }
 
     b {
@@ -241,7 +245,7 @@ const AboutTextWrapper = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     padding: 1.5rem 1.875rem;
-    top: 38%;
+    top: 30%;
 
     font-size: 0.9375rem;
 

@@ -1,24 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import SectionContainer from '@components/Section/SectionContainer';
-import { useScroll } from '@hooks/useScroll';
 import ContactForm from '@/components/Section/ContactSection/ContactForm';
 import ContactLinkList from '@/components/Section/ContactSection/ContactLinkList';
 
 const ContactSection = (): JSX.Element => {
-  const [isVisible, setIsVisible] = useState(false);
-  const { handleScroll, opacity } = useScroll();
-  const className = isVisible ? 'visible' : '';
-
   return (
-    <SectionContainer
-      name='contact'
-      handleVisible={setIsVisible}
-      onScroll={handleScroll}
-    >
+    <SectionContainer name='contact'>
       <Background />
-      <Wrapper style={{ opacity }}>
-        <ContentsWrapper className={className}>
+      <Wrapper>
+        <ContentsWrapper>
           <FormText>
             <GlowingText>저의 포트폴리오를 봐주셔서 감사합니다!</GlowingText>
             <p>관심있게 보셨다면 아래를 통해 저에게 연락주세요 <EmojiWrapper>🙇‍♂️</EmojiWrapper></p>
@@ -133,16 +124,9 @@ const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform: translateY(20px);
   padding-top: 2.5rem;
 
-  opacity: 0;
-  transition: 1400ms 500ms cubic-bezier(0.23, 1, 0.32, 1);
-  
-  &.visible {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  opacity: 1;
 `;
 
 const FormText = styled.div`
@@ -202,11 +186,6 @@ const EmojiWrapper = styled.span`
 const ContactLinksWrapper = styled.div`
   width: 100%;
   max-width: 500px;
-  margin-bottom: 3rem;
-  
-  @media (max-width: 768px) {
-    margin-bottom: 2rem;
-  }
 `;
 
 const FormWrapper = styled.div`

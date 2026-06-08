@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { projectFilterState } from '@/atoms/project';
-import { GooglePlayConsoleIcon, MongodbIcon, NextjsIcon, ReactNativeIcon, RecoilIcon, StyledComponentsIcon, TypescriptIcon, VercelIcon, TailwindCSSIcon, ZustandIcon, TanstackQueryIcon, SocketIOIcon, PostgreSQLIcon, RailwayIcon } from '@/components/Section/ProjectsSection/ProjectsList/Project/StackIcons';
+import { GooglePlayConsoleIcon, MongodbIcon, NextjsIcon, ReactNativeIcon, RecoilIcon, StyledComponentsIcon, TypescriptIcon, VercelIcon, TailwindCSSIcon, ZustandIcon, TanstackQueryIcon, SocketIOIcon, PostgreSQLIcon, RailwayIcon, DockerIcon, CloudflareIcon, NestjsIcon, RedisIcon } from '@/components/Section/ProjectsSection/ProjectsList/Project/StackIcons';
 import smoothScrollTo from '@/utils/smoothScrollTo';
 import { useRouter } from 'next/navigation';
 interface StackIconsType {
@@ -24,6 +24,10 @@ const stackIcons: StackIconsType = {
   GooglePlayConsole: GooglePlayConsoleIcon,
   TailwindCSS: TailwindCSSIcon,
   Zustand: ZustandIcon,
+  Docker: DockerIcon,
+  Cloudflare: CloudflareIcon,
+  Nestjs: NestjsIcon,
+  Redis: RedisIcon,
 };
 
 interface IProps {
