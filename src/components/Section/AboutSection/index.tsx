@@ -27,7 +27,7 @@ const AboutSection = (): JSX.Element => {
           <br />
           <p><b>10개 이상의 프로젝트를</b> 단순 토이 프로젝트가 아닌 실제 <b>서비스 수준</b>으로 기획하고, <b>풀스택</b>으로 개발하며 실질적인 개발 역량을 키웠습니다.</p>
           <br />
-          <p>최근에는 <b>AI와의 협업</b>을 통해 <b>개발 속도와 코드 품질을 동시에 높이는 것</b>을 지속적으로 연습 하고 있으며 개발자로서의 한계를 끊임없이 확장해 나가고 있습니다.</p>
+          <p>최근에는 <b>AI와의 협업</b>을 통해 지속적으로 <b>개발 속도와 코드 품질을 동시에 높이는 연습</b>을 하고 있으며, 개발자로서의 한계를 끊임없이 확장해 나가고 있습니다.</p>
           <br />
           <p><b>초등학생때 부터</b> 해온 개발이 지금은 <b>가장 큰 즐거움</b>이 되었고, 개발에 <b>지치지 않는 열정</b>을 가지게 되었습니다.</p>
           <p>앞으로도 <span className='word'>&ldquo;끝없이 발전하는 개발자&rdquo;</span>가 되는것이 <b>목표</b>입니다.</p>
@@ -203,7 +203,7 @@ const AboutTextWrapper = styled.div`
       font-weight: 400;
       
       padding-bottom: 1.25em;
-      margin-bottom: 1.25em;
+      margin-bottom: 1.125em;
       border-bottom: 2px dashed #b1b1bd22;
       
       &>b {
