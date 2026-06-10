@@ -86,6 +86,7 @@ export default SectionContainer;
 const Container = styled.section`
   position: relative;
   min-height: 100vh;
+  overflow-x: hidden;
 
   &.full {
     height: 100vh;
