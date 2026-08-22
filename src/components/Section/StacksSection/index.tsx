@@ -26,6 +26,8 @@ import SocketIOSVG from '@public/svgs/stacks/socketio.svg';
 import TanstackQuerySrc from '@public/images/stacks/tanstackquery.png';
 import PostgreSQLSrc from '@public/images/stacks/postgresql.png';
 import NginxSrc from '@public/images/stacks/nginx.png';
+import ViteSrc from '@public/images/stacks/vite.png';
+import SupabaseSVG from '@public/svgs/stacks/supabase.svg';
 import NestjsSVG from '@public/svgs/stacks/nestjs.svg';
 import DockerSVG from '@public/svgs/stacks/docker.svg';
 import CloudflareSVG from '@public/svgs/stacks/cloudflare.svg';
@@ -107,6 +109,7 @@ const StacksSection = (): JSX.Element => {
             <StackRow ref={setRowRef(0)} $visible={visibleRows[0]}>
               <Stack name='Next.js' icon={<NextjsIcon />} count={stackCounts['Next.js'] || 0} />
               <Stack name='React.js' icon={<ReactIcon />} count={stackCounts['React'] || 0} />
+              <Stack name='Vite' icon={<ViteIcon src={ViteSrc} alt='Vite' />} count={stackCounts['Vite'] || 0} />
               <Stack name='ReactNative' icon={<ReactIcon />} count={stackCounts['ReactNative'] || 0} />
               <Stack name='Expo' icon={<ExpoIcon />} count={stackCounts['Expo'] || 0} />
               <Stack name='jQuery' icon={<JqueryIcon />} count={stackCounts['jQuery'] || 0} />
@@ -125,6 +128,7 @@ const StacksSection = (): JSX.Element => {
             <StackRow ref={setRowRef(1)} $visible={visibleRows[1]}>
               <Stack name='Nest.js' icon={<NestjsIcon />} count={stackCounts['Nestjs'] || 0} />
               <Stack name='Node.js' icon={<NodejsIcon />} count={stackCounts['Nodejs'] || 0} />
+              <Stack name='Supabase' icon={<SupabaseIcon />} count={stackCounts['Supabase'] || 0} />
               <Stack name='MongoDB' icon={<MongodbIcon />} count={stackCounts['MongoDB'] || 0} />
               <Stack name='MySQL' icon={<MysqlIcon />} count={stackCounts['MySQL'] || 0} />
               <Stack name='PostgreSQL' icon={<PostgreSQLIcon src={PostgreSQLSrc} alt='PostgreSQL' />} count={stackCounts['PostgreSQL'] || 0} />
@@ -351,6 +355,14 @@ const ExpoIcon = styled(ExpoSVG)`
 const SocketIOIcon = styled(SocketIOSVG)`
   width: 4em;
   height: 4em;
+`
+const ViteIcon = styled(Image)`
+  width: 3.75em;
+  height: 3.75em;
+`
+const SupabaseIcon = styled(SupabaseSVG)`
+  width: 3.5em;
+  height: 3.5em;
 `
 const TailwindCSSIcon = styled(TailwindCSSSVG)`
   width: 3.8em;

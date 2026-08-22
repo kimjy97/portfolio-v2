@@ -11,7 +11,7 @@ const ContactSection = (): JSX.Element => {
       <Wrapper>
         <ContentsWrapper>
           <FormText>
-            <GlowingText>저의 포트폴리오를 봐주셔서 감사합니다!</GlowingText>
+            <HeadingText>저의 포트폴리오를 봐주셔서 감사합니다!</HeadingText>
             <p>관심있게 보셨다면 아래를 통해 저에게 연락주세요 <EmojiWrapper>🙇‍♂️</EmojiWrapper></p>
           </FormText>
 
@@ -46,18 +46,6 @@ const floatAnimation = keyframes`
   }
   100% {
     transform: translateY(5px);
-  }
-`;
-
-const glowAnimation = keyframes`
-  0% {
-    text-shadow: 0 0 10px rgba(244, 242, 112, 0.3), 0 0 20px rgba(244, 242, 112, 0.1);
-  }
-  50% {
-    text-shadow: 0 0 15px rgba(244, 242, 112, 0.5), 0 0 30px rgba(244, 242, 112, 0.2);
-  }
-  100% {
-    text-shadow: 0 0 10px rgba(244, 242, 112, 0.3), 0 0 20px rgba(244, 242, 112, 0.1);
   }
 `;
 
@@ -163,11 +151,10 @@ const FormText = styled.div`
   }
 `;
 
-const GlowingText = styled.p`
+const HeadingText = styled.p`
   color: #f4f270;
   font-size: 2.2rem;
   font-weight: 700;
-  animation: ${glowAnimation} 3s ease-in-out infinite;
   
   @media (max-width: 768px) {
     font-size: 1.8rem;

@@ -1,3 +1,7 @@
+import SofarThumbImg from '@public/images/thumbnails/sofar.png';
+import SofarImg1 from '@public/images/projects/sofar_1.png';
+import SofarImg2 from '@public/images/projects/sofar_2.png';
+import SofarImg3 from '@public/images/projects/sofar_3.png';
 import BlogThumbImg from '@public/images/projects/blog_2.png';
 import BlogImg1 from '@public/images/projects/blog_1.png';
 import BlogImg2 from '@public/images/projects/blog_3.png';
@@ -30,6 +34,10 @@ import CromoThumbImg from '@public/images/thumbnails/cromo.png';
 import CromoImg1 from '@public/images/projects/cromo_1.png';
 import CromoImg2 from '@public/images/projects/cromo_2.png';
 import CromoImg3 from '@public/images/projects/cromo_3.png';
+import CroggerThumbImg from '@public/images/thumbnails/crogger.png';
+import CroggerImg1 from '@public/images/projects/crogger_1.png';
+import CroggerImg2 from '@public/images/projects/crogger_2.png';
+import CroggerImg3 from '@public/images/projects/crogger_3.png';
 import { StaticImageData } from 'next/image';
 
 export interface IProjectProps {
@@ -51,22 +59,51 @@ export interface IProjectProps {
 }
 
 export const projectData: IProjectProps[] = [{
-  logo: "https://github.com/kimjy97/portfolio-v2/blob/main/public/meta/fav.png?raw=true",
-  thumb: [PortfolioThumbImg, PortfolioImg1, PortfolioImg2, PortfolioImg3],
-  term: '2024.09 ~ 진행중',
-  name: '웹 포트폴리오',
-  url: 'https://kimjy-portfolio.vercel.app/',
-  github: 'https://github.com/kimjy97/portfolio-v2',
+  logo: "https://raw.githubusercontent.com/team-croni/sofar/c833cd1aa03468843cefb92c78397208ba747644/packages/assets/sofar-logo.svg",
+  thumb: [SofarThumbImg, SofarImg1, SofarImg2, SofarImg3],
+  term: '2026.07 ~ 2026.08',
+  termDiff: '2개월',
+  name: 'sofar - 유튜브 기반 무료 음악 스트리밍',
+  url: 'https://sofar-web.vercel.app',
+  github: 'https://github.com/team-croni/sofar',
   contribution: { dev: '100%', design: '100%', planning: '100%' },
-  stacks: ['Next.js', 'TypeScript', 'Recoil', 'StyledComponents', 'MongoDB', 'Vercel'],
-  issues: [{
-    issue: '섹션이 화면에 보여지면 애니메이션 효과를 주기 위해 **IntersectionObserver**를 사용했습니다만, 긴 섹션에서는 제대로 동작하지 않는 문제가 있었습니다.',
-    solving: '기존에 **IntersectionObserver**를 사용해 화면에 노출되는 섹션을 감지하려 했지만, 섹션이 길어질 경우 감지 범위가 불안정하게 작동하는 문제가 발생했습니다. 이를 해결하기 위해 **getBoundingClientRect**와 스크롤 이벤트를 사용해 화면 노출 여부를 직접 계산하고, 특정 지점에서 섹션이 노출되는지 체크하는 방식으로 변경했습니다.'
-  },
+  stacks: ['React', 'Vite', 'TypeScript', 'Nestjs', 'Supabase', 'PostgreSQL', 'Turborepo', 'Vercel'],
+  issues: [
+    {
+      issue: '대량의 노래를 한 번에 등록할 때 유튜브 검색 API가 몰려 할당량이 초과되거나 서버가 느려지는 문제',
+      solving: 'NestJS 백엔드에서 무차별적인 동시 요청을 막기 위해 **소규모 배치(3개 단위)와 딜레이를 결합한 비동기 순차 처리 파이프라인**을 구축했습니다. 또한 이미 매칭된 곡은 **인메모리 및 DB(Supabase/PostgreSQL) 캐시**를 통해 즉시 건너뛰도록 필터링하여 불필요한 중복 API 호출을 원천 차단하고 대량의 음원을 안전하게 등록할 수 있도록 최적화했습니다.'
+    },
+    {
+      issue: '음악이 재생되는 동안 실시간 가사가 넘어갈 때 화면이 버벅거리거나 프레임이 떨어지는 현상',
+      solving: '초당 수십 번 갱신되는 재생 시간으로 인해 가사 컴포넌트가 불필요하게 자주 다시 그려지는(리렌더링) 문제가 있었습니다. 이를 해결하기 위해 **가사 인덱스 변경 감지(Diffing)** 조건을 두어 가사 줄이 실제로 바뀔 때만 상태를 갱신하도록 제어했습니다. 또한 정렬된 가사 배열에 **조기 탈출(Early Exit)** 탐색과 **부드러운 오토 스크롤 애니메이션**을 적용해 UI 렌더링 부하를 최소화했습니다.'
+    },
+    {
+      issue: '배포 환경에서 검색이나 플레이리스트 페이지를 보던 중 새로고침을 하면 404 에러가 뜨는 문제',
+      solving: 'React(SPA) 특성상 브라우저에서 가상으로 주소를 이동하는데, 새로고침을 하면 배포 서버(Vercel)가 해당 주소의 실제 정적 파일을 서버에서 찾으려다 404 오류가 발생했습니다. 이를 해결하기 위해 `vercel.json`에 **어떤 주소로 접근해도 메인 `index.html`로 연결해 주는 Rewrite 설정**을 적용했습니다. 또한 NestJS API 서버는 독립 배포하고 **Turborepo**로 공통 코드를 묶어 빌드와 배포 환경을 체계화했습니다.'
+    },
+    {
+      issue: '차트나 다른 플레이리스트를 탐색하다가 새로고침을 하면 대기열이 꼬이거나 다음 곡이 엉뚱하게 바뀌는 문제',
+      solving: '현재 재생 중인 곡 정보만 단순하게 다루다 보니, 새로고침 시 원래 듣던 재생 목록과 직접 담아둔 대기열이 뒤섞이는 문제가 있었습니다. 이를 해결하기 위해 **‘내가 담아둔 대기열(Queue)’**과 **‘현재 둘러보고 있는 플레이리스트’**의 상태를 명확히 분리했습니다. 또한 곡 순서와 재생 상태를 **로컬스토리지에 안전하게 동기화**하여, 새로고침 후에도 원래 듣던 곡과 순서 그대로 이어 들을 수 있도록 개선했습니다.'
+    }
   ],
-  reason: "`Next.js`는 서버 사이드 렌더링(SSR)과 정적 사이트 생성(SSG)으로 SEO와 성능을 최적화할 수 있어 선택했고, **API Routes**로 백엔드 없이도 API 처리가 가능했습니다. `TypeScript`는 타입 오류 방지와 코드 유지보수를 위해 도입했으며, `Recoil`은 불필요한 리렌더링을 줄여 성능 최적화에 적합해 사용했습니다. **배포 환경**으로는 Next.js와 호환성이 뛰어나고 빠른 배포가 가능한 `Vercel`을 선택했습니다. `MongoDB`는 유연한 스키마 설계와 빠른 데이터 처리 속도로 선택했으며, 간단한 CRUD 작업에 적합해 사용했습니다.",
-  learned: ' 웹사이트 퍼포먼스 최적화와 사용자 경험을 고려한 인터랙티브 요소 구현에 대해 학습했으며, 다양한 디바이스에 맞는 반응형 디자인의 중요성을 경험했습니다.',
-  intro: '저의 개발 기술 스택과 진행한 프로젝트들을 보여주기 위해 제작한 웹 포트폴리오입니다.\n사용자 경험을 고려해 인터랙티브한 요소를 추가했고, 추가적인 라이브러리 없이 다양한 효과들을 직접 구현했습니다. 또한, 반응형 디자인을 적용하여 어디서든 쉽게 포트폴리오를 볼 수 있도록 개발했습니다.',
+
+  reason: "`React 18`과 `Vite`는 페이지 전환 시에도 끊김 없는 음악 재생 환경(SPA)을 제공하고, 반응성 높은 플레이어 UI를 빠르게 개발하기 위해 선택했습니다. `Turborepo`를 도입해 사용자 화면, 관리자 화면, 백엔드 서버, 공통 UI 라이브러리를 하나의 모노레포로 묶어 코드 재사용성과 유지보수 편의성을 높였습니다. 백엔드는 구조가 체계적이고 안정적인 `NestJS`와 `TypeScript`를 사용해 차트 데이터 수집, 유튜브 검색 연동, 이메일 발송 기능을 구현했습니다. 데이터베이스와 인증은 `Supabase`와 `PostgreSQL`을 활용해 안전한 로그인 처리와 실시간 데이터 관리를 진행했습니다. 디자인은 라이브러리 의존도를 낮추고 일관된 어두운 테마 스타일을 자유롭게 제어하기 위해 순수 **Vanilla CSS**로 공통 디자인 시스템을 구축했습니다.",
+  learned: ' 음악 스트리밍 서비스를 만들면서 단순히 노래를 트는 것을 넘어, **대기열과 재생 목록의 상태를 분리해 사용자가 겪는 불편함을 해소하는 UX 설계**의 중요성을 배웠습니다. 또한 외부 API에서 가져오는 불완전한 데이터를 다양한 조건으로 비교하고 직접 싱크를 맞출 수 있는 편의 기능을 더해 완성도를 높이는 경험을 했습니다.\n **Turborepo 모노레포 구조**를 구축해보며 여러 서비스를 공통 컴포넌트와 함께 체계적으로 관리하는 방법을 익혔고, 사용자의 불편 신고(음원 불일치)를 관리자 기능과 연계해 서비스 품질을 지속해서 개선할 수 있는 운영 구조를 직접 만들어본 뜻깊은 프로젝트였습니다.',
+  intro: '광고 없이 누구나 무료로 음악을 감상할 수 있는 웹 스트리밍 서비스입니다. 유튜브 영상 중 커버나 라이브가 아닌 실제 원곡을 정확하게 찾아내는 자체 매칭 로직을 구현했고, 이를 바탕으로 실시간 싱크 가사까지 매끄럽게 연동하여 완성도 높은 음악 감상 환경을 구축했습니다.',
+  func: [
+    '실시간 인기 차트 및 테마별 추천 플레이리스트',
+    '유튜브 기반 음악 검색 및 자동 원곡 매칭',
+    '실시간 싱크 가사 및 가사 타이밍 조절 (±0.5초)',
+    '재생 대기열 (Queue) 관리 및 순서 변경',
+    '미니 플레이어 및 턴테이블 앨범 애니메이션',
+    '나만의 플레이리스트 생성 및 수록곡 관리',
+    '취침 예약 타이머',
+    '음원 불일치 신고 및 원클릭 대체 음원 교체',
+    '관리자 대시보드 (통계 지표 모니터링 및 회원 관리)',
+    '관리자 전용 유튜브 음원 수동 매칭 사이드바 (드래그 앤 드롭)',
+    '소셜 로그인 (Google) 및 이메일 인증 회원가입',
+    '반응형 웹 디자인'
+  ]
 }, {
   logo: "https://github.com/team-croni/Cromo/blob/main/public/favicon_512.png?raw=true",
   thumb: [CromoThumbImg, CromoImg1, CromoImg2, CromoImg3],
@@ -113,6 +150,49 @@ export const projectData: IProjectProps[] = [{
     '실시간 권한 변경 및 공유',
     '임베딩 기반 문맥 검색',
     '자동 임베딩 스케줄링 및 배치 처리'
+  ]
+}, {
+  logo: "https://raw.githubusercontent.com/team-croni/Crogger/main/public/svgs/logo.svg",
+  thumb: [CroggerThumbImg, CroggerImg1, CroggerImg2, CroggerImg3],
+  term: '2026.01 ~ 2026.01',
+  termDiff: '1개월',
+  name: 'Crogger - Axiom 기반 실시간 로그 시스템',
+  url: 'https://croni-crogger.vercel.app',
+  github: 'https://github.com/team-croni/Crogger',
+  contribution: { dev: '100%', design: '100%', planning: '100%' },
+  stacks: ['Next.js', 'React', 'TypeScript', 'TailwindCSS', 'Zustand', 'TanstackQuery', 'Vercel'],
+  issues: [
+    {
+      issue: '수많은 실시간 로그가 쌓일 때 화면이 느려지거나 버벅거리는 문제',
+      solving: '대량의 로그를 한 번에 화면에 그리지 않고, 현재 보이는 화면 영역만 똑똑하게 렌더링하는 **가상 스크롤(@tanstack/react-virtual)**을 적용했습니다. 이를 통해 수만 개의 로그가 쌓여도 끊김 없이 부드럽게 스크롤할 수 있도록 최적화했습니다.'
+    },
+    {
+      issue: '선택한 기간(1시간~1달)에 따라 로그 통계 차트가 보기 불편해지는 문제',
+      solving: '어떤 기간을 선택하든 화면에 딱 맞는 **45개 막대 그래프로 자동 변환되는 시간 계산 로직**을 구현했습니다. 또한 차트의 특정 시간 막대를 클릭하면 **해당 시간대의 로그 위치로 바로 스크롤되어 강조 표시**되는 편리한 탐색 기능을 만들었습니다.'
+    },
+    {
+      issue: '여러 검색 조건(레벨, 경로, 상태코드 등)을 조합할 때 쿼리 오류가 발생하는 문제',
+      solving: '복잡한 검색 조건을 Axiom 전용 검색 언어(APL)로 안전하게 자동 변환해 주는 **쿼리 빌더**를 구현했습니다. 특수문자나 잘못된 입력을 자동으로 걸러내어 검색 실패 없이 원하는 로그를 정확하게 찾을 수 있도록 했습니다.'
+    },
+    {
+      issue: '민감한 API 키 보안과 여러 프로젝트 로그를 쉽게 전환할 방법 필요',
+      solving: 'API 키가 서버에 저장되지 않고 **브라우저에만 안전하게 보관**되도록 설계했습니다. 또한 입력했던 키를 기억하거나 여러 데이터셋을 클릭 한 번으로 빠르게 전환할 수 있는 기능을 추가해 보안과 편의성을 모두 챙겼습니다.'
+    }
+  ],
+  reason: "`Next.js 16`과 `React 19`를 사용해 반응 속도가 빠르고 부드러운 웹 환경을 구축했습니다. 실시간으로 들어오는 로그 데이터와 검색 필터 등 복잡한 상태를 깔끔하게 관리하기 위해 `Zustand`와 `TanStack Query`를 조합했습니다. 수많은 로그 데이터를 끊김 없이 보여주기 위해 `@tanstack/react-virtual` 가상 스크롤을 도입했고, 다크 모드를 지원하는 깔끔한 대시보드 UI를 만들기 위해 `Tailwind CSS`를 활용했습니다.",
+  learned: ' 대량의 실시간 데이터를 다루면서 **화면 성능 저하를 막는 가상 스크롤 기법과 직관적인 데이터 시각화 차트**를 직접 구현해보는 값진 경험을 했습니다. 차트와 로그 목록을 유기적으로 연결해 사용자 편의를 높이는 방법을 배웠으며, 대시보드 웹뿐만 아니라 손쉽게 로그를 보낼 수 있는 **전용 로깅 라이브러리(crogger-utils)까지 npm에 직접 배포**해보며 서비스 전체를 아우르는 개발 경험을 쌓았습니다.',
+  intro: '웹 서비스나 서버의 로그를 실시간으로 한눈에 모니터링하고 분석할 수 있는 웹 대시보드입니다. 수많은 로그도 버벅임 없이 볼 수 있는 가상 스크롤, 시간대별 로그 발생량을 보여주는 인터랙티브 차트, 상세 필터 검색 기능을 제공하며, 누구나 쉽게 연동할 수 있는 전용 npm 로깅 도구도 함께 지원합니다.',
+  func: [
+    '실시간 로그 모니터링 및 자동 새로고침 (Live 모드)',
+    '시간대별 로그 통계 막대 차트 (클릭 시 해당 시간대로 자동 스크롤)',
+    '대량 로그를 위한 가상 스크롤 (Virtual Scroll)',
+    '상세 다중 필터 검색 (로그 레벨, 상태 코드, 요청 메서드, 경로 등)',
+    '로그 상세 내용 확인 (JSON 포맷팅 및 원클릭 복사)',
+    '로그 데이터 다운로드 (JSON, CSV)',
+    '다중 데이터셋 전환 및 API 토큰 안전 저장',
+    '전용 npm 패키지 `crogger-utils` 연동 지원',
+    '다크 / 라이트 모드 테마 지원',
+    '반응형 대시보드 UI'
   ]
 }, {
   logo: "https://github.com/kimjy97/ReStory/blob/main/public/favicon_512.png?raw=true",
@@ -309,5 +389,22 @@ export const projectData: IProjectProps[] = [{
     '문서 추가, 수정, 삭제',
     '고급 쿼리 작성',
   ]
+}, {
+  logo: "https://github.com/kimjy97/portfolio-v2/blob/main/public/meta/fav.png?raw=true",
+  thumb: [PortfolioThumbImg, PortfolioImg1, PortfolioImg2, PortfolioImg3],
+  term: '2024.09 ~ 진행중',
+  name: '웹 포트폴리오',
+  url: 'https://kimjy-portfolio.vercel.app/',
+  github: 'https://github.com/kimjy97/portfolio-v2',
+  contribution: { dev: '100%', design: '100%', planning: '100%' },
+  stacks: ['Next.js', 'TypeScript', 'Recoil', 'StyledComponents', 'MongoDB', 'Vercel'],
+  issues: [{
+    issue: '섹션이 화면에 보여지면 애니메이션 효과를 주기 위해 **IntersectionObserver**를 사용했습니다만, 긴 섹션에서는 제대로 동작하지 않는 문제가 있었습니다.',
+    solving: '기존에 **IntersectionObserver**를 사용해 화면에 노출되는 섹션을 감지하려 했지만, 섹션이 길어질 경우 감지 범위가 불안정하게 작동하는 문제가 발생했습니다. 이를 해결하기 위해 **getBoundingClientRect**와 스크롤 이벤트를 사용해 화면 노출 여부를 직접 계산하고, 특정 지점에서 섹션이 노출되는지 체크하는 방식으로 변경했습니다.'
+  },
+  ],
+  reason: "`Next.js`는 서버 사이드 렌더링(SSR)과 정적 사이트 생성(SSG)으로 SEO와 성능을 최적화할 수 있어 선택했고, **API Routes**로 백엔드 없이도 API 처리가 가능했습니다. `TypeScript`는 타입 오류 방지와 코드 유지보수를 위해 도입했으며, `Recoil`은 불필요한 리렌더링을 줄여 성능 최적화에 적합해 사용했습니다. **배포 환경**으로는 Next.js와 호환성이 뛰어나고 빠른 배포가 가능한 `Vercel`을 선택했습니다. `MongoDB`는 유연한 스키마 설계와 빠른 데이터 처리 속도로 선택했으며, 간단한 CRUD 작업에 적합해 사용했습니다.",
+  learned: ' 웹사이트 퍼포먼스 최적화와 사용자 경험을 고려한 인터랙티브 요소 구현에 대해 학습했으며, 다양한 디바이스에 맞는 반응형 디자인의 중요성을 경험했습니다.',
+  intro: '저의 개발 기술 스택과 진행한 프로젝트들을 보여주기 위해 제작한 웹 포트폴리오입니다.\n사용자 경험을 고려해 인터랙티브한 요소를 추가했고, 추가적인 라이브러리 없이 다양한 효과들을 직접 구현했습니다. 또한, 반응형 디자인을 적용하여 어디서든 쉽게 포트폴리오를 볼 수 있도록 개발했습니다.',
 }
 ]

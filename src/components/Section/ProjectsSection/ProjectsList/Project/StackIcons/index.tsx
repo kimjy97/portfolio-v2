@@ -10,6 +10,7 @@ import ReactNativeSVG from '@public/svgs/stacks/react.svg';
 import GooglePlayConsoleSVG from '@public/svgs/stacks/googleplay.svg';
 import TailwindCSSSVG from '@public/svgs/stacks/tailwindcss.svg';
 import TanstackQuerySrc from '@public/images/stacks/tanstackquery.png';
+import ViteSrc from '@public/images/stacks/vite.png';
 import ZustandSVG from '@public/svgs/stacks/zustand.svg';
 import RailwaySVG from '@public/svgs/stacks/railway.svg';
 import SocketIOSVG from '@public/svgs/stacks/socketio.svg';
@@ -18,6 +19,9 @@ import DockerSVG from '@public/svgs/stacks/docker.svg';
 import CloudflareSVG from '@public/svgs/stacks/cloudflare.svg';
 import NestjsSVG from '@public/svgs/stacks/nestjs.svg';
 import RedisSVG from '@public/svgs/stacks/redis.svg';
+import SupabaseSVG from '@public/svgs/stacks/supabase.svg';
+import ReactSVG from '@public/svgs/stacks/react.svg';
+import AxiomSVG from '@public/svgs/stacks/axiom.svg';
 import Image from "next/image";
 
 export const NextjsIcon = styled(NextjsSVG)`
@@ -106,4 +110,27 @@ export const ZustandIcon = styled(ZustandSVG)`
   width: 1.75em;
   height: 1.75em;
   margin-bottom: -0.3em;
+`
+
+export const ReactIcon = styled(ReactSVG)`
+  width: 1.6em;
+  height: 1.6em;
+`
+
+export const SupabaseIcon = styled(SupabaseSVG)`
+  width: 1.5em;
+  height: 1.5em;
+`
+
+export const ViteIcon = () => {
+  return (
+    <div style={{ position: 'relative', width: '1.5em', height: '1.5em' }}>
+      <Image src={ViteSrc} alt='Vite' fill style={{ objectFit: 'contain' }} />
+    </div>
+  )
+}
+
+export const AxiomIcon = styled(AxiomSVG)`
+  width: 1.5em;
+  height: 1.5em;
 `
