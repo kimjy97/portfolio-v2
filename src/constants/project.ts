@@ -113,7 +113,7 @@ export const projectData: IProjectProps[] = [{
   url: 'https://cromo.site',
   github: 'https://github.com/team-croni/Cromo',
   contribution: { dev: '100%', design: '100%', planning: '100%' },
-  stacks: ['Next.js', 'TypeScript', 'TailwindCSS', 'Zustand', 'TanstackQuery', 'Socket.IO', 'PostgreSQL', 'Vercel', 'Railway'],
+  stacks: ['Next.js', 'TypeScript', 'TailwindCSS', 'Zustand', 'TanstackQuery', 'Socket.IO', 'PostgreSQL', 'Docker', 'Vercel', 'Railway'],
   issues: [
     {
       issue: '검증되지 않은 코드의 프로덕션 배포 리스크 방지',
@@ -136,7 +136,7 @@ export const projectData: IProjectProps[] = [{
       solving: 'OpenRouter API 실패 또는 타임아웃 발생 시 자동으로 로컬 OpenAI 호환 모델로 전환되는 **폴백 시스템**을 구축했습니다. 클라우드 API의 안정성과 로컬 모델의 독립성을 결합하여 서비스 가용성을 극대화하고, 네트워크 장애나 API 장애 상황에서도 핵심 AI 기능이 중단되지 않도록 **이중화**했습니다.'
     }
   ],
-  reason: "`Next.js 15 App Router`는 서버 컴포넌트와 클라이언트 컴포넌트를 효율적으로 분리할 수 있어 선택했고, `TypeScript`로 타입 안정성을 확보했습니다. `TailwindCSS`는 빠른 UI 개발과 일관된 디자인 시스템 구축을 위해 도입했으며, `Zustand`와 `TanstackQuery`를 조합하여 클라이언트 상태와 서버 상태를 명확히 분리 관리했습니다. `Socket.IO`는 실시간 공유 기능의 핵심으로, 서버리스 환경의 제약을 극복하기 위해 `Railway`에 독립 서버로 구축했습니다. `PostgreSQL`은 Neon의 서버리스 DB로 자동 스케일링과 pgvector 확장을 지원하여 벡터 검색 구현에 최적이었고, `Inngest`는 임베딩 처리 같은 백그라운드 작업을 선언적으로 스케줄링할 수 있어 채택했습니다.",
+  reason: "`Next.js 15 App Router`는 서버 컴포넌트와 클라이언트 컴포넌트를 효율적으로 분리할 수 있어 선택했고, `TypeScript`로 타입 안정성을 확보했습니다. `TailwindCSS`는 빠른 UI 개발과 일관된 디자인 시스템 구축을 위해 도입했으며, `Zustand`와 `TanstackQuery`를 조합하여 클라이언트 상태와 서버 상태를 명확히 분리 관리했습니다. `Socket.IO`는 실시간 공유 기능의 핵심으로, 서버리스 환경의 제약을 극복하기 위해 `Railway`에 독립 서버로 구축했습니다. `PostgreSQL`은 Neon의 서버리스 DB로 자동 스케일링과 pgvector 확장을 지원하여 벡터 검색 구현에 최적이었고, `Docker`를 통해 pgvector가 포함된 로컬 DB 및 개발 환경을 컨테이너화하여 일관된 개발/테스트 환경을 구축했습니다. `Inngest`는 임베딩 처리 같은 백그라운드 작업을 선언적으로 스케줄링할 수 있어 채택했습니다.",
   learned: ' **RRF 알고리즘**을 직접 구현하며 하이브리드 검색의 원리를 깊이 이해하게 되었고, **서버리스 환경과 상태 유지 서버를 분리 배포**하는 아키텍처 설계 경험을 쌓았습니다. MD5 해싱과 배치 처리를 통한 **비용 최적화 전략**을 적용하며, 대규모 데이터에서도 밀리초 단위 응답을 보장하는 인덱싱 전략의 중요성을 체감했습니다. 또한 Inngest를 활용한 비동기 작업 스케줄링과 OpenRouter API 통합을 통해 안정적인 AI 파이프라인 구축 방법을 익혔습니다.\n 또한, **GitHub Actions를 활용한 CI/CD 파이프라인 설계**를 통해 단순 배포를 넘어 **검증된 배포**의 중요성을 깨달았습니다. 서로 다른 OS 환경(GitHub-Debian, Vercel-RHEL) 사이의 의존성 문제를 해결하며 **Prisma 엔진 아키텍처**에 대해 이해하게 되었고, 캐싱 전략과 환경 변수 동기화를 통해 빌드 속도와 운영 보안을 동시에 챙기는 실무적인 배포 최적화 경험을 쌓았습니다.',
   intro: '단순한 메모 기록을 넘어, 개인의 생각이나 여러 사람의 아이디어를 실시간으로 동기화하고 AI를 통해 더 가치 있게 만드는 플랫폼입니다. 실시간 동기화의 안정성을 위해 서버 구조를 분리하고, 임베딩 모델로 메모를 임베딩하는 스케줄링 로직과 검색 알고리즘을 직접 구현하여 문맥까지 찾아내는 검색 엔진을 구현했습니다.',
   func: [
