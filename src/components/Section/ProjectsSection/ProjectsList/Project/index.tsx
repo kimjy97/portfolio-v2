@@ -6,7 +6,7 @@ import ArrowSVG from '@public/svgs/arrowRight.svg';
 
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { isOpenProjectState, projectFilterState } from '@/atoms/project';
-import { IProjectProps } from '@/constants/project';
+import { IProjectProps, isVideoSource, getMediaUrl } from '@/constants/project';
 import ProjectStacks from '@/components/Section/ProjectsSection/ProjectsList/Project/ProjectStakcs';
 
 interface IProps {
@@ -15,8 +15,9 @@ interface IProps {
 
 const Project = ({ data }: IProps): JSX.Element => {
   const [, setIsOpen] = useRecoilState(isOpenProjectState);
-  const { thumb, term, name, url, github, team, stacks, logo } = data;
+  const { thumbnail, thumb, term, name, url, github, team, stacks, logo } = data;
   const selectedStacks = useRecoilValue<string[]>(projectFilterState);
+  const coverMedia = thumbnail || thumb[0];
 
   const handleClickDetail = () => {
     setIsOpen(data);
@@ -27,11 +28,21 @@ const Project = ({ data }: IProps): JSX.Element => {
   return (
     <Container className={isVisible ? '' : 'visible'}>
       <ThumbnailWrapper onClick={handleClickDetail}>
-        <Image
-          src={thumb[0]}
-          alt={`${name}(Thumbnail)_0`}
-          fill
-        />
+        {isVideoSource(coverMedia) ? (
+          <video
+            src={getMediaUrl(coverMedia)}
+            muted
+            playsInline
+            preload="metadata"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        ) : (
+          <Image
+            src={coverMedia}
+            alt={`${name}(Thumbnail)`}
+            fill
+          />
+        )}
       </ThumbnailWrapper>
       <Row $marginBottom='0.65em'>
         <NameWrapper>
@@ -115,7 +126,7 @@ const ThumbnailWrapper = styled.div`
   cursor: pointer;
   transition: 150ms;
 
-  img {
+  img, video {
     object-fit: cover;
     -webkit-user-drag: none;
     -khtml-user-drag: none;

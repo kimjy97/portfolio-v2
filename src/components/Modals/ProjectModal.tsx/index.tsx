@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import { useRecoilState } from 'recoil';
 import styled, { keyframes } from 'styled-components';
 import LinkSVG from '@public/svgs/link.svg';
 import { isOpenProjectState } from '@/atoms/project';
 import CrossSVG from '@public/svgs/cross.svg';
 import ArrowDownSVG from '@public/svgs/arrowDown.svg';
-import { IProjectProps, projectData } from '@/constants/project';
+import { IProjectProps, ProjectMedia, isVideoSource, getMediaUrl, projectData } from '@/constants/project';
 import Issue from '@/components/Modals/ProjectModal.tsx/Issue';
 import ReasonText from '@/components/Modals/ProjectModal.tsx/ReasonText';
 import FuncList from '@/components/Modals/ProjectModal.tsx/FuncList';
@@ -22,6 +22,7 @@ const ProjectModal = () => {
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const bodyRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const imgListRef = useRef<HTMLDivElement>(null);
   const contentsRef = useRef<HTMLDivElement>(null);
   const MockUpClassName = `${isScroll ? 'scrolled' : 'unScrolled'} ${isOpen ? 'visible' : ''}`;
@@ -91,6 +92,32 @@ const ProjectModal = () => {
     };
   }, [isImageModalOpen]);
 
+  // 프로젝트 창 열림 시 동영상 약간 지연 후 자동 재생
+  useEffect(() => {
+    let playTimer: NodeJS.Timeout;
+    const currentVideo = videoRef.current;
+
+    if (isOpen && info && isVideoSource(info.thumb[thumbNum])) {
+      playTimer = setTimeout(() => {
+        if (currentVideo) {
+          currentVideo.currentTime = 0;
+          currentVideo.play().catch(() => {
+            // 브라우저 정책상 자동재생 차단 시 무시
+          });
+        }
+      }, 1000);
+    } else if (currentVideo) {
+      currentVideo.pause();
+    }
+
+    return () => {
+      clearTimeout(playTimer);
+      if (currentVideo) {
+        currentVideo.pause();
+      }
+    };
+  }, [isOpen, thumbNum, info]);
+
   return (
     <>
       <Background className={isOpen ? 'visible' : ''} onClick={handleClose} />
@@ -104,23 +131,58 @@ const ProjectModal = () => {
           <BackColor />
           {info && (
             <MockUp className={MockUpClassName}>
-              <Image
-                ref={imgRef}
-                src={info.thumb[thumbNum]}
-                alt={`${info.name}(Thumbnail)_${thumbNum}`}
-                onClick={handleImageClick}
-                style={{ cursor: 'pointer' }}
-              />
+              {isVideoSource(info.thumb[thumbNum]) ? (
+                <MockUpVideo
+                  ref={videoRef}
+                  key={`${info.name}_video_${thumbNum}`}
+                  src={getMediaUrl(info.thumb[thumbNum])}
+                  controls
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                />
+              ) : (
+                <Image
+                  ref={imgRef}
+                  src={info.thumb[thumbNum]}
+                  alt={`${info.name}(Thumbnail)_${thumbNum}`}
+                  onClick={handleImageClick}
+                  style={{ cursor: 'pointer' }}
+                />
+              )}
               <SelectThumbList ref={imgListRef}>
-                {info.thumb.map((i: StaticImageData, idx: number) =>
-                  <SelectThumb
-                    key={idx * randomKey}
-                    className={idx === thumbNum ? 'selected' : ''}
-                    src={i}
-                    alt={`${info.name}(Thumbnail)_${idx}`}
-                    onClick={() => setThumbNum(idx)}
-                  />
-                )}
+                {info.thumb.map((i: ProjectMedia, idx: number) => {
+                  const isVideo = isVideoSource(i);
+                  const mediaUrl = getMediaUrl(i);
+                  return isVideo ? (
+                    <ThumbVideoWrapper
+                      key={idx * randomKey}
+                      className={idx === thumbNum ? 'selected' : ''}
+                      onClick={() => setThumbNum(idx)}
+                    >
+                      <SelectThumbVideo
+                        src={mediaUrl}
+                        muted
+                        playsInline
+                        preload="metadata"
+                      />
+                      <VideoBadge>
+                        <svg viewBox="0 0 24 24" width="12" height="12" fill="white">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </VideoBadge>
+                    </ThumbVideoWrapper>
+                  ) : (
+                    <SelectThumb
+                      key={idx * randomKey}
+                      className={idx === thumbNum ? 'selected' : ''}
+                      src={i}
+                      alt={`${info.name}(Thumbnail)_${idx}`}
+                      onClick={() => setThumbNum(idx)}
+                    />
+                  );
+                })}
               </SelectThumbList>
             </MockUp>
           )}
@@ -234,17 +296,27 @@ const ProjectModal = () => {
         </ScrollNote>
       </Container>
 
-      {/* 전체 화면 이미지 모달 */}
+      {/* 전체 화면 이미지/비디오 모달 */}
       {isImageModalOpen && info && (
         <ImageModalOverlay onClick={handleImageModalClose}>
           <ImageModalContent onClick={(e) => e.stopPropagation()}>
             <ImageModalCloseBtn onClick={handleImageModalClose}>
               <CrossIcon />
             </ImageModalCloseBtn>
-            <ImageModalImage
-              src={info.thumb[thumbNum]}
-              alt={`${info.name}(Thumbnail)_${thumbNum}`}
-            />
+            {isVideoSource(info.thumb[thumbNum]) ? (
+              <ImageModalVideo
+                src={getMediaUrl(info.thumb[thumbNum])}
+                controls
+                autoPlay
+                loop
+                playsInline
+              />
+            ) : (
+              <ImageModalImage
+                src={info.thumb[thumbNum]}
+                alt={`${info.name}(Thumbnail)_${thumbNum}`}
+              />
+            )}
           </ImageModalContent>
         </ImageModalOverlay>
       )}
@@ -381,7 +453,7 @@ const MockUp = styled.div`
     width: 75%;
     max-width: 80rem;
     height: auto;
-    aspect-ratio: 3840/2112;
+    max-height: 70vh;
     margin-top: 60px;
 
     object-fit: contain;
@@ -390,8 +462,7 @@ const MockUp = styled.div`
     border: 1px solid #404149;
     box-shadow: 0px 20px 34px #0004;
     -webkit-user-drag: none;
-    box-sizing: content-box;
-    background-color: #141419;
+    box-sizing: border-box;
   }
 
   &.visible {
@@ -835,17 +906,58 @@ const SelectThumbList = styled.div`
 const SelectThumb = styled(ImageWithSpinner)`
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   aspect-ratio: 3840/2112;
 
   border-radius: 0.5em;
   background-color: #141419;
-  object-fit: contain;
+  object-fit: cover;
   overflow: hidden;
   border-radius: 0.5em;
   border: 1.5px solid #404149;
   box-shadow: 0em 1.25em 2.125em #0004;
   -webkit-user-drag: none;
+  box-sizing: border-box;
+
+  cursor: pointer;
+  transition: 100ms;
+  will-change: transform;
+
+  &.selected {
+    position: relative;
+    z-index: 100;
+    outline: 1.5px solid #8764ff;
+    outline-offset: 0.1em;
+    border-color: transparent;
+  }
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  @media (max-width: 768px) {
+    border-radius: 0.5em;
+    box-shadow: none;
+    box-sizing: border-box;
+    border: none;
+
+    &:hover {
+      transform: scale(1);
+    }
+  }
+`
+
+const ThumbVideoWrapper = styled.div`
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3840/2112;
+
+  border-radius: 0.5em;
+  background-color: #141419;
+  overflow: hidden;
+  border: 1.5px solid #404149;
+  box-shadow: 0em 1.25em 2.125em #0004;
   box-sizing: content-box;
 
   cursor: pointer;
@@ -873,6 +985,90 @@ const SelectThumb = styled(ImageWithSpinner)`
     &:hover {
       transform: scale(1);
     }
+  }
+`
+
+const SelectThumbVideo = styled.video`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+`
+
+const VideoBadge = styled.div`
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  border-radius: 50%;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+
+  svg {
+    margin-left: 1px;
+  }
+
+  @media (max-width: 768px) {
+    top: 0.2rem;
+    right: 0.2rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    svg {
+      width: 8px;
+      height: 8px;
+    }
+  }
+`
+
+const MockUpVideo = styled.video`
+  width: 75%;
+  max-width: 80rem;
+  height: auto;
+  max-height: 70vh;
+  margin-top: 60px;
+
+  object-fit: contain;
+  overflow: hidden;
+  border-radius: 0.875rem;
+  border: 1px solid #404149;
+  box-shadow: 0px 20px 34px #0004;
+  box-sizing: border-box;
+  background-color: transparent;
+
+  @media (max-width: 1024px) {
+    width: calc(100% - 2rem) !important;
+  }
+
+  @media (max-width: 768px) {
+    width: 100% !important;
+    margin-top: 0px;
+    border-radius: 0.5em;
+    border: none;
+    border-bottom: 1px solid #000000;
+    box-shadow: none;
+    box-sizing: border-box;
+  }
+`
+
+const ImageModalVideo = styled.video`
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  background-color: transparent;
+  outline: none;
+
+  @media (max-width: 768px) {
+    border-radius: 0;
+    max-width: 100vw;
+    max-height: 90vh;
   }
 `
 

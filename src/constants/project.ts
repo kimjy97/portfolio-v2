@@ -40,8 +40,26 @@ import CroggerImg2 from '@public/images/projects/crogger_2.png';
 import CroggerImg3 from '@public/images/projects/crogger_3.png';
 import { StaticImageData } from 'next/image';
 
+export type ProjectMedia = StaticImageData | string;
+
+export const isVideoSource = (src: ProjectMedia | undefined | null): boolean => {
+  if (!src) return false;
+  if (typeof src === 'string') {
+    return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(src);
+  }
+  if (typeof src === 'object' && typeof src.src === 'string') {
+    return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(src.src);
+  }
+  return false;
+};
+
+export const getMediaUrl = (src: ProjectMedia): string => {
+  return typeof src === 'string' ? src : src.src;
+};
+
 export interface IProjectProps {
-  thumb: StaticImageData[];
+  thumbnail?: ProjectMedia;
+  thumb: ProjectMedia[];
   term: string;
   termDiff?: string;
   name: string;
@@ -60,7 +78,8 @@ export interface IProjectProps {
 
 export const projectData: IProjectProps[] = [{
   logo: "https://raw.githubusercontent.com/team-croni/sofar/c833cd1aa03468843cefb92c78397208ba747644/packages/assets/sofar-logo.svg",
-  thumb: [SofarThumbImg, SofarImg1, SofarImg2, SofarImg3],
+  thumbnail: SofarThumbImg,
+  thumb: ['/videos/sofar-demo.mp4', SofarImg1, SofarImg2, SofarImg3],
   term: '2026.07 ~ 2026.08',
   termDiff: '2개월',
   name: 'sofar - 유튜브 기반 무료 음악 스트리밍',
@@ -79,7 +98,7 @@ export const projectData: IProjectProps[] = [{
     },
     {
       issue: '배포 환경에서 검색이나 플레이리스트 페이지를 보던 중 새로고침을 하면 404 에러가 뜨는 문제',
-      solving: 'React(SPA) 특성상 브라우저에서 가상으로 주소를 이동하는데, 새로고침을 하면 배포 서버(Vercel)가 해당 주소의 실제 정적 파일을 서버에서 찾으려다 404 오류가 발생했습니다. 이를 해결하기 위해 `vercel.json`에 **어떤 주소로 접근해도 메인 `index.html`로 연결해 주는 Rewrite 설정**을 적용했습니다. 또한 NestJS API 서버는 독립 배포하고 **Turborepo**로 공통 코드를 묶어 빌드와 배포 환경을 체계화했습니다.'
+      solving: 'React(SPA) 특성상 브라우저에서 가상으로 주소를 이동하는데, 새로고침을 하면 배포 서버(Vercel)가 해당 주소의 실제 정적 파일을 서버에서 찾으려다 404 오류가 발생했습니다. 이를 해결하기 위해 vercel.json에 **어떤 주소로 접근해도 메인 index.html로 연결해 주는 Rewrite 설정**을 적용했습니다. 또한 NestJS API 서버는 독립 배포하고 **Turborepo**로 공통 코드를 묶어 빌드와 배포 환경을 체계화했습니다.'
     },
     {
       issue: '차트나 다른 플레이리스트를 탐색하다가 새로고침을 하면 대기열이 꼬이거나 다음 곡이 엉뚱하게 바뀌는 문제',
@@ -106,6 +125,7 @@ export const projectData: IProjectProps[] = [{
   ]
 }, {
   logo: "https://github.com/team-croni/Cromo/blob/main/public/favicon_512.png?raw=true",
+  thumbnail: CromoThumbImg,
   thumb: [CromoThumbImg, CromoImg1, CromoImg2, CromoImg3],
   term: '2025.11 ~ 2026.01',
   termDiff: '3개월',
@@ -153,6 +173,7 @@ export const projectData: IProjectProps[] = [{
   ]
 }, {
   logo: "https://raw.githubusercontent.com/team-croni/Crogger/main/public/svgs/logo.svg",
+  thumbnail: CroggerThumbImg,
   thumb: [CroggerThumbImg, CroggerImg1, CroggerImg2, CroggerImg3],
   term: '2026.01 ~ 2026.01',
   termDiff: '1개월',
@@ -196,6 +217,7 @@ export const projectData: IProjectProps[] = [{
   ]
 }, {
   logo: "https://github.com/kimjy97/ReStory/blob/main/public/favicon_512.png?raw=true",
+  thumbnail: RestoryThumbImg,
   thumb: [RestoryThumbImg, RestoryImg1, RestoryImg2, RestoryImg3],
   term: "2025.06 ~ 2025.07",
   termDiff: "1개월",
@@ -252,6 +274,7 @@ export const projectData: IProjectProps[] = [{
   ],
 }, {
   logo: "https://github.com/kimjy97/devblog-v2/blob/main/public/meta/fav/fav.png?raw=true",
+  thumbnail: AichatThumbImg,
   thumb: [AichatThumbImg, AichatImg1, AichatImg2, AichatImg3],
   term: '2024.04 ~ 2024.08',
   termDiff: '5개월',
@@ -283,6 +306,7 @@ export const projectData: IProjectProps[] = [{
   ],
 }, {
   logo: "https://github.com/kimjy97/devblog-v2/blob/main/public/meta/fav/fav.png?raw=true",
+  thumbnail: BlogThumbImg,
   thumb: [BlogThumbImg, BlogImg1, BlogImg2, BlogImg3],
   term: '2024.05 ~ 2024.09',
   termDiff: '5개월',
@@ -308,6 +332,7 @@ export const projectData: IProjectProps[] = [{
   func: ['게시물 조회', '게시물 검색', '게시물 좋아요', '게시물 정렬', '댓글 등록, 수정, 삭제', '게시판 이동', '다크모드 및 라이트모드 지원', '반응형 웹'],
 }, {
   logo: "https://github.com/kimjy97/blog-admin/blob/main/public/favicon.png?raw=true",
+  thumbnail: BlogAdminThumbImg,
   thumb: [BlogAdminThumbImg, BlogAdminImg1, BlogAdminImg2, BlogAdminImg3],
   term: "2025.05 ~ 2025.05",
   termDiff: "1개월",
@@ -344,6 +369,7 @@ export const projectData: IProjectProps[] = [{
 },
 {
   logo: "https://avatars.githubusercontent.com/u/82198250?s=200&v=4",
+  thumbnail: WhatIsPillThumbImg,
   thumb: [WhatIsPillThumbImg, WhatIsPillImg1, WhatIsPillImg2, WhatIsPillImg3],
   term: '2023.03 ~ 진행중',
   name: '이게뭐약 - 알약 촬영 검색 애플리케이션',
@@ -364,6 +390,7 @@ export const projectData: IProjectProps[] = [{
   func: ['알약 촬영 및 검색 기능', '앨범에서 사진 선택하여 검색 기능', '알약 정보 조회', '최근 검색한 약품 리스트 제공', '알약 보관함 기능'],
 }, {
   logo: "https://raw.githubusercontent.com/kimjy97/mongoDB-manager/refs/heads/main/src/app/favicon.ico",
+  thumbnail: MongoDBThumbImg,
   thumb: [MongoDBThumbImg, MongoDBImg1, MongoDBImg2, MongoDBImg3],
   term: '2024.08 ~ 2024.09',
   termDiff: '2개월',
@@ -391,6 +418,7 @@ export const projectData: IProjectProps[] = [{
   ]
 }, {
   logo: "https://github.com/kimjy97/portfolio-v2/blob/main/public/meta/fav.png?raw=true",
+  thumbnail: PortfolioThumbImg,
   thumb: [PortfolioThumbImg, PortfolioImg1, PortfolioImg2, PortfolioImg3],
   term: '2024.09 ~ 진행중',
   name: '웹 포트폴리오',
