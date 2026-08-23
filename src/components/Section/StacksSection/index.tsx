@@ -48,11 +48,13 @@ const StacksSection = (): JSX.Element => {
 
   const calculateStackCounts = useCallback(() => {
     const counts: { [key: string]: number } = {};
-    projectData.forEach((project: IProjectProps) => {
-      project.stacks.forEach((stack: string) => {
-        counts[stack] = (counts[stack] || 0) + 1;
+    projectData
+      .filter((project: IProjectProps) => !project.hidden)
+      .forEach((project: IProjectProps) => {
+        project.stacks.forEach((stack: string) => {
+          counts[stack] = (counts[stack] || 0) + 1;
+        });
       });
-    });
     return counts;
   }, []);
 

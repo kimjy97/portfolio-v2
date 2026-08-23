@@ -58,6 +58,7 @@ export const getMediaUrl = (src: ProjectMedia): string => {
 };
 
 export interface IProjectProps {
+  hidden?: boolean;
   thumbnail?: ProjectMedia;
   thumb: ProjectMedia[];
   term: string;
@@ -172,6 +173,7 @@ export const projectData: IProjectProps[] = [{
     '자동 임베딩 스케줄링 및 배치 처리'
   ]
 }, {
+  hidden: true,
   logo: "https://raw.githubusercontent.com/team-croni/Crogger/main/public/svgs/logo.svg",
   thumbnail: CroggerThumbImg,
   thumb: [CroggerThumbImg, CroggerImg1, CroggerImg2, CroggerImg3],

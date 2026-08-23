@@ -8,20 +8,24 @@ import { projectFilterState } from '@/atoms/project';
 const ProjectsList = (): JSX.Element => {
   const selectedStacks = useRecoilValue<string[]>(projectFilterState);
 
+  const visibleProjects = useMemo(() => {
+    return projectData.filter((project: IProjectProps) => !project.hidden);
+  }, []);
+
   const sortedProjects = useMemo(() => {
-    return projectData.sort((a, b) => {
+    return [...visibleProjects].sort((a, b) => {
       const isVisibleA = selectedStacks.length === 0 || a.stacks.some((stack: string) => selectedStacks.includes(stack));
       const isVisibleB = selectedStacks.length === 0 || b.stacks.some((stack: string) => selectedStacks.includes(stack));
 
       if (isVisibleA === isVisibleB) return 0;
       return isVisibleA ? -1 : 1;
     });
-  }, [selectedStacks]);
+  }, [visibleProjects, selectedStacks]);
 
   return (
     <Container>
       {sortedProjects.map((project: IProjectProps, idx: number) => (
-        <Project key={idx} data={project} />
+        <Project key={project.name || idx} data={project} />
       ))}
     </Container>
   );

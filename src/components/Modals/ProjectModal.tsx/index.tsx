@@ -15,7 +15,7 @@ import ImageWithSpinner from '@/components/ImageWithSpinner';
 
 const ProjectModal = () => {
   const [isOpen, setIsOpen] = useRecoilState(isOpenProjectState);
-  const [info, setInfo] = useState<IProjectProps | undefined>(projectData[0]);
+  const [info, setInfo] = useState<IProjectProps | undefined>(() => projectData.find((p) => !p.hidden) || projectData[0]);
   const [isScroll, setIsScroll] = useState(false);
   const [thumbNum, setThumbNum] = useState<number>(0);
   const [randomKey, setRandomKey] = useState(1);
