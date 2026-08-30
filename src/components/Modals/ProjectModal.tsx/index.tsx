@@ -911,7 +911,7 @@ const SelectThumb = styled(ImageWithSpinner)`
 
   border-radius: 0.5em;
   background-color: #141419;
-  object-fit: cover;
+  object-fit: contain;
   overflow: hidden;
   border-radius: 0.5em;
   border: 1.5px solid #404149;
@@ -991,7 +991,7 @@ const ThumbVideoWrapper = styled.div`
 const SelectThumbVideo = styled.video`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   pointer-events: none;
 `

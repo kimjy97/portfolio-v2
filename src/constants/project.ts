@@ -1,3 +1,7 @@
+import TraderingThumbImg from '@public/images/thumbnails/tradering.png';
+import TraderingImg1 from '@public/images/projects/tradering_1.png';
+import TraderingImg2 from '@public/images/projects/tradering_2.png';
+import TraderingImg3 from '@public/images/projects/tradering_3.png';
 import SofarThumbImg from '@public/images/thumbnails/sofar.png';
 import SofarImg1 from '@public/images/projects/sofar_1.png';
 import SofarImg2 from '@public/images/projects/sofar_2.png';
@@ -78,6 +82,54 @@ export interface IProjectProps {
 }
 
 export const projectData: IProjectProps[] = [{
+  logo: '/svgs/tradering.svg',
+  thumbnail: TraderingThumbImg,
+  thumb: ['/videos/tradering-demo.mp4', TraderingImg1, TraderingImg2, TraderingImg3],
+  term: '2026.04 ~ 2026.08',
+  termDiff: '5개월',
+  name: 'Tradering - 실시간 모의투자 주식 게임',
+  url: 'https://tradering.site',
+  github: '',
+  contribution: { dev: '100%', design: '100%', planning: '100%' },
+  stacks: ['Next.js', 'React', 'TypeScript', 'Nestjs', 'PostgreSQL', 'Redis', 'TailwindCSS', 'Zustand', 'TanstackQuery', 'Socket.IO', 'Docker', 'Cloudflare'],
+  issues: [
+    {
+      issue: '24시간 봇 가동 시 시간이 지날수록 전 종목 차트가 비정상적으로 우상향하고 차트가 단조로워져 게임 밸런스가 무너지는 문제',
+      solving: '단순 랜덤 생성을 탈피하고 기준가 괴리율에 따라 차익 실현 매도 압력을 지수함수적으로 가하는 **가격 균형 피드백 알고리즘**을 직접 설계했습니다. 다양한 시장 흐름의 전이 시간과 변동성 패턴을 수학적으로 조율하여, 인위적인 상하한가 제한 없이도 실제 시장처럼 급등 후 건전한 조정과 박스권 횡보가 연출되는 유기적 변동성을 완성했습니다.'
+    },
+    {
+      issue: '호가 유동성을 공급하는 마켓 메이커 봇의 고빈도 틱 연산과 주문 생성이 백엔드와 동일한 프로세스에서 실행될 경우, 서버 이벤트 루프를 점유하여 실제 유저의 API 및 웹소켓 응답이 지연되는 문제',
+      solving: '마켓 메이커 봇을 완전 독립된 별도 서비스 컨테이너로 분리하고, 메인 서버와 **Redis Pub/Sub 채널 기반 비동기 이벤트 통신**을 하도록 아키텍처를 격리했습니다. 초당 수백 회의 시뮬레이션 연산이 발생해도 메인 거래 엔진과 사용자 트래픽에 전혀 부하를 주지 않는 안정적인 분산 구조를 구축했습니다.'
+    },
+    {
+      issue: '외부 유료 API 사용 시 지속적인 비용이 발생하고, 게임 내 주가 급등락이나 이벤트에 맞춰 실시간으로 뉴스를 발행하기 어려운 문제',
+      solving: '서버 내부에 **Ollama**를 구축하여 경량 오픈소스 AI 모델을 메모리에 상주시키고, CPU 스레드 최적화를 통해 2초 이내의 빠른 추론 속도를 확보했습니다. 마켓 메이커의 시장 이벤트 발생 시 주가 변동률과 기업 정보를 조합한 프롬프트로 속보 뉴스를 자동 발행하여 게임의 현실감과 몰입도를 극대화했습니다.'
+    },
+    {
+      issue: '홈서버 환경에서는 24시간 안정적인 서비스 유지가 어렵고, 포트 개방에 따른 보안 위험과 수동 배포의 번거로움이 존재하는 문제',
+      solving: '**Oracle Cloud ARM 인스턴스**로 인프라를 이전하고, **Cloudflare Tunnel**을 적용해 인바운드 포트를 전부 차단한 안전한 격리 네트워크를 구축했습니다. 프론트엔드는 **Cloudflare Pages**로 분리 배포하고, 로컬 빌드 후 컨테이너를 교체하는 **1줄 무중단 자동 배포 스크립트**를 작성해 배포 소요 시간을 10초대로 단축하고 24시간 안정적인 서비스를 실현했습니다.'
+    }
+  ],
+  reason: "`Next.js 16 App Router`와 `React 19`로 데스크톱과 모바일 환경 모두에서 실제 모바일 주식 거래 앱처럼 쾌적하게 동작하는 반응형 트레이딩 대시보드를 구축했고, 모바일 터치와 대량의 캔들 데이터를 부드럽게 렌더링하기 위해 `TradingView Lightweight Charts`를 도입했습니다. 실시간 호가창과 차트의 빠른 데이터 반영을 위해 `Socket.IO`, `Zustand`, `TanStack Query`를 조합해 클라이언트/서버 상태를 효율적으로 분리했습니다. 백엔드는 체결 엔진과 이벤트 처리에 적합한 모듈식 아키텍처의 `NestJS`와 `Prisma`, `PostgreSQL`을 선택했습니다. 24시간 시장 유동성을 공급하는 마켓 메이커 봇은 메인 서버와 분리하여 `Redis Pub/Sub`으로 비동기 통신하도록 설계해 부하 영향을 원천 차단했으며, `Oracle Cloud ARM`, `Docker Compose`, `Cloudflare Tunnel`, `Ollama` 기반 온프레미스 AI 엔진을 연동해 가상 뉴스 생성과 견고한 인프라 환경을 구축했습니다.",
+  learned: ' 실시간 주식 거래 엔진과 자동 거래 봇을 직접 설계하면서, **단순한 랜덤 가격 생성이 아닌 실제 시장처럼 가격이 오르고 내리는 균형 알고리즘을 만들어 자연스러운 시장 흐름을 구현해보는 경험**을 했습니다. 또한 **서버에 Ollama 기반 경량 AI 모델을 올려 시장 상황에 맞는 실시간 속보 뉴스를 자동으로 작성하도록 연동**하고, 모바일과 PC 어디서든 실제 주식 앱처럼 부드럽게 동작하는 반응형 화면을 완성했습니다.\n 백엔드와 인프라 측면에서는 **봇과 메인 서버를 분리해 부하를 줄인 분산 구조 설계, 클라우드 이전과 보안 네트워크 구성, 명령어 하나로 끝나는 무중단 배포 자동화**까지 서비스의 모든 영역을 직접 구축해보며 전체 시스템을 아우르는 개발 시야와 문제 해결 능력을 키울 수 있었습니다.',
+  intro: '자체 개발한 마켓 메이커 시뮬레이션 엔진과 실시간 체결 엔진을 탑재한 웹 기반 주식 게임입니다. 데스크톱뿐만 아니라 모바일 환경에서도 실제 주식 앱처럼 매끄럽게 매매를 즐길 수 있는 반응형 인터페이스를 제공하며, 1분봉부터 일봉까지의 실시간 캔들 차트와 10단계 호가창, 다채로운 시장 흐름에 따른 가상 주가 변동성, 월별 시즌 정산 및 랭크 시스템, LLM 기반 실시간 가상 뉴스 발행 등 다양한 컨텐츠를 구현했습니다.',
+  func: [
+    '실시간 호가창 및 지정가/시장가 매매 체결 엔진',
+    '시장 흐름을 시뮬레이션하는 마켓 메이커 봇',
+    '모바일 환경에 최적화된 반응형 UI',
+    '1분봉부터 일봉까지의 실시간 캔들 차트 및 보조지표',
+    'LLM 기반 실시간 가상 주식 뉴스 자동 발행',
+    '월별 시즌 정산 및 자산 청산 배치 시스템',
+    '7단계 랭크 등급 및 투자 수익률 기반 랭킹',
+    'Redis ZSET 기반 실시간 자산 순위 리더보드',
+    '포인트 및 토큰 상점, 유저 인벤토리 시스템',
+    '출석체크 연속 스트릭 보상 및 선물함',
+    '1주 이상 보유 주주 전용 실시간 종목 채팅방',
+    '가상 종합 주가지수 TOSPI 산출 및 실시간 반영',
+    '종합 백오피스 관리자 대시보드',
+    '다크 모드 지원 및 반응형 웹 디자인'
+  ]
+}, {
   logo: "https://raw.githubusercontent.com/team-croni/sofar/c833cd1aa03468843cefb92c78397208ba747644/packages/assets/sofar-logo.svg",
   thumbnail: SofarThumbImg,
   thumb: ['/videos/sofar-demo.mp4', SofarImg1, SofarImg2, SofarImg3],
