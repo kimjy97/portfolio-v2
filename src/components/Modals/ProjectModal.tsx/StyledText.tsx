@@ -9,12 +9,15 @@ interface IProps {
 
 const StyledText = ({ children }: IProps): JSX.Element => {
   const parseText = (text: string): JSX.Element[] => {
-    const regex = /(\*\*[^*]+\*\*)/g;
+    const regex = /(\*\*[^*]+\*\*|__[^_]+__)/g;
     const parts = text.split(regex);
 
     return parts.map((part, index) => {
       if (part.startsWith('**') && part.endsWith('**')) {
         return <BoldText key={index}>{part.slice(2, -2)}</BoldText>;
+      }
+      if (part.startsWith('__') && part.endsWith('__')) {
+        return <BlueBoldText key={index}>{part.slice(2, -2)}</BlueBoldText>;
       }
       return <React.Fragment key={index}>{part}</React.Fragment>;
     });
@@ -30,4 +33,9 @@ const Container = styled.div`
 
 const BoldText = styled.span`
   font-weight: bold;
+`;
+
+const BlueBoldText = styled.span`
+  font-weight: bold;
+  color: #3b5bdb;
 `;

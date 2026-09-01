@@ -32,12 +32,15 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  padding-bottom: 4px;
+  padding: 4px;
 `
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 16px;
 `
 const DetailInfoText = styled.div`
   display: flex;
