@@ -8,17 +8,19 @@ import ScrollProgressBar from "@components/ScrollBar";
 import Modals from "@/components/Modals";
 import { Suspense } from "react";
 
+import { PROFILE } from "@/constants/profile";
+
 export const metadata: Metadata = {
   openGraph: {
-    title: '웹 개발자 포트폴리오 - 김종연',
+    title: PROFILE.meta.title,
     images: [{ url: '/meta/fav.png' }],
     type: 'website',
-    siteName: '웹 개발자 김종연 포트폴리오',
-    description: '안녕하세요. 웹 개발자 김종연 입니다. 해당 웹사이트는 저의 기술과 프로젝트를 소개하기 위한 포트폴리오 웹사이트입니다.',
+    siteName: PROFILE.meta.siteName,
+    description: PROFILE.meta.description,
     url: process.env.NEXT_PUBLIC_VERCEL_URL || 'https://kimjy-portfolio.vercel.app'
   },
-  title: "웹 개발자 포트폴리오 - 김종연",
-  description: "안녕하세요. 웹 개발자 김종연 입니다. 해당 웹사이트는 저의 기술과 프로젝트를 소개하기 위한 포트폴리오 웹사이트입니다.",
+  title: PROFILE.meta.title,
+  description: PROFILE.meta.description,
   icons: {
     icon: [
       { rel: 'icon', type: 'image/png', url: '/meta/fav.png' },

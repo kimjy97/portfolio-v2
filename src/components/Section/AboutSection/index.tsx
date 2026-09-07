@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SectionContainer from '@components/Section/SectionContainer';
 import styled, { keyframes } from 'styled-components';
+import { PROFILE } from '@/constants/profile';
 
 const AboutSection = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false);
@@ -21,7 +22,7 @@ const AboutSection = (): JSX.Element => {
           <span>NEXT LEVEL.</span>
         </Typo>
         <AboutTextWrapper className={isVisibleClassName}>
-          <p>안녕하세요! 웹 개발자 <b>김종연</b>입니다.</p>
+          <p>{PROFILE.about.greeting} <b>김종연</b>입니다.</p>
           <p>저는 <b>끝없이 성장</b>하며 <span className='word'>&ldquo;지치지 않는 열정&rdquo;</span>을 가진 개발자입니다.</p>
           <p>맡은 일에 최선을 다하는 책임감 있는 태도로 <b>완벽한 결과물</b>을 만들기 위해 노력합니다.</p>
           <br />

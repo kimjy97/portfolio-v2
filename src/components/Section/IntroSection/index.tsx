@@ -2,6 +2,7 @@ import React from 'react';
 import SectionContainer from '@components/Section/SectionContainer';
 import ArrowDownSVG from '@public/svgs/arrowDown.svg';
 import styled, { keyframes } from 'styled-components';
+import { PROFILE } from '@/constants/profile';
 
 const IntroSection = (): JSX.Element => {
   return (
@@ -12,8 +13,8 @@ const IntroSection = (): JSX.Element => {
       <Background />
       <Wrapper>
         <Typo>
-          <MainTypo>WEB DEVELOPER.</MainTypo>
-          <SubTypo>PORTFOLIO</SubTypo>
+          <MainTypo>{PROFILE.intro.mainTypo}</MainTypo>
+          <SubTypo>{PROFILE.intro.subTypo}</SubTypo>
         </Typo>
         <ArrowDown>
           <ArrowDownSVG />
