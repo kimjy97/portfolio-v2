@@ -35,21 +35,22 @@ export default ProjectsList;
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
-  column-gap: 4rem;
-  row-gap: 5rem;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  column-gap: 2.5rem;
+  row-gap: 4.5rem;
   width: 100%;
-  padding: 0 1.5rem;
+  padding: 0 4rem;
 
-  @media (max-width: 1360px) {
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    column-gap: 1.5rem;
-    row-gap: 3rem;
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    column-gap: 1.75rem;
+    row-gap: 3.5rem;
+    padding: 0 2rem;
   }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     row-gap: 2.5rem;
-    padding: 0 1rem;
+    padding: 0 1.25rem;
   }
 `;

@@ -52,29 +52,27 @@ export default SortOption;
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  width: calc(100% - 2rem);
-  padding-top: 5rem;
-  padding-bottom: 3rem;
+  width: 100%;
+  padding: 5rem 4rem 3rem;
   margin: 0 auto;
   
   background: #000;
 
   z-index: 100;
 
+  @media (max-width: 1024px) {
+    padding: 4rem 2rem 2.5rem;
+  }
+
   @media (max-width: 768px) {
-    padding-top: 3rem;
-    padding-bottom: 2rem;
+    padding: 3rem 1.25rem 2rem;
   }
 `
 const Wrapper = styled.div`
   width: 100%;
-  padding: 1rem 0.5rem;
+  padding: 1rem 0;
 
   border-bottom: 5px solid #0e0e13;
-
-  @media (max-width: 768px) {
-    padding: 1rem 0rem;
-  }
 `
 const StackList = styled.div`
   width: 100%;
