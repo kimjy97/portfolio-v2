@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { projectFilterState } from '@/atoms/project';
-import { GooglePlayConsoleIcon, MongodbIcon, NextjsIcon, ReactNativeIcon, RecoilIcon, StyledComponentsIcon, TypescriptIcon, VercelIcon, TailwindCSSIcon, ZustandIcon, TanstackQueryIcon, SocketIOIcon, PostgreSQLIcon, RailwayIcon, DockerIcon, CloudflareIcon, NestjsIcon, RedisIcon, ReactIcon, ViteIcon, SupabaseIcon, AxiomIcon } from '@/components/Section/ProjectsSection/ProjectsList/Project/StackIcons';
+import { GooglePlayConsoleIcon, MongodbIcon, NextjsIcon, ReactNativeIcon, RecoilIcon, StyledComponentsIcon, TypescriptIcon, VercelIcon, TailwindCSSIcon, ZustandIcon, TanstackQueryIcon, SocketIOIcon, PostgreSQLIcon, RailwayIcon, DockerIcon, CloudflareIcon, NestjsIcon, RedisIcon, ReactIcon, ViteIcon, SupabaseIcon, AxiomIcon, TauriIcon, RustIcon, SQLiteIcon, SwiftIcon, OciIcon } from '@/components/Section/ProjectsSection/ProjectsList/Project/StackIcons';
 import smoothScrollTo from '@/utils/smoothScrollTo';
 import { useRouter } from 'next/navigation';
 interface StackIconsType {
@@ -16,6 +16,7 @@ const stackIcons: StackIconsType = {
   'PostgreSQL': PostgreSQLIcon,
   'Railway': RailwayIcon,
   React: ReactIcon,
+  'React.js': ReactIcon,
   Vite: ViteIcon,
   Supabase: SupabaseIcon,
   TypeScript: TypescriptIcon,
@@ -30,8 +31,15 @@ const stackIcons: StackIconsType = {
   Docker: DockerIcon,
   Cloudflare: CloudflareIcon,
   Nestjs: NestjsIcon,
+  'Nest.js': NestjsIcon,
   Redis: RedisIcon,
   Axiom: AxiomIcon,
+  Tauri: TauriIcon,
+  Rust: RustIcon,
+  SQLite: SQLiteIcon,
+  Swift: SwiftIcon,
+  OCI: OciIcon,
+  'Oracle Cloud': OciIcon,
 };
 
 interface IProps {

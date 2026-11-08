@@ -136,6 +136,7 @@ const ProjectModal = () => {
                   ref={videoRef}
                   key={`${info.name}_video_${thumbNum}`}
                   src={getMediaUrl(info.thumb[thumbNum])}
+                  poster={info.thumbnail ? getMediaUrl(info.thumbnail) : undefined}
                   controls
                   loop
                   muted
@@ -161,12 +162,19 @@ const ProjectModal = () => {
                       className={idx === thumbNum ? 'selected' : ''}
                       onClick={() => setThumbNum(idx)}
                     >
-                      <SelectThumbVideo
-                        src={mediaUrl}
-                        muted
-                        playsInline
-                        preload="metadata"
-                      />
+                      {info.thumbnail ? (
+                        <ThumbVideoImage
+                          src={info.thumbnail}
+                          alt={`${info.name}(Thumbnail)_${idx}`}
+                        />
+                      ) : (
+                        <SelectThumbVideo
+                          src={mediaUrl}
+                          muted
+                          playsInline
+                          preload="metadata"
+                        />
+                      )}
                       <VideoBadge>
                         <svg viewBox="0 0 24 24" width="12" height="12" fill="white">
                           <path d="M8 5v14l11-7z" />
@@ -958,7 +966,7 @@ const ThumbVideoWrapper = styled.div`
   overflow: hidden;
   border: 1.5px solid #404149;
   box-shadow: 0em 1.25em 2.125em #0004;
-  box-sizing: content-box;
+  box-sizing: border-box;
 
   cursor: pointer;
   transition: 100ms;
@@ -986,6 +994,16 @@ const ThumbVideoWrapper = styled.div`
       transform: scale(1);
     }
   }
+`
+
+const ThumbVideoImage = styled(ImageWithSpinner)`
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3840/2112;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
 `
 
 const SelectThumbVideo = styled.video`

@@ -22,6 +22,11 @@ import RedisSVG from '@public/svgs/stacks/redis.svg';
 import SupabaseSVG from '@public/svgs/stacks/supabase.svg';
 import ReactSVG from '@public/svgs/stacks/react.svg';
 import AxiomSVG from '@public/svgs/stacks/axiom.svg';
+import TauriSVG from '@public/svgs/stacks/tauri.svg';
+import RustSVG from '@public/svgs/stacks/rust.svg';
+import SQLiteSVG from '@public/svgs/stacks/sqlite.svg';
+import SwiftSVG from '@public/svgs/stacks/swift.svg';
+import OciSVG from '@public/svgs/stacks/oci.svg';
 import Image from "next/image";
 
 export const NextjsIcon = styled(NextjsSVG)`
@@ -131,6 +136,31 @@ export const ViteIcon = () => {
 }
 
 export const AxiomIcon = styled(AxiomSVG)`
+  width: 1.5em;
+  height: 1.5em;
+`
+
+export const TauriIcon = styled(TauriSVG)`
+  width: 1.5em;
+  height: 1.5em;
+`
+
+export const RustIcon = styled(RustSVG)`
+  width: 1.5em;
+  height: 1.5em;
+`
+
+export const SQLiteIcon = styled(SQLiteSVG)`
+  width: 1.5em;
+  height: 1.5em;
+`
+
+export const SwiftIcon = styled(SwiftSVG)`
+  width: 1.5em;
+  height: 1.5em;
+`
+
+export const OciIcon = styled(OciSVG)`
   width: 1.5em;
   height: 1.5em;
 `

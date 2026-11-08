@@ -7,7 +7,6 @@ import SortOption from '@components/Section/ProjectsSection/SortOption';
 
 const ProjectsSection = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false);
-  const className = isVisible ? 'visible' : '';
 
   return (
     <SectionContainer
@@ -21,7 +20,7 @@ const ProjectsSection = (): JSX.Element => {
           main='프로젝트'
           sub={`현재까지 개발한 프로젝트입니다.\n프로젝트를 클릭하면 자세히 볼 수 있습니다.`}
         />
-        <ContentsWrapper className={className}>
+        <ContentsWrapper>
           <SortOption />
           <ProjectsList />
         </ContentsWrapper>
@@ -60,11 +59,4 @@ const ContentsWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-
-  opacity: 0;
-  transition: 500ms 600ms cubic-bezier(0.23, 1, 0.320, 1);
-
-  &.visible {
-    opacity: 1;
-  }
 `

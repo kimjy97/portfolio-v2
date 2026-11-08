@@ -42,6 +42,10 @@ import CroggerThumbImg from '@public/images/thumbnails/crogger.png';
 import CroggerImg1 from '@public/images/projects/crogger_1.png';
 import CroggerImg2 from '@public/images/projects/crogger_2.png';
 import CroggerImg3 from '@public/images/projects/crogger_3.png';
+import NookiveThumbImg from '@public/images/thumbnails/nookive.png';
+import NookiveImg1 from '@public/images/projects/nookive_1.png';
+import NookiveImg2 from '@public/images/projects/nookive_2.png';
+import NookiveImg3 from '@public/images/projects/nookive_3.png';
 import { StaticImageData } from 'next/image';
 
 export type ProjectMedia = StaticImageData | string;
@@ -82,6 +86,59 @@ export interface IProjectProps {
 }
 
 export const projectData: IProjectProps[] = [{
+  logo: 'https://raw.githubusercontent.com/team-croni/Nookive/main/src-tauri/icons/128x128@2x.png',
+  thumbnail: NookiveThumbImg,
+  thumb: ['/videos/nookive-demo.mp4', NookiveImg1, NookiveImg2, NookiveImg3],
+  term: '2026.10 ~ 진행중',
+  name: 'Nookive - Mac을 위한 온디바이스 AI 검색 앱',
+  url: 'https://github.com/team-croni/Nookive/releases/latest',
+  github: 'https://github.com/team-croni/Nookive',
+  contribution: { dev: '100%', design: '100%', planning: '100%' },
+  stacks: ['Tauri', 'Rust', 'React', 'TypeScript', 'Vite', 'SQLite', 'Swift'],
+  issues: [
+    {
+      issue: '문서·사진·앱 등 파일 형식마다 점수 기준이 달라, 관련 없는 사진이 상위에 노출되거나 필요한 문서가 밀려나는 문제',
+      solving: '텍스트와 이미지 등 데이터 유형마다 서로 다른 점수 분포를 맞추기 위해 **점수 정규화 로직과 연관도 필터**를 설계했습니다. 또한 개선 효과를 객관적으로 검증하기 위해 1,400여 개의 테스트 검색 쿼리로 평가 환경을 구축하여 테스트를 진행했습니다. 그 결과 단순 유사도 검색 대비 **상위 5위 내 검색 정확도를 31%에서 47%로 대폭 개선**하면서도 엉뚱한 결과가 섞여 나오는 문제를 해결했습니다.'
+    },
+    {
+      issue: '긴 동영상이나 음성 파일 검색 시 파일 자체만 찾아주어, 원하는 장면이나 대화 위치를 일일이 탐색해야 하는 문제',
+      solving: '미디어 파일을 통째로 다루지 않고 **일정 시간 단위로 쪼개어 분석하는 파이프라인**을 구축하고 구간별 타임스탬프를 기록했습니다. 여기에 음성 인식(STT)을 결합해 검색어와 일치하는 **정확한 재생 위치로 즉시 이동**할 수 있게 구현했습니다. 또한 영상 속 특정 한 프레임의 우연한 일치로 오작동하지 않도록 프레임 평균 점수 보정 로직을 추가해 신뢰도를 높였습니다.'
+    },
+    {
+      issue: '수백 개의 앱 아이콘을 불러오거나 고용량 PDF를 미리보기할 때 메인 스레드가 멈추며 화면이 굳는 문제',
+      solving: 'Tauri와 Rust의 비동기 백그라운드 스레드(spawn_blocking)로 파일 읽기, 앱 아이콘 추출, PDF 렌더링 작업을 분리해 UI 스레드의 부하를 없앴습니다. 반면 창 전환이나 데이터 동기화처럼 순서가 중요한 작업은 메인 스레드에서 안전하게 처리하도록 **작업 성격에 맞게 스레드 역할을 분리**하여 끊김 없는 60fps 반응성을 확보했습니다.'
+    },
+    {
+      issue: '고해상도 사진이 많은 폴더를 검색할 때 원본 이미지를 그대로 디코딩하느라 스크롤이 버벅이고 메모리가 급증하는 문제',
+      solving: '색인 시점에 macOS 내장 그래픽 엔진(sips)으로 목록용 썸네일(160px)과 미리보기용(720px) 이미지를 사전에 경량화하여 생성했습니다. 또한 파일 내용 해시 기반의 캐시 시스템을 구축하고, 500MB 초과 시 오래된 파일부터 정리하는 **LRU 캐시 알고리즘**을 적용해 디스크와 메모리 낭비 없이 매끄러운 스크롤을 구현했습니다.'
+    },
+    {
+      issue: '프로젝트 소스 코드 파일까지 무거운 AI 모델로 색인하여 속도가 느려지고 정확한 줄 탐색이 어려운 문제',
+      solving: '코드는 AI 임베딩 대신 가볍고 빠른 **SQLite FTS5(전문 검색 엔진)**로 별도 분리하여 줄 단위로 색인하도록 설계했습니다. 파일이 수정된 경우에만 부분 갱신하는 방식을 적용해 **1만여 개의 소스 코드 파일(약 200MB)을 34초 만에 색인**하고 **검색 응답 속도를 50ms 안팎으로 단축**했습니다. 검색 결과 클릭 시 VS Code나 Cursor 등 개발 에디터의 해당 줄 번호로 즉시 열리도록 연동했습니다.'
+    },
+    {
+      issue: '한글 타이핑 도중 글자가 조합 중일 때(예: 카카오ㅌ, 카카옽) 앱 이름이 매칭되지 않아 검색이 끊기는 문제',
+      solving: '한글 음절의 초성·중성·종성 조합 구조를 분석해 **현재 타이핑 중인 자모로 완성될 수 있는 모든 글자 형태를 실시간 매칭**하도록 정규식 변환 로직을 개발했습니다. 그 결과 입력이 완전히 끝나지 않아도 타이핑과 동시에 원하는 앱이 즉시 추천되도록 사용성을 개선했습니다. 또한 macOS 다국어 메타데이터를 연동해 "메모", "시스템 설정" 같은 친숙한 한국어 이름으로도 앱을 찾을 수 있게 구현했습니다.'
+    }
+  ],
+  reason: '가볍고 빠른 데스크톱 앱 환경을 만들기 위해 웹 기술과 네이티브 성능을 결합할 수 있는 `Tauri 2`와 `Rust`를 선택했습니다. 화면은 친숙한 `React`와 `TypeScript`를 활용해 빠르고 유연하게 개발했습니다. 특히 클라우드 비용이나 개인정보 유출 걱정 없이 안전하게 동작하도록, Apple Silicon의 Metal GPU를 활용하는 온디바이스 AI 파이프라인을 구축해 모든 텍스트·이미지·오디오 색인을 사용자 Mac 기기 내부에서 완전히 처리하도록 설계했습니다.',
+  learned: ' 웹 개발을 넘어 **macOS 데스크톱 네이티브 앱**을 처음부터 설계하면서, 백그라운드 스레드 분리와 프로세스 생명주기 관리 등 깊이 있는 시스템 프로그래밍을 경험했습니다. 또한 텍스트, 이미지, 음성을 아우르는 **멀티모달 검색 파이프라인**을 직접 구축하며 각 데이터의 특성에 맞는 최적화 기법을 체득했습니다.\n 무엇보다 검색 품질을 개선할 때 단순한 느낌이 아니라 정량적인 테스트 데이터를 기반으로 측정하고 검증하는 엔지니어링 방식을 배웠으며, 오픈소스 프로젝트로서 설치부터 실사용까지 매끄러운 사용자 경험을 완성하는 소중한 경험을 얻었습니다.',
+  intro: '파일명이 기억나지 않아도 "기억나는 내용"으로 Mac 안의 모든 파일을 찾을 수 있는 온디바이스 AI 검색 앱입니다. 문서와 PDF는 물론 사진 속 글자나 영상 속 장면까지 Mac 안에서 직접 AI로 분석해 개인정보 유출 걱정 없이 안전하게 찾아줍니다. 검색창 하나에서 앱 실행, 시스템 설정 바로가기, 계산기 및 단위 변환까지 지원해 Mac의 필수 생산성 도구로 활용할 수 있도록 개발했습니다.',
+  func: [
+    '문서·PDF·이미지·오디오·영상 내용 기반 AI 자연어 검색',
+    'PDF 매칭 페이지 자동 이동 및 검색어 하이라이트',
+    '오디오·영상 검색 구간 자동 이동 (재생 시점 타임스탬프)',
+    '사진 내용 및 텍스트(OCR) 인식 검색',
+    '소스 코드 파일 내용 검색 및 에디터 해당 줄 바로 열기',
+    '앱·시스템 설정 실행 및 앱 이름 실시간 자동완성',
+    '계산기·단위 변환, 날씨, 세계 시각, 환율, 날짜 계산',
+    '웹 검색 바로가기 (Google, Naver 등 7개 엔진 지원)',
+    '파일 변경 자동 감지 및 백그라운드 스마트 색인',
+    '자주 찾는 파일 우선 추천 및 개인화',
+    '메뉴 막대(트레이) 상주 및 원클릭 설치 지원',
+    '다국어 지원(9개 언어) 및 다크 / 라이트 모드'
+  ]
+}, {
   logo: '/svgs/tradering.svg',
   thumbnail: TraderingThumbImg,
   thumb: ['/videos/tradering-demo.mp4', TraderingImg1, TraderingImg2, TraderingImg3],
@@ -91,7 +148,7 @@ export const projectData: IProjectProps[] = [{
   url: 'https://tradering.site',
   github: '',
   contribution: { dev: '100%', design: '100%', planning: '100%' },
-  stacks: ['Next.js', 'React', 'TypeScript', 'NestJS', 'PostgreSQL', 'Prisma', 'Redis', 'TailwindCSS', 'Zustand', 'TanStack Query', 'Socket.IO', 'Docker', 'Cloudflare', 'Ollama'],
+  stacks: ['Next.js', 'React', 'TypeScript', 'Nest.js', 'PostgreSQL', 'Prisma', 'Redis', 'TailwindCSS', 'Zustand', 'TanstackQuery', 'Socket.IO', 'Docker', 'Cloudflare', 'Oracle Cloud', 'Ollama'],
   issues: [
     {
       issue: '거래 데이터가 누적될수록 매번 전체 내역을 실시간 집계하여 차트 로딩이 8초 이상 지연되는 문제',
@@ -119,7 +176,7 @@ export const projectData: IProjectProps[] = [{
     }
   ],
   reason: '`Next.js 16 App Router`와 `React 19`를 사용해 모바일과 데스크톱에서 사용할 수 있는 반응형 트레이딩 대시보드를 구축했습니다. 대량의 캔들 데이터를 효율적으로 렌더링하기 위해 `TradingView Lightweight Charts`를 사용했고, 백엔드는 `NestJS`, `PostgreSQL`, `Redis`를 기반으로 실시간 체결과 이벤트 처리를 구현했습니다. 24시간 동작하는 마켓 메이커 봇은 메인 서버와 분리해 서비스에 미치는 부하를 줄였으며, `Oracle Cloud ARM`과 `Docker` 환경에서 경량 AI 모델을 직접 서빙해 외부 API 비용을 줄였습니다.',
-  learned: ' 주식 거래 게임을 처음부터 설계하고 개발해 오픈베타를 운영하면서, 데이터베이스 인덱싱과 사전 집계를 활용해 대량의 거래 데이터를 효율적으로 처리하는 방법을 경험했습니다. 또한 대량 주문이 발생하는 상황에서 핵심 작업과 부가 작업을 분리하고 비동기 처리를 적용하며 서비스의 안정성을 높이는 방법을 익혔습니다.\n 제한된 클라우드 자원에서는 컨테이너별 메모리를 조정하고 경량 AI 모델을 최적화하며 서버 자원을 효율적으로 사용하는 경험도 했습니다. 오픈베타 기간에는 문의 게시판과 설문조사를 통해 실제 사용자의 요구사항과 불편사항을 확인하고 UI와 기능을 개선하면서, 개발한 기능을 실제 사용자의 관점에서 다시 바라보는 경험을 할 수 있었습니다.',
+  learned: ' 주식 거래 게임을 처음부터 설계하고 개발해 **오픈베타**를 운영하면서, 데이터베이스 인덱싱과 사전 집계를 활용해 **대량의 거래 데이터**를 효율적으로 처리하는 방법을 경험했습니다. 또한 대량 주문이 발생하는 상황에서 핵심 작업과 부가 작업을 분리하고 비동기 처리를 적용하며 서비스의 안정성을 높이는 방법을 익혔습니다.\n 제한된 클라우드 자원에서는 컨테이너별 메모리를 조정하고 **경량 AI 모델**을 최적화하며 서버 자원을 효율적으로 사용하는 경험도 했습니다. 오픈베타 기간에는 **문의 게시판**과 **설문조사**를 통해 실제 사용자의 요구사항과 불편사항을 확인하고 UI와 기능을 개선하면서, 개발한 기능을 실제 사용자의 관점에서 다시 바라보는 경험을 할 수 있었습니다.',
   intro: '자체 개발한 마켓 메이커 시뮬레이션 엔진과 실시간 체결 엔진을 기반으로 만든 웹 기반 주식 거래 게임입니다. 실제 시장의 거래 흐름을 게임으로 구현하고, 오픈베타 테스트(OBT)를 운영하며 사용자 피드백과 데이터를 바탕으로 서비스를 지속적으로 개선했습니다. 실시간 캔들 차트와 호가창, 주문 기능을 비롯해 AI 속보 뉴스, 월별 랭킹, 출석 보상 등 게임 요소를 결합했습니다.',
   func: [
     '실시간 호가창 및 지정가/시장가 주문',
@@ -141,7 +198,7 @@ export const projectData: IProjectProps[] = [{
   url: 'https://sofar-web.vercel.app',
   github: 'https://github.com/team-croni/sofar',
   contribution: { dev: '100%', design: '100%', planning: '100%' },
-  stacks: ['React', 'Vite', 'TypeScript', 'Nestjs', 'Supabase', 'PostgreSQL', 'Turborepo', 'Vercel'],
+  stacks: ['React', 'Vite', 'TypeScript', 'Nest.js', 'Supabase', 'PostgreSQL', 'Turborepo', 'Vercel'],
   issues: [
     {
       issue: '대량의 노래를 한 번에 등록할 때 유튜브 검색 API가 몰려 할당량이 초과되거나 서버가 느려지는 문제',

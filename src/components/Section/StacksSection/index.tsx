@@ -32,10 +32,19 @@ import NestjsSVG from '@public/svgs/stacks/nestjs.svg';
 import DockerSVG from '@public/svgs/stacks/docker.svg';
 import CloudflareSVG from '@public/svgs/stacks/cloudflare.svg';
 import RedisSVG from '@public/svgs/stacks/redis.svg';
+import OciSVG from '@public/svgs/stacks/oci.svg';
 import Stack from '@components/Section/StacksSection/Stack';
 import Title from '@components/Section/Title';
 import { IProjectProps, projectData } from '@/constants/project';
 import Image from 'next/image';
+import { normalizeStackName } from '@/utils/stackMatcher';
+
+interface IStackData {
+  name: string;
+  name2?: string;
+  icon: React.ReactNode;
+  countKey: string;
+}
 
 const StacksSection = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false);
@@ -53,6 +62,10 @@ const StacksSection = (): JSX.Element => {
       .forEach((project: IProjectProps) => {
         project.stacks.forEach((stack: string) => {
           counts[stack] = (counts[stack] || 0) + 1;
+          const normalized = normalizeStackName(stack);
+          if (normalized && normalized !== stack) {
+            counts[normalized] = (counts[normalized] || 0) + 1;
+          }
         });
       });
     return counts;
@@ -82,12 +95,13 @@ const StacksSection = (): JSX.Element => {
       }
     );
 
-    rowRefs.current.forEach((ref) => {
+    const currentRefs = [...rowRefs.current];
+    currentRefs.forEach((ref) => {
       if (ref) observer.observe(ref);
     });
 
     return () => {
-      rowRefs.current.forEach((ref) => {
+      currentRefs.forEach((ref) => {
         if (ref) observer.unobserve(ref);
       });
     };
@@ -106,58 +120,24 @@ const StacksSection = (): JSX.Element => {
           sub='스택을 누르면 해당 스택이 사용된 프로젝트로 이동합니다.'
         />
         <StackList>
-          <StackItem>
-            <StackType $visible={visibleRows[0]}># FRONT-END</StackType>
-            <StackRow ref={setRowRef(0)} $visible={visibleRows[0]}>
-              <Stack name='Next.js' icon={<NextjsIcon />} count={stackCounts['Next.js'] || 0} />
-              <Stack name='React.js' icon={<ReactIcon />} count={stackCounts['React'] || 0} />
-              <Stack name='Vite' icon={<ViteIcon src={ViteSrc} alt='Vite' />} count={stackCounts['Vite'] || 0} />
-              <Stack name='ReactNative' icon={<ReactIcon />} count={stackCounts['ReactNative'] || 0} />
-              <Stack name='Expo' icon={<ExpoIcon />} count={stackCounts['Expo'] || 0} />
-              <Stack name='jQuery' icon={<JqueryIcon />} count={stackCounts['jQuery'] || 0} />
-              <Stack name='TypeScript' icon={<TypescriptIcon />} count={stackCounts['TypeScript'] || 0} />
-              <Stack name='Recoil' icon={<RecoilIcon />} count={stackCounts['Recoil'] || 0} />
-              <Stack name='Zustand' icon={<ZustandIcon />} count={stackCounts['Zustand'] || 0} />
-              <Stack name='TanstackQuery' icon={<TanstackQueryIcon src={TanstackQuerySrc} alt='TanstackQuery' />} count={stackCounts['TanstackQuery'] || 0} />
-              <Stack name='Styled' name2='Components' icon={<StyledComponentsIcon />} count={stackCounts['StyledComponents'] || 0} />
-              <Stack name='TailwindCSS' icon={<TailwindCSSIcon />} count={stackCounts['TailwindCSS'] || 0} />
-              <Stack name='SCSS' icon={<ScssIcon />} count={stackCounts['SCSS'] || 0} />
-              <Stack name='Socket.IO' icon={<SocketIOIcon />} count={stackCounts['Socket.IO'] || 0} />
-            </StackRow>
-          </StackItem>
-          <StackItem>
-            <StackType $visible={visibleRows[1]}># BACK-END & DATABASE</StackType>
-            <StackRow ref={setRowRef(1)} $visible={visibleRows[1]}>
-              <Stack name='Nest.js' icon={<NestjsIcon />} count={stackCounts['Nestjs'] || 0} />
-              <Stack name='Node.js' icon={<NodejsIcon />} count={stackCounts['Nodejs'] || 0} />
-              <Stack name='Supabase' icon={<SupabaseIcon />} count={stackCounts['Supabase'] || 0} />
-              <Stack name='MongoDB' icon={<MongodbIcon />} count={stackCounts['MongoDB'] || 0} />
-              <Stack name='MySQL' icon={<MysqlIcon />} count={stackCounts['MySQL'] || 0} />
-              <Stack name='PostgreSQL' icon={<PostgreSQLIcon src={PostgreSQLSrc} alt='PostgreSQL' />} count={stackCounts['PostgreSQL'] || 0} />
-              <Stack name='Nginx' icon={<NginxIcon src={NginxSrc} alt='Nginx' />} count={stackCounts['Nginx'] || 0} />
-              <Stack name='Redis' icon={<RedisIcon />} count={stackCounts['Redis'] || 0} />
-            </StackRow>
-          </StackItem>
-          <StackItem>
-            <StackType $visible={visibleRows[2]}># DEPLOYMENT</StackType>
-            <StackRow ref={setRowRef(2)} $visible={visibleRows[2]}>
-              <Stack name='Docker' icon={<DockerIcon />} count={stackCounts['Docker'] || 0} />
-              <Stack name='Cloudflare' icon={<CloudflareIcon />} count={stackCounts['Cloudflare'] || 0} />
-              <Stack name='Vercel' icon={<VercelIcon />} count={stackCounts['Vercel'] || 0} />
-              <Stack name='Railway' icon={<RailwayIcon />} count={stackCounts['Railway'] || 0} />
-              <Stack name='AWS' icon={<AwsIcon />} count={stackCounts['AWS'] || 0} />
-              <Stack name='GooglePlay' name2='Console' icon={<GooglePlayIcon />} count={stackCounts['GooglePlayConsole'] || 0} />
-            </StackRow>
-          </StackItem>
-          <StackItem>
-            <StackType $visible={visibleRows[3]}># TOOLS</StackType>
-            <StackRow ref={setRowRef(3)} $visible={visibleRows[3]}>
-              <Stack name='Postman' icon={<PostmanIcon />} count={stackCounts['Postman'] || 0} />
-              <Stack name='Figma' icon={<FigmaIcon />} count={stackCounts['Figma'] || 0} />
-              <Stack name='illustrator' icon={<IllustratorIcon />} count={stackCounts['Illustrator'] || 0} />
-              <Stack name='Photoshop' icon={<PhotoshopIcon />} count={stackCounts['Photoshop'] || 0} />
-            </StackRow>
-          </StackItem>
+          {STACK_CATEGORIES.map((category, rowIndex) => (
+            <StackItem key={category.title}>
+              <StackType $visible={!!visibleRows[rowIndex]}>{category.title}</StackType>
+              <StackRow ref={setRowRef(rowIndex)}>
+                {category.stacks.map((stack, stackIndex) => (
+                  <Stack
+                    key={`${stack.name}-${stack.name2 ?? ''}`}
+                    name={stack.name}
+                    name2={stack.name2}
+                    icon={stack.icon}
+                    count={stackCounts[stack.countKey] || stackCounts[normalizeStackName(stack.countKey)] || 0}
+                    isVisible={!!visibleRows[rowIndex]}
+                    delay={stackIndex * 45}
+                  />
+                ))}
+              </StackRow>
+            </StackItem>
+          ))}
         </StackList>
       </Wrapper>
       <TopGradient />
@@ -200,7 +180,7 @@ const StackList = styled.div`
   row-gap: 1.5em;
   column-gap: 4em;
   width: calc(100% - 6rem);
-  max-width: 61em;
+  max-width: 72em;
   padding-top: 8em;
   padding-bottom: 10em;
 
@@ -240,23 +220,19 @@ const StackType = styled.p<{ $visible: boolean }>`
   transform: translateY(${({ $visible }) => ($visible ? '0px' : '10px')});
   transition: 200ms ease-out;
 `
-const StackRow = styled.div<{ $visible: boolean }>`
+const StackRow = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 2em;
-  flex-wrap: wrap;
   width: 100%;
   margin-bottom: 1.5em;
-
-  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
-  transform: translateY(${({ $visible }) => ($visible ? '0px' : '10px')});
-  transition: opacity 1200ms 250ms cubic-bezier(0.23, 1, 0.320, 1), transform 1200ms 250ms cubic-bezier(0.23, 1, 0.320, 1);
 
   @media (max-width: 470px) {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
   }
 `
+
 const NextjsIcon = styled(NextjsSVG)`
   width: 5em;
   height: 5em;
@@ -346,6 +322,10 @@ const AwsIcon = styled(AwsSVG)`
   width: 5em;
   height: 5em;
 `
+const OciIcon = styled(OciSVG)`
+  width: 4.25em;
+  height: 4.25em;
+`
 const GooglePlayIcon = styled(GooglePlaySVG)`
   width: 3.8em;
   height: 3.8em;
@@ -382,3 +362,55 @@ const NginxIcon = styled(Image)`
   width: 4.25em;
   height: 4.25em;
 `
+
+const FRONTEND_STACKS: IStackData[] = [
+  { name: 'Next.js', icon: <NextjsIcon />, countKey: 'Next.js' },
+  { name: 'React.js', icon: <ReactIcon />, countKey: 'React' },
+  { name: 'Vite', icon: <ViteIcon src={ViteSrc} alt='Vite' />, countKey: 'Vite' },
+  { name: 'ReactNative', icon: <ReactIcon />, countKey: 'ReactNative' },
+  { name: 'Expo', icon: <ExpoIcon />, countKey: 'Expo' },
+  { name: 'jQuery', icon: <JqueryIcon />, countKey: 'jQuery' },
+  { name: 'TypeScript', icon: <TypescriptIcon />, countKey: 'TypeScript' },
+  { name: 'Recoil', icon: <RecoilIcon />, countKey: 'Recoil' },
+  { name: 'Zustand', icon: <ZustandIcon />, countKey: 'Zustand' },
+  { name: 'TanstackQuery', icon: <TanstackQueryIcon src={TanstackQuerySrc} alt='TanstackQuery' />, countKey: 'TanstackQuery' },
+  { name: 'Styled', name2: 'Components', icon: <StyledComponentsIcon />, countKey: 'StyledComponents' },
+  { name: 'TailwindCSS', icon: <TailwindCSSIcon />, countKey: 'TailwindCSS' },
+  { name: 'SCSS', icon: <ScssIcon />, countKey: 'SCSS' },
+  { name: 'Socket.IO', icon: <SocketIOIcon />, countKey: 'Socket.IO' },
+];
+
+const BACKEND_STACKS: IStackData[] = [
+  { name: 'Nest.js', icon: <NestjsIcon />, countKey: 'Nestjs' },
+  { name: 'Node.js', icon: <NodejsIcon />, countKey: 'Nodejs' },
+  { name: 'Supabase', icon: <SupabaseIcon />, countKey: 'Supabase' },
+  { name: 'MongoDB', icon: <MongodbIcon />, countKey: 'MongoDB' },
+  { name: 'MySQL', icon: <MysqlIcon />, countKey: 'MySQL' },
+  { name: 'PostgreSQL', icon: <PostgreSQLIcon src={PostgreSQLSrc} alt='PostgreSQL' />, countKey: 'PostgreSQL' },
+  { name: 'Nginx', icon: <NginxIcon src={NginxSrc} alt='Nginx' />, countKey: 'Nginx' },
+  { name: 'Redis', icon: <RedisIcon />, countKey: 'Redis' },
+];
+
+const DEPLOYMENT_STACKS: IStackData[] = [
+  { name: 'Docker', icon: <DockerIcon />, countKey: 'Docker' },
+  { name: 'Cloudflare', icon: <CloudflareIcon />, countKey: 'Cloudflare' },
+  { name: 'Vercel', icon: <VercelIcon />, countKey: 'Vercel' },
+  { name: 'Railway', icon: <RailwayIcon />, countKey: 'Railway' },
+  { name: 'AWS', icon: <AwsIcon />, countKey: 'AWS' },
+  { name: 'Oracle Cloud', icon: <OciIcon />, countKey: 'Oracle Cloud' },
+  { name: 'GooglePlay', name2: 'Console', icon: <GooglePlayIcon />, countKey: 'GooglePlayConsole' },
+];
+
+const TOOL_STACKS: IStackData[] = [
+  { name: 'Postman', icon: <PostmanIcon />, countKey: 'Postman' },
+  { name: 'Figma', icon: <FigmaIcon />, countKey: 'Figma' },
+  { name: 'illustrator', icon: <IllustratorIcon />, countKey: 'Illustrator' },
+  { name: 'Photoshop', icon: <PhotoshopIcon />, countKey: 'Photoshop' },
+];
+
+const STACK_CATEGORIES = [
+  { title: '# FRONT-END', stacks: FRONTEND_STACKS },
+  { title: '# BACK-END & DATABASE', stacks: BACKEND_STACKS },
+  { title: '# DEPLOYMENT', stacks: DEPLOYMENT_STACKS },
+  { title: '# TOOLS', stacks: TOOL_STACKS },
+];

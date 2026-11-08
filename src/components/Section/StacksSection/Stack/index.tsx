@@ -10,9 +10,11 @@ interface IProps {
   name: string;
   name2?: string;
   count: number;
+  isVisible?: boolean;
+  delay?: number;
 }
 
-const Stack = ({ name, name2, icon, count }: IProps): JSX.Element => {
+const Stack = ({ name, name2, icon, count, isVisible = true, delay = 0 }: IProps): JSX.Element => {
   const [, setSeletedStacks] = useRecoilState(projectFilterState);
   const containerRef = useRef<HTMLDivElement>(null);
   const mousePositionRef = useRef({ x: 0, y: 0 });
@@ -27,7 +29,7 @@ const Stack = ({ name, name2, icon, count }: IProps): JSX.Element => {
       await smoothScrollTo(targetPosition, 450);
       router.replace(`/?section=projects`, { scroll: false });
     }
-  }, [setSeletedStacks, router]);
+  }, [setSeletedStacks, router, count]);
 
   const updateElementPosition = useCallback(() => {
     if (containerRef.current) {
@@ -58,19 +60,40 @@ const Stack = ({ name, name2, icon, count }: IProps): JSX.Element => {
   }, [handleMouseMove]);
 
   return (
-    <Container ref={containerRef} onClick={() => handleClickStack(`${name}${name2 ?? ''}`)}>
-      <Background />
-      <StackIcon>{icon}</StackIcon>
-      <StackName>
-        <p>{name}</p>
-        {name2 && <p>{name2}</p>}
-      </StackName>
-      {!!count && <Badge>{count}</Badge>}
-    </Container>
+    <ItemWrapper $visible={isVisible} $delay={delay}>
+      <Container ref={containerRef} onClick={() => handleClickStack(`${name}${name2 ?? ''}`)}>
+        <Background />
+        <StackIcon>{icon}</StackIcon>
+        <StackName>
+          <p>{name}</p>
+          {name2 && <p>{name2}</p>}
+        </StackName>
+        {!!count && <Badge>{count}</Badge>}
+      </Container>
+    </ItemWrapper>
   );
 };
 
 export default React.memo(Stack);
+
+const ItemWrapper = styled.div<{ $visible: boolean; $delay: number }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+  transform: translateY(${({ $visible }) => ($visible ? '0px' : '20px')});
+  transition: opacity 550ms cubic-bezier(0.23, 1, 0.32, 1) ${({ $delay }) => $delay}ms,
+              transform 550ms cubic-bezier(0.23, 1, 0.32, 1) ${({ $delay }) => $delay}ms;
+  pointer-events: ${({ $visible }) => ($visible ? 'auto' : 'none')};
+
+  &:hover {
+    z-index: 2;
+  }
+
+  @media (max-width: 470px) {
+    width: 100%;
+  }
+`;
 
 const Container = styled.div`
   position: relative;

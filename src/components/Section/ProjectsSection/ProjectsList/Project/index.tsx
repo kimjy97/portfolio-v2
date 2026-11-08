@@ -8,12 +8,16 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { isOpenProjectState, projectFilterState } from '@/atoms/project';
 import { IProjectProps, isVideoSource, getMediaUrl } from '@/constants/project';
 import ProjectStacks from '@/components/Section/ProjectsSection/ProjectsList/Project/ProjectStakcs';
+import { isStackMatched } from '@/utils/stackMatcher';
 
 interface IProps {
   data: IProjectProps;
+  isVisible?: boolean;
+  delay?: number;
+  setRef?: (el: HTMLDivElement | null) => void;
 }
 
-const Project = ({ data }: IProps): JSX.Element => {
+const Project = ({ data, isVisible = true, delay = 0, setRef }: IProps): JSX.Element => {
   const [, setIsOpen] = useRecoilState(isOpenProjectState);
   const { thumbnail, thumb, term, name, url, github, team, stacks, logo } = data;
   const selectedStacks = useRecoilValue<string[]>(projectFilterState);
@@ -23,73 +27,91 @@ const Project = ({ data }: IProps): JSX.Element => {
     setIsOpen(data);
   }
 
-  const isVisible = selectedStacks.length === 0 || stacks.some((stack: string) => selectedStacks.includes(stack));
+  const isMatched =
+    selectedStacks.length === 0 ||
+    stacks.some((stack: string) => selectedStacks.some((selected) => isStackMatched(stack, selected)));
 
   return (
-    <Container className={isVisible ? '' : 'visible'}>
-      <ThumbnailWrapper onClick={handleClickDetail}>
-        {isVideoSource(coverMedia) ? (
-          <video
-            src={getMediaUrl(coverMedia)}
-            muted
-            playsInline
-            preload="metadata"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-        ) : (
-          <Image
-            src={coverMedia}
-            alt={`${name}(Thumbnail)`}
-            fill
-          />
-        )}
-      </ThumbnailWrapper>
-      <Row $marginBottom='0.65em'>
-        <NameWrapper>
-          <Name onClick={handleClickDetail}>
-            {logo &&
-              <LogoWrapper>
-                <Logo
-                  src={logo}
-                  alt={name}
-                  fill
-                />
-              </LogoWrapper>
-            }
-            <span>
-              {name}
-            </span>
-            <DetailBtn onClick={handleClickDetail}>
-              <p>자세히 보기</p>
-              <ArrowIcon />
-            </DetailBtn>
-          </Name>
-        </NameWrapper>
-      </Row>
-      <Row $marginBottom='1em'>
-        <Info>
-          <Term>{term}</Term>
-          <Units>{team ? '팀 프로젝트' : '개인 프로젝트'}</Units>
-        </Info>
-      </Row>
-      <BtnWrapper>
-        {url && <LinkBtn href={url} target='_blank'>
-          <span>서비스 이동</span>
-          <LinkIcon />
-        </LinkBtn>}
-        {github &&
-          <LinkBtn href={github} target='_blank'>
-            <span>GitHub</span>
+    <ProjectWrapper
+      ref={setRef}
+      data-name={name}
+      $visible={isVisible}
+      $delay={delay}
+    >
+      <Container className={isMatched ? '' : 'visible'}>
+        <ThumbnailWrapper onClick={handleClickDetail}>
+          {isVideoSource(coverMedia) ? (
+            <video
+              src={getMediaUrl(coverMedia)}
+              muted
+              playsInline
+              preload="metadata"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          ) : (
+            <Image
+              src={coverMedia}
+              alt={`${name}(Thumbnail)`}
+              fill
+            />
+          )}
+        </ThumbnailWrapper>
+        <Row $marginBottom='0.65em'>
+          <NameWrapper>
+            <Name onClick={handleClickDetail}>
+              {logo &&
+                <LogoWrapper>
+                  <Logo
+                    src={logo}
+                    alt={name}
+                    fill
+                  />
+                </LogoWrapper>
+              }
+              <span>
+                {name}
+              </span>
+              <DetailBtn onClick={handleClickDetail}>
+                <p>자세히 보기</p>
+                <ArrowIcon />
+              </DetailBtn>
+            </Name>
+          </NameWrapper>
+        </Row>
+        <Row $marginBottom='1em'>
+          <Info>
+            <Term>{term}</Term>
+            <Units>{team ? '팀 프로젝트' : '개인 프로젝트'}</Units>
+          </Info>
+        </Row>
+        <BtnWrapper>
+          {url && <LinkBtn href={url} target='_blank'>
+            <span>서비스 이동</span>
             <LinkIcon />
-          </LinkBtn>
-        }
-      </BtnWrapper>
-      <ProjectStacks stacks={stacks} />
-    </Container>
+          </LinkBtn>}
+          {github &&
+            <LinkBtn href={github} target='_blank'>
+              <span>GitHub</span>
+              <LinkIcon />
+            </LinkBtn>
+          }
+        </BtnWrapper>
+        <ProjectStacks stacks={stacks} />
+      </Container>
+    </ProjectWrapper>
   )
 };
 
 export default Project;
+
+const ProjectWrapper = styled.div<{ $visible: boolean; $delay: number }>`
+  width: 100%;
+  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+  transform: translateY(${({ $visible }) => ($visible ? '0px' : '30px')});
+  transition: opacity 650ms cubic-bezier(0.23, 1, 0.32, 1) ${({ $delay }) => $delay}ms,
+              transform 650ms cubic-bezier(0.23, 1, 0.32, 1) ${({ $delay }) => $delay}ms;
+  pointer-events: ${({ $visible }) => ($visible ? 'auto' : 'none')};
+`
 
 const Container = styled.div`
   position: relative;
