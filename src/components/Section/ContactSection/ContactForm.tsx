@@ -175,6 +175,10 @@ const Container = styled.form`
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 
+  &:hover {
+    border-color: rgba(101, 101, 182, 0.3);
+  }
+
   &.submitting {
     transform: scale(0.99);
     opacity: 0.9;
@@ -281,9 +285,22 @@ const SubmitButton = styled.button<{ disabled: boolean }>`
   font-weight: 500;
   cursor: ${props => props.disabled ? 'default' : 'pointer'};
   transition: all 0.2s ease;
-  
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
   &:hover:not(:disabled) {
     border-color: #887ae6ff;
+    transform: translateY(-2px);
+
+    svg {
+      transform: translate(2px, -2px);
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
   }
 `;
 

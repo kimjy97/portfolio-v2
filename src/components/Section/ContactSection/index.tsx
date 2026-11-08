@@ -1,30 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import SectionContainer from '@components/Section/SectionContainer';
 import ContactForm from '@/components/Section/ContactSection/ContactForm';
 import ContactLinkList from '@/components/Section/ContactSection/ContactLinkList';
 
 const ContactSection = (): JSX.Element => {
+  const [isVisible, setIsVisible] = useState(false);
+
   return (
-    <SectionContainer name='contact'>
+    <SectionContainer name='contact' handleVisible={setIsVisible}>
       <Background />
       <Wrapper>
         <ContentsWrapper>
-          <FormText>
+          <FormText className={isVisible ? 'visible' : ''}>
             <HeadingText>저의 포트폴리오를 봐주셔서 감사합니다!</HeadingText>
             <p>관심있게 보셨다면 아래를 통해 저에게 연락주세요 <EmojiWrapper>🙇‍♂️</EmojiWrapper></p>
           </FormText>
 
           <ContactLinksWrapper>
-            <ContactLinkList />
+            <ContactLinkList isVisible={isVisible} />
           </ContactLinksWrapper>
 
-          <FormWrapper>
+          <FormWrapper className={isVisible ? 'visible' : ''}>
             <ContactForm />
           </FormWrapper>
         </ContentsWrapper>
 
-        <FooterSection>
+        <FooterSection className={isVisible ? 'visible' : ''}>
           <FooterLine />
           <CopyRights>
             Copyright © {new Date().getFullYear()}. JongYeon All rights reserved.
@@ -61,7 +63,7 @@ const Background = styled.div`
   background-attachment: fixed;
   z-index: 0;
   pointer-events: none;
-`
+`;
 
 const BottomGradient = styled.div`
   position: absolute;
@@ -113,7 +115,6 @@ const ContentsWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 2.5rem;
-
   opacity: 1;
 `;
 
@@ -125,13 +126,29 @@ const FormText = styled.div`
   gap: 1.2rem;
   text-align: center;
   
+  transform: translateY(30px);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+
   & > p:last-child {
     color: #ffffff;
     font-size: 1.2rem;
     font-weight: 400;
-    opacity: 0.9;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.15s, opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.15s;
   }
   
+  &.visible {
+    transform: translateY(0);
+    opacity: 1;
+
+    & > p:last-child {
+      opacity: 0.9;
+      transform: translateY(0);
+    }
+  }
+
   @media (max-width: 768px) {
     padding-top: 2rem;
     padding-bottom: 3rem;
@@ -179,6 +196,15 @@ const FormWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  
+  transform: translateY(30px);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.3s, opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.3s;
+
+  &.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
 `;
 
 const FooterSection = styled.div`
@@ -189,10 +215,19 @@ const FooterSection = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+
+  &.visible > div:first-child {
+    width: 40%;
+  }
+
+  &.visible > div:last-child {
+    opacity: 0.8;
+    transform: translateY(0);
+  }
 `;
 
 const FooterLine = styled.div`
-  width: 40%;
+  width: 0%;
   height: 1px;
   background: linear-gradient(
     to right,
@@ -200,13 +235,16 @@ const FooterLine = styled.div`
     rgba(134, 128, 152, 0.3),
     transparent
   );
+  transition: width 0.9s cubic-bezier(0.23, 1, 0.32, 1) 0.4s;
 `;
 
 const CopyRights = styled.div`
   color: #868098;
   font-size: 0.85rem;
-  opacity: 0.8;
+  opacity: 0;
+  transform: translateY(10px);
   letter-spacing: 0.05em;
+  transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.5s, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.5s;
   
   @media (max-width: 768px) {
     font-size: 0.75rem;
